@@ -1,0 +1,281 @@
+{template header}
+<link href="{SITE_URL}css/feeds.css" rel="stylesheet" type="text/css" />
+
+<div id="wrap">
+	<div id="container" class="clearfix">
+		<div class="main box-shadow">
+			<div class="nav">
+				<ul class="clearfix">
+					<li <!--{if $news=='index'||$news=='goods'||$news=='zhuti'||$news=='pinpai'||$news=='topic'}-->class="cur"<!--{/if}-->>
+                    <!--{if $userid>0}-->
+                    <a href="{SITE_URL}{tsurl('feed')}">好友动态</a>
+                    <!--{else}-->
+                    <a href="javascript:;" date-href="{SITE_URL}{tsurl('feed')}" class="create-btn">好友动态</a>
+                    <!--{/if}-->
+                    </li>
+					<li <!--{if $news=='news'}-->class="cur"<!--{/if}-->><a href="{SITE_URL}{tsurl('feed','news')}">全站动态</a></li>
+				</ul>
+			</div>
+						<div class="feeds-list">
+								<div class="feeds-menu">
+		
+		<div class="fl feeds-cate">
+		<label>分类：</label>
+        <!--{if $news=='index'||$news=='goods'||$news=='zhuti'||$news=='pinpai'||$news=='topic'}-->
+		<a href="{SITE_URL}{tsurl('feed')}"  <!--{if $news=='index'}-->class="cur"<!--{/if}--> >全部</a>
+		<span>|</span>
+		<a href="{SITE_URL}{tsurl('feed','goods')}" <!--{if $news=='goods'}-->class="cur"<!--{/if}-->>宝贝</a>
+		<span>|</span>
+		<a href="{SITE_URL}{tsurl('feed','zhuti')}" <!--{if $news=='zhuti'}-->class="cur"<!--{/if}-->>主题</a>
+        <span>|</span>
+        <a href="{SITE_URL}{tsurl('feed','topic')}" <!--{if $news=='topic'}-->class="cur"<!--{/if}-->>讨论</a>
+        
+        <!--{elseif $news=='news'}-->
+        
+        <a href="{SITE_URL}{tsurl('feed','news')}"  <!--{if $type==''}-->class="cur"<!--{/if}--> >全部</a>
+		<span>|</span>
+		<a href="{SITE_URL}{tsurl('feed','news',array('type'=>'goods'))}" <!--{if $type=='goods'}-->class="cur"<!--{/if}-->>宝贝</a>
+		<span>|</span>
+		<a href="{SITE_URL}{tsurl('feed','news',array('type'=>'zhuti'))}" <!--{if $type=='zhuti'}-->class="cur"<!--{/if}-->>主题</a>
+        <span>|</span>
+        <a href="{SITE_URL}{tsurl('feed','news',array('type'=>'topic'))}" <!--{if $type=='topic'}-->class="cur"<!--{/if}-->>讨论</a>
+        
+        <!--{/if}-->
+
+	</div>
+	</div>
+    <!--{if $arrfollowfeed}-->
+    <!--{loop $arrfollowfeed $key $item}-->
+    <!--{if $item[feedtype]=='goods'}-->
+	<div class="section clearfix">
+		<div class="byUser-pic">
+			<a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" title="{$item[user][username]}" target="_blank">
+			<img src="{$item[user][face]}" width="60" height="60" alt="{$item[user][username]}" title="{$item[user][username]}"/>
+			</a>
+		</div>
+		<div class="byUser-feeds">
+									<h3 class="ofh"><a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" target="_blank">{$item[user][username]}</a><span class="content mr10">：{$item[data][ctyle]} <a href="{SITE_URL}{tsurl('baobei',$item[data][goods_id])}" target="_blank">{$item[data][title]}</a></span></h3>
+									<div class="feeds-info">
+							<div class="baobei-feeds clearfix">
+					<div class="baobei-pic" rel="small" data-proid="{$item[data][goods_id]}">
+						<img src="<!--{if $DISK_YUN['isopen']}-->{BCS_URL}{$item[data][img]}<!--{else}-->{SITE_URL}{$item[data][img]}<!--{/if}-->" alt="{$item[data][title]}" width="120"/>					
+						<span>￥{$item[price]}</span>
+					</div>
+				</div>
+				<div class="comment-time">
+						<!--{if  $item[user][userid] == $TS_USER[user][userid] ||$TS_USER[user][userid] == 1}--><a class="fr btn" rel="del_feed" href="javascript:;" data-feedid="{$item[feedid]}" title="删除该动态">删除动态</a>
+                        <span class="mr5 ml5 gcc fr">|</span>
+                    <!--{/if}-->
+										
+                                        
+					<a href="{SITE_URL}{tsurl('baobei',$item[data][goods_id])}" class="fr btn">查看详情</a>
+										<span class="gc">{php echo date('m-d H:i',$item[addtime])}</span>
+				</div>
+						</div>
+		</div>
+	</div>
+    <!--{elseif $item[feedtype]=='zhuti'}-->
+     <!--{if $item[data][topicid]}-->
+   		<div class="section clearfix">
+		<div class="byUser-pic">
+			<a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" title="{$item[user][username]}" target="_blank">
+			<img src="{$item[user][face]}" width="60" height="60" alt="{$item[user][username]}" title="{$item[user][username]}"/>
+			</a>
+		</div>
+		<div class="byUser-feeds">
+									<h3 class="ofh"><a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" target="_blank">{$item[user][username]}</a>:{$item[content]}</h3>
+                                    
+                                    <p class="byUser-comment wbbw">{$item[data][content]}</p>
+									<div class="feeds-info">
+				<div class="comment-time">
+					
+					<!--{if  $item[user][userid] == $TS_USER[user][userid] ||$TS_USER[user][userid] == 1}--><a class="fr btn" rel="del_feed" href="javascript:;" data-feedid="{$item[feedid]}" title="删除该动态">删除动态</a>
+                    <!--{/if}-->
+										<span class="gc">{php echo date('m-d H:i',$item[addtime])}</span>
+				</div>
+						</div>
+		</div>
+	</div>
+     <!--{/if}-->
+      <!--{if $item[data][themeid]}-->
+    	<div class="section clearfix">
+		<div class="byUser-pic">
+			<a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" title="{$item[user][username]}" target="_blank">
+			<img src="{$item[user][face]}" width="60" height="60" alt="{$item[user][username]}" title="{$item[user][username]}"/>
+			</a>
+		</div>
+		<div class="byUser-feeds">
+									<h3 class="ofh"><a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" target="_blank">{$item[user][username]}</a><span class="content mr10">：{$item[data][ctyle]} <a href="{SITE_URL}{tsurl('zhuti'.$item[data][themeid])}" target="_blank">{$item[data][title]}</a></span></h3>
+									<div class="feeds-info">
+							<div class="topic-feeds clearfix">
+					<div class="topic-pic viewlike">
+						<a class="pic" target="_blank" href="{SITE_URL}{tsurl('zhuti'.$item[data][themeid])}">
+						<span class="b-img"><img src="{SITE_URL}{$item[data][img]}" alt="{$item[data][title]}"></span></a>
+					</div>
+				</div>
+				<div class="comment-time">
+				<!--{if  $item[user][userid] == $TS_USER[user][userid] ||$TS_USER[user][userid] == 1}--><a class="fr btn" rel="del_feed" href="javascript:;" data-feedid="{$item[feedid]}" title="删除该动态">删除动态</a>
+                    <!--{/if}-->
+										<span class="gc">{php echo date('m-d H:i',$item[addtime])}</span>
+				</div>
+						</div>
+		</div>
+	</div>
+     <!--{/if}-->
+    
+	<!--{elseif $item[feedtype]=='topic'||$item[feedtype]=='zhuti'}-->
+    
+    
+    
+    <div class="section clearfix">
+		<div class="byUser-pic">
+			<a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" title="{$item[user][username]}" target="_blank">
+			<img src="{$item[user][face]}" width="60" height="60" alt="{$item[user][username]}" title="{$item[user][username]}"/>
+			</a>
+		</div>
+		<div class="byUser-feeds">
+									<h3 class="ofh"><a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" target="_blank">{$item[user][username]}</a>:{$item[content]}</h3>
+                                    
+                                    <p class="byUser-comment wbbw">{$item[data][content]}</p>
+									<div class="feeds-info">
+				<div class="comment-time">
+					
+					<!--{if  $item[user][userid] == $TS_USER[user][userid] ||$TS_USER[user][userid] == 1}--><a class="fr btn" rel="del_feed" href="javascript:;" data-feedid="{$item[feedid]}" title="删除该动态">删除动态</a>
+                    <!--{/if}-->
+										<span class="gc">{php echo date('m-d H:i',$item[addtime])}</span>
+				</div>
+						</div>
+		</div>
+	</div>
+    
+    
+    <!--{/if}-->
+    <!--{/loop}-->
+     <!--{else}-->
+     <p style="line-height:34px;">
+     
+     暂无任何动态...
+     
+     </p>
+    <!--{/if}-->
+	  								<div class="clearfix pt20 pb20">
+
+					<div class="pagin fr pagination" id="J_Pagination">
+                    
+                     {$pageUrl}
+                    
+                    </div>
+                   
+				</div>
+			</div>
+					</div><!--main end-->
+		<div class="side">
+		
+	<!--小道消息-->	
+		<div class="news box-shadow plr15 ss">
+		<div class="title">小道消息，嘘...</div>
+		<ul id="J_FeedsNews">
+            <!--{if $arrfriendfeed}-->
+    <!--{loop $arrfriendfeed $key $item}-->
+        
+        <li>
+				<div class="user-pic">
+					<a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" target="_blank">
+					<img src="{$item[user][face]}" width="30" height="30" alt="alezebet_5045" title="alezebet_5045"/>
+					</a>
+				</div>
+				<div class="user-news">
+					<a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" target="_blank">{$item[user][username]}</a>&nbsp;刚刚关注了
+																								<a href="{$item[data][link]}" target="_blank">{$item[data][username]}</a>																																															   					<br/>
+									</div>
+			</li>
+                <!--{/loop}-->
+    <!--{/if}-->
+        
+					</ul>
+	</div>
+		
+	<!--登录状态-->
+    <!--{if $userid>0}-->
+			<div class="interest box-shadow plr15 ss">
+		<div class="title">你可能感兴趣的人</div>
+		<ul class="interPer" id="J_InterPer">
+											   <!--{if $arrPer}-->
+                            <!--{loop $arrPer $key $item}-->
+                            
+						<li>
+				<div class="user-pic">
+					<a href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" title="{$item[user][username]}">
+        			        				<img src="{$item[user][face]}" width="50" height="50" alt="{$item[user][username]}" title="{$item[user][username]}">
+        								</a>
+				</div>
+				<div class="user-info">
+										<a class="username ofh" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" title="{$item[user][username]}">{$item[user][username]}</a>
+									<p>关注 {$item[user][count_follow]}<span class="mr5 ml5">|</span>粉丝 {$item[user][count_followed]} </p>
+					<a rel="follow" href="javascript:;" class="follow-btn" data-followtype="{$item[ft]}" data-userid="{$item[user][userid]}">加关注</a>
+				</div>
+			</li>
+            <!--{/loop}-->
+            
+            <!--{else}-->
+            <li><p>木有了，你好厉害，系统自愧不如。</p></li>
+                            <!--{/if}-->
+								</ul>
+	</div>
+    
+    <!--{/if}-->
+			
+		<div class="friend-comment box-shadow plr15 ss">
+		<div class="title">
+			他们正在讨论...
+		</div>
+		<ul style="overflow:hidden">
+        											   <!--{if $arrnowtopic}-->
+                            <!--{loop $arrnowtopic $key $item}-->
+        <li>
+				<div class="comment-pic">
+				<a class="username ofh" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" title="{$item[user][username]}" target="_blank">
+					<img src="{$item[user][face]}" width="30" height="30" alt="{$item[user][username]}" title="{$item[user][username]}"/>
+					</a>
+				</div>
+				<div class="comment-con">
+					<p class="top">
+						<a href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$item['topicid']))}" target="_blank">{$item[title]}</a>
+					</p>
+					<p class="btm">
+                    <!--{if $item['typeid']==1}-->
+						<a href="{SITE_URL}{tsurl('zhuti',$item[catetheme])}" target="_blank">{$item[catetheme]}</a><!--{elseif $item['typeid']==0}--><a href="{SITE_URL}{tsurl('group','group',array(groupid=>$item[groupid]))}" target="_blank">{$item[groupname]}</a><!--{/if}--><span class="mr5 ml5">/</span><a href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$item['topicid']))}" target="_blank">{$item[count_comment]}条回复</a>
+					</p>
+				</div>
+			</li>
+            <!--{/loop}-->
+            <!--{/if}-->
+					</ul>
+	</div>
+
+		
+	<!--登录状态-->
+<input id="J_ForumPostCon" type="hidden" />
+<style>.guang-editor-wrap { display:none}</style>
+			<!--未登录状态-->
+	</div><!--side end-->
+	</div>
+</div>
+
+{php include pubTemplate("JsConstant");}
+
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});Do.add("track_info",{path:a("track_info.min.js"),type:"js"});
+    Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("add_topic_say",{path:a("add_topic_say.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");Do("track_info");
+})();
+</script>
+<script type="text/javascript">
+Do('follow');
+Do('feedfile');
+Do('ajaxfileupload');
+</script>
+
+
+{template footer}

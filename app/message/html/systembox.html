@@ -1,0 +1,16 @@
+<!--{loop $arrMessage $key $item}-->
+
+<dl>
+                                                                                
+								<dt></dt>
+							<dd>
+                            {$item[user][username]} <!--{if $item[isread]='0'}--><span style="padding-left:0px; padding-right:10px; color:#F00">new</span> <!--{/if}-->{$item[content]} 
+                            
+                            <span>{php echo date('H:i:s',$item[addtime])}</span></dd>
+						</dl>
+
+
+<!--{/loop}-->
+
+
+

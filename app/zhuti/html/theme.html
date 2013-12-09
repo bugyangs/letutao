@@ -1,0 +1,396 @@
+{template header}
+<link href="{SITE_URL}css/topicdetail.css" rel="stylesheet" type="text/css" />
+<style>
+ 
+body{
+	background-image:url({$pageBgImage});
+	background-color:{$arrpageStyle[backgroundColor]};
+	background-repeat:{$arrpageStyle[backgroundRepeat]};
+	background-position:{$arrpageStyle[backgroundPosition]};
+	background-attachment:{$arrpageStyle[backgroundAttachment]};
+}
+.banner {
+	height:{$arrtopStyle[height]}px;
+	background-color:{$arrtopStyle[backgroundColor]};
+	background-image:url({$headerBgImage});
+	background-repeat:{$arrtopStyle[backgroundRepeat]};
+	background-position:{$arrtopStyle[backgroundPosition]};
+	max-height:600px;
+	min-heihgt:80px;
+	overflow:hidden;
+} 
+
+.banner .banner-title .maintitle {
+	color: {$arrtopStyle[color]};
+	font-size: 50px;
+	line-height: 1.6;
+}
+
+.banner .banner-title .subtitle {
+	color : {$arrtopStyle[color]};
+}
+
+</style>
+
+
+	<div id="container">
+                    <div class="nav-wrap clearfix">
+                    <!--{if $TS_USER[user][userid] == $strTheme[userid] ||  $TS_USER[user][isadmin] ==1}-->
+    			<div class="user-tool">
+			<div class="user-tool-nav clearfix">
+    			<div class="fl">
+    				<label><p class="base-input" style="border:none; width:70px;">添加宝贝：</p></label>
+    				<a class="bbl-btn add_goods" rel="shareGoods" datethemeid="{$Themeid}">点击添加</a>
+    				<i class="i-split"></i>
+    				<a href="{SITE_URL}{tsurl('user','editzt',array('themeid'=>$strTheme[themeid]))}" rel="nofollow" class="bgr-btn">编辑</a>
+    				<a id="J_UserTopicStyleOpenBtn" class="bgr-btn">美化</a>
+    			</div>
+    			<div class="fr">
+                <!--{if $TS_USER[user][isadmin] ==1}-->
+                
+                	<!--{if  $strTheme[recom]}-->
+                	<a class="admin" id="J_AdminRecom" datatype="0" type="Recom">取消推荐</a>
+                    <!--{else}-->
+                    <a class="admin" id="J_AdminRecom" datatype="1" type="Recom">推荐</a>
+                    <!--{/if}-->
+                    
+              		
+					<!--{if  $strTheme[istop]}-->
+                	<a class="admin" id="J_AdminTop" datatype="0" type="top">取消置顶</a>
+                    <!--{else}-->
+                    <a class="admin" id="J_AdminTop" datatype="1" type="top">置顶</a>
+                    <!--{/if}-->
+				<!--{/if}-->
+                	<a class="admin" id="J_ResetSimg">更换缩略图</a>
+    				<a class="del" id="J_UserTopicDel">删除主题</a>
+    			</div>
+			</div>
+			<div class="user-topic-style clearfix" id="J_UserTopicStyle">
+				<dl class="header-style">
+					<dt>页面头部</dt>
+					<dd>
+						<label class="color"><span>底色：</span><a data-colorval="{$arrtopStyle[backgroundColor]}" id="J_HeaderBgColor"><i style="background-color:#fafafa"></i></a></label>
+						<label class="color"><span>文字颜色：</span><a data-colorval="{$arrtopStyle[color]}" id="J_HeaderWordColor"><i style="background-color:#666"></i></a></label>
+						<label>高度：<input type="text" value="{$arrtopStyle[height]}" class="height-input" id="J_HeaderHeight"/>像素</label>
+					</dd>
+					<dd>
+						<label class="topic-pic"><span>图片：</span><button class="sgr-btn" id="J_HeaderPicBtn" data-src="{$strTheme['headerPhoto']}">上传图片</button>
+							<div class="upload-con" id="J_HeaderPicUploadCon">
+								<p>支持JPG/PNG图片，文件需小于2M，建议宽度：960像素</p>
+    							<form id="J_HeaderPicUploadForm" target="headerPicUploadTarget" action="{SITE_URL}index.php?app=share&ac=do&le=upthemefile&c=HeaderPic_{$strTheme[themeid]}" method="post" enctype="multipart/form-data">
+    								<button class="bbl-btn" id="J_HeaderFileCover">选择文件</button>
+    								<input type="file" name="filedata" class="file-input" id="J_HeaderFileInput" onchange="window.submitPic(this, 'header')" size="20" hidefocus="true">
+    								<input type="hidden" name="picType" value="topicBanner">
+    							</form>
+    							<iframe name="headerPicUploadTarget" id="headerPicUploadTarget" width="0" height="0" style="display:none" frameborder="0" allowtransparent="yes" scrolling="no"></iframe>
+							</div>
+						</label>
+						<label><input type="checkbox" value="{$trepeat}" <!--{if $trepeat==0}-->checked="checked"<!--{/if}--> id="J_HeaderBgRepeat"/>平铺</label>
+						<label><select id="J_HeaderBgPosition" data-val="{$arrtopStyle[backgroundPosition]}"><option value="center" <!--{if $arrtopStyle[backgroundPosition]=='center'}--> selected="selected"<!--{/if}-->>居中</option><option value="left" <!--{if $arrtopStyle[backgroundPosition]=='left'}--> selected="selected"<!--{/if}-->>居左</option><option value="right" <!--{if $arrtopStyle[backgroundPosition]=='right'}--> selected="selected"<!--{/if}-->>居右</option></select></label>
+						<a class="del" id="J_HeaderPhotoDel">移除图片</a>
+					</dd>
+				</dl>
+				<dl class="page-style">
+					<dt>页面背景</dt>
+					<dd>
+						<label class="color"><span>底色：</span><a data-colorval="{$arrpageStyle[backgroundColor]}" id="J_PageBgColor"><i style="background-color:#F9F9EF"></i></a></label>
+					</dd>
+					<dd>
+						<label class="topic-pic"><span>图片：</span><button class="sgr-btn" id="J_PagePicBtn" data-src="{$strTheme['pagePhoto']}">上传图片</button>
+							<div class="upload-con" id="J_PagePicUploadCon">
+								<p>支持JPG/PNG图片，文件需小于2M</p>
+    							<form id="J_PagePicUploadForm" target="pagePicUploadTarget" action="{SITE_URL}index.php?app=share&ac=do&le=upthemefile&c=PagePic_{$strTheme[themeid]}" method="post" enctype="multipart/form-data">
+    								<button class="bbl-btn">选择文件</button>
+    								<input type="file" name="filedata" class="file-input" id="J_PageFileInput" onchange="window.submitPic(this, 'page')" size="20" hidefocus="true">
+    								<input type="hidden" name="picType" value="topicBg">
+    							</form>
+    							<iframe name="pagePicUploadTarget" id="pagePicUploadTarget" width="0" height="0" style="display:none" frameborder="0" allowtransparent="yes" scrolling="no"></iframe>
+							</div>
+						</label>
+						<label><input type="checkbox" value="{$prepeat}" <!--{if $prepeat==0}-->checked="checked"<!--{/if}-->   id="J_PageBgRepeat"/>平铺</label>
+						<label><input type="checkbox" value="{$pfixed}" <!--{if $pfixed==1}-->checked="checked"<!--{/if}-->   id="J_PageBgAttachment"/>锁定</label>
+						<label><select id="J_PageBgPosition" data-val="{$arrpageStyle[backgroundPosition]}"><option value="center" <!--{if $arrpageStyle[backgroundPosition]=='center'}--> selected="selected"<!--{/if}-->>居中</option><option value="left" <!--{if $arrpageStyle[backgroundPosition]=='left'}--> selected="selected"<!--{/if}-->>居左</option><option value="right" <!--{if $arrpageStyle[backgroundPosition]=='right'}--> selected="selected"<!--{/if}-->>居右</option></select></label>
+						<a class="del" id="J_PagePhotoDel">移除图片</a>
+					</dd>
+				</dl>
+				<div class="oper">
+					<a class="bbl-btn" id="J_TopicStyleSave">保存设置</a>
+					<a class="bgr-btn" id="J_UserTopicStyleCloseBtn">关闭</a>
+				</div>
+			</div>
+		</div>
+        <!--{/if}-->
+				<div class="brand-nav">
+			<ul class="nav-bar clearfix">
+				<li class="h on">
+					<div class="nav-item clearfix">
+						<h2>
+                            <a href="{SITE_URL}{tsurl('zhuti'.{$strTheme[themeid]})}" data-val="0">{$strTheme[title]}</a>
+						</h2>
+						<a href="javascript:;" class="ilike-s mt5" data-type="0">喜欢</a>
+					</div>
+				</li>
+				<li>
+					<div class="nav-item">
+						<a class="trait"  href="{SITE_URL}{tsurl('zhuti'.{$strTheme[themeid]})}" title="宝贝"><em>N+</em><br>宝贝</a>
+					</div>	
+				</li>
+				<li>
+					<div class="nav-item">
+						<a  href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$strTheme['topicid']))}">{$commentNum}<br>讨论</a>
+					</div>
+				</li>
+				<li>
+					<div class="nav-item">
+						<a  href="{SITE_URL}{tsurl('zhuti'.$strTheme[themeid],'likes')}"><em id="J_LikeCount">{$strTheme[likenum]}</em><br>喜欢</a>
+					</div>
+				</li>	
+				<i></i>
+			</ul>
+			<span class="pos-l-txt gc6">返回：
+    	    	        <a href="{SITE_URL}{tsurl('zhuti')}">主题街</a>
+    	    	        	            					<span class="ml5 mr5">/</span>
+                                                            
+            				    		                <a href="{SITE_URL}{tsurl('zhuti',{$strTheme[cate]})}#zhutiid">{$strTheme[cate]}</a>    		
+                        </span>
+		</div>         		
+		<!--share2 end-->
+                		</div>		
+                        <div class="banner" id="J_TopicBanner">
+						<div class="banner-title" id="J_SubTitle">
+
+                  <p class="maintitle">
+					<span class="bigfs">{$strTheme[title]}</span>
+					</p>
+
+					<p class="subtitle">
+                    {$strTheme[desc]}
+				</p>
+			</div>
+		</div>
+		<div class="main clearfix">
+			<div class="goods-wall colmain715" id="GoodsWall">
+				<div id="J_GoodsContent" class="goods-container">
+																	  <!--{if $strsharey}-->
+			<!--{loop $strsharey $key $item}-->
+						<div class="goods">
+							<div class="goods-pic" style=" height:210px ">
+								<a href="{SITE_URL}{tsurl('baobei',$item[goods_id])}" target="_blank" title="{$item[name]}">
+								<img src="{SITE_URL}{$item[img]}"  height="{$item[imgheigt]}"  alt="{$item[name]}" />
+								</a>
+                            <!--{if $TS_USER[user][userid] == $strTheme[userid] ||  $TS_USER[user][isadmin] ==1}-->
+						<a class="ilike-del" href="javascript:;" data-le="del_themegoods" data-proid="{$item[goods_id]}" style="display:none;" title="从当前主题内删除">删除</a>
+                            <!--{/if}-->
+						<a class="ilike-m"  href="javascript:;" data-type="0" data-proid="{$item[goods_id]}" style="display:none;">喜欢(<em class="like-count">{$item[count_like]}</em>)</a>
+								<a class="ilike-topic" href="javascript:void(0);" data-proid="{$item[goods_id]}" style="display:none;">加入主题</a>
+							</div>
+                        <div class="comments-top">
+                                                <span class="like-num"><em class="like-count"> {$item[count_like]}  </em></span>
+                                                                                     <span class="like-comments"><em class="like-count">{$item[count_comment]}</em></span>     
+                                                                                                                                          <span class="like-price">￥{$item[price]}</span>
+                    </div>
+                    <div class="comments">
+                                                                                   {$item[name]}	
+                                                                            </div>
+                                                                                                      <!--{if $item[OneComment]}-->
+        <div class="user">   
+            <a class="a-img" href="<!--{if $item[OneComment][userid] == 0}-->javascript:'';<!--{else}-->{SITE_URL}{tsurl('user','space',array(userid=>$item[OneComment][userid]))}<!--{/if}-->" title="{$item[OneComment][user][username]}" target="_blank">
+                                
+<img src="{$item[OneComment][user][face_32]}" width="30px" height="30px" alt="{$item[OneComment][user][username]}">
+
+                                                                </a>
+                                <a class="ofh" href="<!--{if $item[OneComment][userid] == 0}-->javascript:'';<!--{else}-->{SITE_URL}{tsurl('user','space',array(userid=>$item[OneComment][userid]))}<!--{/if}-->" title="{$item[OneComment][user][username]}" target="_blank">{$item[OneComment][user][username]}：</a> 
+                                                                                                                    <div class="bewrite ofh">{$item[OneComment][content]}</div>
+                                                    </div>
+                                                    
+            <!--{/if}-->
+						                        </div>
+            <!--{/loop}-->
+				<!--{/if}-->
+                
+                
+                
+                
+                  <!--{if $strshare1}-->
+			<!--{loop $strshare1 $key $item}-->
+						<div class="goods">
+							<div class="goods-pic" style=" height:210px ">
+								<a href="{SITE_URL}{tsurl('baobei',$item[goods_id])}" target="_blank" title="{$item[name]}">
+								<img src="{SITE_URL}{$item[img]}"  height="{$item[imgheigt]}"  alt="{$item[name]}" />
+								</a>
+								   <!--{if $TS_USER[user][userid] == $strTheme[userid] ||  $TS_USER[user][isadmin] ==1}-->
+						<a class="ilike-del" href="javascript:;" data-le="del_themegoods" data-proid="{$item[goods_id]}" style="display:none;" title="从当前主题内删除">删除</a>
+                            <!--{/if}-->
+																<a class="ilike-m"  href="javascript:;" data-type="0" data-proid="{$item[goods_id]}" style="display:none;">喜欢(<em class="like-count"> {$item[count_like]}</em>)</a>
+								<a class="ilike-topic" href="javascript:void(0);" data-proid="{$item[goods_id]}" style="display:none;">加入主题</a>
+							</div>
+                        <div class="comments-top">
+                                                <span class="like-num"><em class="like-count"> {$item[count_like]}  </em></span>
+                                                                                     <span class="like-comments"><em class="like-count">{$item[count_comment]}</em></span>     
+                                                                                                                                          <span class="like-price">￥{$item[price]}</span>
+                    </div>
+                    <div class="comments">
+                                                                                   {$item[OneComment][content]}	
+                                                                            </div>
+                                                                                                      <!--{if $item[OneComment]}-->
+        <div class="user">   
+            <a class="a-img" href="<!--{if $item[OneComment][userid] == 0}-->javascript:'';<!--{else}-->{SITE_URL}{tsurl('user','space',array(userid=>$item[OneComment][userid]))}<!--{/if}-->" title="{$item[OneComment][user][username]}" target="_blank">
+                                
+<img src="{$item[OneComment][user][face_32]}" width="30px" height="30px" alt="{$item[OneComment][user][username]}">
+
+                                                                </a>
+                                <a class="ofh" href="<!--{if $item[OneComment][userid] == 0}-->javascript:'';<!--{else}-->{SITE_URL}{tsurl('user','space',array(userid=>$item[OneComment][userid]))}<!--{/if}-->" title="{$item[OneComment][user][username]}" target="_blank">{$item[OneComment][user][username]}：</a> 
+                                                                                                                    <div class="bewrite ofh">{$item[OneComment][content]}</div>
+                                                    </div>
+                                                    
+            <!--{/if}-->
+						                        </div>
+            <!--{/loop}-->
+				<!--{/if}-->
+                <!--{if count($strsharey)==1}-->
+					 	 <div class="goods" style="display:none">
+                         </div>
+                <!--{/if}-->
+											
+					 	 
+															</div>
+			</div>
+			<div class="side colaside230">
+	
+	<div class="author box-shadow">
+		<div class="pic">
+			<a href="{SITE_URL}{tsurl('user','space',array('userid'=>$strThemeUser['userid']))}">
+			<img src="{$strThemeUser[face]}" width="50" height="50" alt="{$strThemeUser[username]}" title="{$strThemeUser[username]}">
+			</a>
+		</div>
+		<div class="info">
+						<a href="{SITE_URL}{tsurl('user','space',array('userid'=>$strThemeUser['userid']))}" target="_blank" class="acc ofh"><em>{$strThemeUser[username]}</em></a>
+						&nbsp;创建
+			<p><a href="{SITE_URL}{tsurl('user','space',array('userid'=>$strThemeUser['userid']))}" target="_blank">宝贝({$Gnum})</a>&nbsp;/&nbsp;<a href="{SITE_URL}{tsurl('user','zhuti',array('userid'=>$strThemeUser['userid']))}" target="_blank">主题({$sthemesNum})</a></p>
+		</div>
+	</div>
+    
+    
+    <div class="tags box-shadow plr15">
+		<div class="title">相关标签</div>
+		<ul class="clearfix">
+							 <!--{if $arrTag}-->
+			<!--{loop $arrTag $key $item}-->
+             <!--{if $item}-->
+             <li><a href="{SITE_URL}{tsurl('faxian','',array(tag=>$item))}" target="_blank">{$item}</a></li>
+			<!--{/if}-->
+            <!--{/loop}-->
+			<!--{/if}-->
+					</ul>
+	</div>
+    
+    
+    
+			<div class="comments box-shadow plr15">
+		<div class="title">
+			<a href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$strTheme['topicid']))}" class="all-follows">进入&gt;</a>
+			讨论板
+		</div>
+		<div class="comment-wrap clearfix">
+			<textarea class="b-textarea" id="J_SideCmtContent" name="commentContent"> </textarea>
+			<a class="sbl-btn" id="J_SideCmt" href="javascript:;" data-name="ney6bi">发表</a>
+					</div>
+		<ul id="J_CmtList">
+        <!--{if is_array($arrTopicComment)}-->
+<!--{loop $arrTopicComment $key $item}-->	
+        <li><div class="user-pic"><a href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" target="_blank"><img src="{$item[user][face]}" width="30" height="30" alt="{$item[user][username]}" title="{$item[user][username]}"></a></div><div class="user-news">
+        <!--{if $item[user][darenid]}-->
+       <a class="g-daren" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" target="_blank"><em>{$item[user][username]}</em><i class="i-daren">达人</i></a>
+        <!--{else}-->
+         <a href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" target="_blank">{$item[user][username]}</a>
+        <!--{/if}-->
+        ：{$item[content]}<br><span class="comment-time"> {php echo date('m-d H:i',$item[addtime])}</span></div></li>
+        <!--{/loop}-->
+<!--{/if}-->
+        
+		</ul>
+	</div>
+					
+	</div>		</div>
+				<div class="topic_share clearfix box-shadow">
+	<span class="topic_tip">看完啦？别忘了喜欢一下~</span>
+	<a class="ilike" href="javascript:;">喜欢</a>
+	<a class="icomment" href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$strTheme['topicid']))}">讨论</a>
+	<div class="share fr" >						
+		<span class="fl l20">分享给好友：</span>	
+		<a class="s-sina" href="javascript:void((function(){var title=encodeURIComponent('{$title}- {$TS_APP[options][appname]} - {$TS_SITE[base][site_title]}');var link='{SITE_URL}{tsurl('user'.$Themeid)}';var pic='';window.open('http://service.t.sina.com.cn/share/share.php?title='+title+'&pic='+pic+'&url='+link);})())" alt="分享到新浪微博"></a>
+		<a class="s-qzone" href="javascript:void((function(){var title=encodeURIComponent('{$title}- {$TS_APP[options][appname]} - {$TS_SITE[base][site_title]}');var link='{SITE_URL}{tsurl('user'.$Themeid)}';window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+link);})())" alt="分享到QQ空间"></a>	
+		<a class="s-tencent" href="javascript:void((function(){var title=encodeURIComponent('{$title}- {$TS_APP[options][appname]} - {$TS_SITE[base][site_title]}');var link='{SITE_URL}{tsurl('user'.$Themeid)}';var pic='';window.open('http://v.t.qq.com/share/share.php?url='+link+'&title='+title+'&pic=&site='+link);})())" alt="分享到腾讯微博"></a>	
+		<a class="s-douban" href="javascript:void((function(){var title=encodeURIComponent('{$title}- {$TS_APP[options][appname]} - {$TS_SITE[base][site_title]}');var link='{SITE_URL}{tsurl('user'.$Themeid)}';window.open('http://www.douban.com/recommend/?url='+link+'&title='+title);})())" alt="分享到豆瓣"></a>		
+		<a class="s-renren" href="javascript:void((function(){var title=encodeURIComponent('{$title}- {$TS_APP[options][appname]} - {$TS_SITE[base][site_title]}');var link='{SITE_URL}{tsurl('user'.$Themeid)}';window.open('http://share.renren.com/share/buttonshare.do?link='+link+'&title='+title);})())" alt="分享到人人网"></a>
+		<a class="s-163" href="javascript:void((function(){var title=encodeURIComponent('{$title}- {$TS_APP[options][appname]} - {$TS_SITE[base][site_title]}');var link='{SITE_URL}{tsurl('user'.$Themeid)}';var pic='';window.open('http://t.163.com/article/user/checkLogin.do?link='+link+'&info='+title+link+'&images='+pic+'&togImg=true');})());" alt="分享到网易微博"></a>
+	</div>
+</div></div>
+<input id="J_TopicId" type="hidden" value="{$strTheme[themeid]}"/>
+<input id="J_ForumPostCon" type="hidden" />
+<style>.guang-editor-wrap { display:none}</style>
+<script type="text/javascript">
+
+	GUANGER = { 
+
+		userId:"{$TS_USER[user][userid]}",
+
+		nick:"{$TS_USER[user][username]}",
+		
+		face:"{$hface}",
+
+		path:"{SITE_URL}",
+		
+		resulthtml: '{$resulthtml}',
+		
+		themeid:"{$Themeid}",
+		
+		topicid:"{$strTheme['topicid']}"
+
+	}
+</script>
+
+<script src="{SITE_URL}js/jquery-1.6.4.min.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="{SITE_URL}js/jquery.tools.min.js"></script>
+
+<script type="text/javascript" src="{SITE_URL}js/jquery.cookie.min.js?t=2012112603" async="true"></script>
+
+<script type="text/javascript" src='{SITE_URL}js/guang.min.js?t=20120106230000.js'></script>
+
+<script type="text/javascript" src='{SITE_URL}js/goods_flow.min.js'></script>
+
+<script type="text/javascript" src='{SITE_URL}js/common.min.js'></script>
+
+<script type="text/javascript" src='{SITE_URL}js/comment.min.js'></script>
+
+<script type="text/javascript" src="{SITE_URL}js/ajaxfileupload.min.js"></script>
+
+<script type="text/javascript">
+GUANGER.topicurl = "{tsurl('group','topic',array('topicid'=>$strTheme['topicid']))}";
+$.guang.goods.conf.colArray = [0,0,0,jQuery(".side").outerHeight()+13];
+</script>
+<script src="{SITE_URL}js/module/highlight.js" type="text/javascript"></script>
+<script src="{SITE_URL}js/module/brand-goods.js?t=20120813.js" type="text/javascript"></script>
+<script src="{SITE_URL}js/module/topicForum.js?t=20120813.js" type="text/javascript"></script>
+<script src="{SITE_URL}js/module/jquery.colorpicker.js?t=20120813.js" type="text/javascript"></script>
+<script src="{SITE_URL}js/module/userTopicCreate.js?t=20120813.js" type="text/javascript"></script>
+<script src="{SITE_URL}js/editor/guang.editor.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$.guang.editor = $.guang.Editor({});
+
+(function(a) {
+        var d = a.guang.editor,
+        h = d.contentDecode;
+		
+		a("#J_CmtList .user-news").each(function() {
+            var c = a(this);
+            b = c.html();
+            b = h.call(d, b);
+            c.html(b)
+        });
+})(jQuery);
+
+</script>
+{template footer}

@@ -1,0 +1,234 @@
+{template header}
+<link href="{SITE_URL}css/forum.css" rel="stylesheet" type="text/css" />
+<div class="discuss">
+
+<div class="forum-nav">
+	<ul class="nav-bar clearfix">
+				<li class="h on">
+			<div class="nav-item clearfix">
+				<h2>
+					<a href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid]))}">{$strGroup[groupname]}</a>
+				</h2>
+					<a id="J_ForumLover" href="javascript:;" class="ilike-s mt5" data="g">喜欢</a>
+			</div>
+		</li>
+        
+		<li>
+			<div class="nav-item">
+				<a  class="trait"  href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid]))}">{$strGroup[count_topic]}<br />讨论</a>
+			</div>
+		</li>
+				<li>
+			<div class="nav-item">
+				 <a  href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid],'likes'=>'1'))}"><em id="J_LikeCount">{$strGroup[count_user]}</em><br/>喜欢</a>
+			</div>
+		</li>	
+				<i></i>
+	</ul>	
+    
+    <span class="pos-l-txt gc6">
+    	    	     <a href="{SITE_URL}{tsurl('group','allgroup')}">所有板块  </a>
+    <!--{if $isGroupUser > 0 && $TS_USER[user][userid] == $strGroup[userid]||$TS_USER[user][userid]==1}-->
+    	    	     <a href="{SITE_URL}{tsurl('group','egroup',array(groupid=>$strGroup[groupid]))}">编辑板块  </a>
+     <!--{/if}-->
+                    </span>
+	
+	</div>
+
+
+<div class="forum clearfix" id="J_Forum">
+
+	<div class="forum-main box-shadow">
+				<div class="forum-oper">
+			<dl>
+				<dt>话题：</dt>
+                									<!--{if $typestr==''}-->
+													<dd class="current"><a>全部</a></dd>
+                                                    <!--{else}-->
+                                                    <dd ><a href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid],sort=>$sortstr))}">全部</a></dd>
+                                                     <!--{/if}-->
+                                                    <!--{if $typestr=='best'}-->
+													<dd class="current"><a>精华</a></dd>
+                                                    <!--{else}-->
+                                                   <dd ><a href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid],type=>'best',sort=>$sortstr))}">精华</a></dd>
+                                                    <!--{/if}-->
+                                                    <!--{if $typestr=='ask'}-->
+													<dd class="current last"><a>问答</a></dd>
+                                                     <!--{else}-->
+                                                     <dd class="last"><a href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid],type=>'ask',sort=>$sortstr))}">问答</a></dd>
+                                                     <!--{/if}-->
+                                                     
+							</dl>
+			<dl>
+				<dt>排序：</dt>
+                									<!--{if $sortstr==''}-->
+													<dd class="current"><a>最后回复</a></dd>
+                                                    <!--{else}-->
+                                                    <dd ><a href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid],type=>$typestr))}">最后回复</a></dd>
+                                                     <!--{/if}-->
+                                                    <!--{if $sortstr=='new'}-->
+													<dd class="current"><a>最新发表</a></dd>
+                                                    <!--{else}-->
+                                                   <dd ><a href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid],type=>$typestr,sort=>'new'))}">最新发表</a></dd>
+                                                    <!--{/if}-->
+                                                    <!--{if $sortstr=='most'}-->
+													<dd class="current last"><a>最多回帖</a></dd>
+                                                     <!--{else}-->
+                                                     <dd class="last"><a href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid],type=>$typestr,sort=>'most'))}">最多回帖</a></dd>
+                                                     <!--{/if}-->
+							</dl>
+						<form action="{SITE_URL}index.php">
+                <input name="app" type="hidden" value="group"/>
+                <input name="ac" type="hidden" value="group"/>
+                <input name="groupid" type="hidden" value="{$strGroup[groupid]}"/>
+				<input name="kw" type="text" class="txt" value=""/>
+				<input type="submit" class="sbl-btn" value="搜索">
+			</form>
+		</div>
+				<div class="forum-con">
+            <table>
+                <tr> 
+					<th class="top-icon"></th> 
+					<th class="topic">话题</th>
+					<th class="anthor">作者</th>
+					<th class="statistics">回帖/查看</th>
+					<th class="latest">最新回帖</th>
+				</tr>
+ <!--{if $arrTopic}-->
+<!--{loop $arrTopic $key $item}-->
+                
+					 				<tr>
+
+    					<td class="top-icon" align="left">												
+							<!--{if $item[istop]==1}-->
+    					 	<div class="icon i-forum i-status-top i-d" title="置顶帖">置顶帖</div>
+                            <!--{elseif $item[isask]==1}-->
+                            <div class="icon i-forum i-status-ask i-d" title="问答帖">问答帖</div>
+                             <!--{elseif $item[isposts]==1}-->
+                            <div class="icon i-forum i-status-best i-d" title="精华帖">精华帖</div>
+                             <!--{else}-->
+                            <div class="icon i-forum i-status-general i-d" title="普通帖">普通帖</div>
+							<!--{/if}-->
+    						    					</td>
+
+    					<td align="left" class="topic">
+
+    						<a class="status-top ofh wordbreak" href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$item['topicid']))}" title="{$item['title']}">
+
+    							{$item['title']}
+
+    						</a>
+
+    					</td>
+
+    					<td align="left" class="anthor">
+
+							    						<a class="g-daren" href="{SITE_URL}{tsurl('user','space',array('userid'=>$item['user']['userid']))}" title="{$item['user']['username']}" target="_blank"><em class="ofh">{$item['user']['username']}</em><!--{if $item['user']['darenid']>0}--><i class="i-daren">达人</i><!--{/if}--></a>
+
+							    					</td>
+
+    					<td align="left">{$item['count_comment']}/{$item['count_view']}</td>
+
+    					<td align="right">{php echo date('m-d h:i',$item[addtime])}</td>
+
+    				</tr>
+<!--{/loop}-->
+<!--{else}-->
+<tr>
+<td class="top-icon" align="left"></td>
+<td align="left" class="topic">暂无任何话题！</td>
+<td align="left" class="anthor"></td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+
+<!--{/if}--> 
+                    
+
+							</table>
+			<div class="pagin inlineblock clearfix" id="J_Pagination">
+			                 			   							
+
+		
+
+			
+
+	     	
+
+	           		
+
+			
+
+					{$pageUrl}
+
+				</div>
+		</div>
+        
+        
+        
+        
+					</div>
+	<div class="forum-sidebar">
+		<a class="bbl-btn create" href="{SITE_URL}{tsurl('group','new_topic',array('groupid'=>$strGroup[groupid]))}" title="+创建话题" rel="nofollow" >＋创建话题</a>
+		<div class="box box-shadow">
+			<div class="hd no-border">
+				<h3>板块简介</h3>
+											</div>
+<p class="bd" id="J_NoticeCon">
+{$strGroup[groupdesc]}
+</p>
+		</div>
+        <div class="box box-shadow">
+			<div class="hd no-border">
+				<h3>管理员</h3>
+			</div>
+			<div class="bd user-member">
+				<ul>
+																				<li class="last" >
+						<a class="img" href="{SITE_URL}{tsurl('user','space',array(userid=>$strLeader[userid]))}" target="_blank" title="{$strLeader[username]}"><img src="{$strLeader[f]}" width="40px" height="40px" alt="{$strLeader[username]}"></a>
+												<a href="{SITE_URL}{tsurl('user','space',array(userid=>$strLeader[userid]))}" target="_blank" title="{$strLeader[username]}">{$strLeader[username]}</a>
+							<span>发帖:{$strLeader[ft]}/ 回复:{$strLeader[cmt]}</span>
+					</li>
+									</ul>
+			</div>
+		</div>
+		<div class="box box-shadow">
+									<div class="hd">
+				<h3>活跃成员</h3>
+			</div>
+			<div class="bd user-member activist">
+												<ul>
+                 <!--{loop $arrGroupUser $key $item}-->
+                 
+                 <li class="last">
+																								<a class="img" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[userid]))}" target="_blank" title="{$item[username]}"><img src="{$item[face]}" width="40px" height="40px" alt="{$item[username]}"></a>
+					<a href="{SITE_URL}{tsurl('user','space',array(userid=>$item[userid]))}" target="_blank" title="{$item[username]}">{$item[username]}</a>
+						<span>发帖:{$item[ft]}/ 回复:{$item[cmt]}</span>
+					</li>
+                 
+                        
+                 <!--{/loop}-->
+
+									</ul>
+			</div>
+					</div>
+		
+			</div>
+</div>
+</div>
+    
+{php include pubTemplate("JsConstant");}
+
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});Do.add("track_info",{path:a("track_info.min.js"),type:"js"});
+    Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("add_topic_say",{path:a("add_topic_say.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");Do("track_info");
+})();
+</script>
+<script type="text/javascript">
+	Do('comment');
+	Do('forum');
+	Do('ajaxfileupload');
+</script>
+    {template footer}

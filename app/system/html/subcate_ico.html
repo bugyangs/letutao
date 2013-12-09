@@ -1,0 +1,15 @@
+{template header}
+
+<div class="midder">
+{template menu}
+<form method="POST" action="index.php?app=system&ac=navtag&ts=do_subcate_ico" enctype="multipart/form-data">
+<input type="hidden" name="subcate_id" value="{$subcate_id}" />
+<input type="hidden" name="cate_id" value="{$cate_id}" />
+<table  cellpadding="0" cellspacing="0">
+<tr><td width="100">选择标签组图标：</td><td><input type="file" class="fileinput" name="cate_icon" size="30">（建议尺寸为50x50）</td></tr>
+<tr><td></td><td><input class="btn btn_submit" type="submit" value="提 交" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.php?app=system&ac=navtag&cate_id={$cate_id}" class="btn btn_submit" style="display:inline">返回</a>
+</td></tr>
+</table>
+</form>
+</div>
+{template footer}

@@ -1,0 +1,212 @@
+{template header}
+
+<div id="wrap">
+		<div id="container">
+        <!--{if $catetags}-->
+			<div class="tag-book s1024">
+            
+				<div class="bd clearfix">
+                <!--{loop $catetags $key $item}-->
+										<div class="item">
+										<h3><a href="{SITE_URL}{tsurl($cate_appname,'',array(subcate=>$item[cate_name]))}"  title="{$item[cate_name]}" <!--{if $subcate==$item[cate_name]}-->class="cur"<!--{/if}-->>{$item[cate_name]}</a></h3>
+                                        
+                                        
+                           <!--{if is_array($item[subcate])}-->
+                       <!--{loop $item[subcate] $kkey $iitem}-->
+						<div class="top">
+							<div class="tag-img">
+								<a href="{SITE_URL}{tsurl({$item[appname]})}" title="{$item[cate_name]}">
+								<img src="<!--{if $iitem[subcate_icon]}-->{SITE_URL}{$iitem[subcate_icon]}<!--{else}-->{SITE_URL}images/subcate_ico.png<!--{/if}-->" title="{$item[cate_name]}" alt="{$item[cate_name]}"/>
+								</a>
+							</div>
+							<ul>
+                             <!--{if is_array($iitem[arr_tag])}-->
+                            <!--{loop {$iitem[arr_tag]} $kkkey $iiitem}-->
+                            <li><a class="<!--{if $tag == $iiitem}-->cur<!--{/if}-->" href="{SITE_URL}{tsurl($cate_appname,'',array(tag=>$iiitem))}">{$iiitem}</a></li>
+							<!--{/loop}-->
+							 <!--{/if}--> 																	</ul>
+						</div>
+  <!--{/loop}-->
+                        <!--{/if}--> 
+
+
+
+
+
+
+
+											</div>
+									<!--{/loop}-->
+									</div>
+			</div>
+<!--{/if}-->
+			<div class="goods-title clearfix" id="J_GoodsTitle">
+													<h2><!--{if $tag}-->{$tag}<!--{elseif $kw}-->搜索"<b>{$kw}</b>"的结果<!--{else}-->全部<!--{/if}--></h2>	
+								<div class="sort">
+                    <a <!--{if $sort=='count_like'}-->class="on"<!--{/if}--> href="{SITE_URL}{tsurl($cate_appname,'','',$tag,'count_like',$kw)}">受欢迎</a>	
+<a <!--{if $sort=='count_worth'}-->class="on"<!--{/if}--> href="{SITE_URL}{tsurl($cate_appname,'','',$tag,'count_worth',$kw)}">值得买</a>
+<a <!--{if $sort=='count_view'}-->class="on"<!--{/if}--> href="{SITE_URL}{tsurl($cate_appname,'','',$tag,'count_view',$kw)}">热门</a>
+<a <!--{if $sort=='count_comment'}-->class="on"<!--{/if}--> href="{SITE_URL}{tsurl($cate_appname,'','',$tag,'count_comment',$kw)}">热评</a>
+
+				</div>
+                                <div class="range-box">
+                         <a <!--{if $sort=='0~100'}-->class="on"<!--{/if}--> href="{SITE_URL}{tsurl($cate_appname,'','',$tag,'0~100')}">0-100元</a>|
+<a <!--{if $sort=='100~200'}-->class="on"<!--{/if}--> href="{SITE_URL}{tsurl($cate_appname,'','',$tag,'100~200',$kw)}">100-200元</a>|
+<a <!--{if $sort=='200~500'}-->class="on"<!--{/if}--> href="{SITE_URL}{tsurl($cate_appname,'','',$tag,'200~500',$kw)}">200-500元</a>|
+
+<a <!--{if $sort=='500~9999999'}-->class="on"<!--{/if}--> href="{SITE_URL}{tsurl($cate_appname,'','',$tag,'500~9999999',$kw)}">500元以上</a>
+                </div>
+                 <div class="tabpin">			
+                      <ul class="pin-board-switcher clearfix">
+       <li class="first selected"><a href="{SITE_URL}{tsurl('faxian','',array('subcate'=>$subcate,'k'=>$kw,'tag'=>$tag,'sort'=>$sort,'style'=>'pin'))}">瀑布流</a></li>
+        <li class="last"><a href="{SITE_URL}{tsurl('faxian','',array('subcate'=>$subcate,'k'=>$kw,'tag'=>$tag,'sort'=>$sort,'style'=>'boards'))}">画板</a></li>
+    </ul>	
+    </div>				
+			</div>
+			
+            
+            <div class="goods-wall" id="J_GoodsWall">
+			<div class="goods-block" style="opacity: 1; ">
+			<!--{if $Good && $page==1}-->
+<!--{loop $Good $key $item}-->
+<div class="goods">		
+		<div class="goods-pic" style="height:<!--{if $item[imgheigt]}-->{$item[imgheigt]}<!--{else}-->210<!--{/if}-->px;">            
+			<a href="{SITE_URL}{tsurl('baobei',$item[goods_id])}" target="_blank">                
+				<img src="{SITE_URL}{$item[img]}" alt="{$item[name]}">
+			</a>
+			<!--{if $item[uid] == $TS_USER[user][userid] || $TS_USER[user][userid] == 1}-->
+			<a class="ilike-del" href="javascript:void(0);" data-type="4" data-proid="{$item[goods_id]}" data-le="del_good" style="display: none; ">喜欢(<em class="like-count">{$item[count_like]}</em>)</a>
+            <a class="ilike-topic" href="javascript:void(0);" data-proid="{$item[goods_id]}" style="display: none; ">加入主题</a>
+			<!--{else}-->
+			<a class="ilike-m" href="javascript:void(0);" data-type="0" data-proid="{$item[goods_id]}" style="display: none; ">喜欢(<em class="like-count">{$item[count_like]}</em>)</a>
+            <a class="ilike-topic" href="javascript:void(0);" data-proid="{$item[goods_id]}" style="display: none; ">加入主题</a>
+			<!--{/if}-->
+								</div>      
+         <div class="comments-top">
+         <span class="like-num"><em class="like-count">{$item[count_like]}  </em></span>
+         <span class="like-comments"><em class="like-count">{$item[count_comment]}</em></span>     
+<!--{if $item[price]> 0}-->
+         <span class="like-price <!--{if intval($item[coupon_price])>0 && time()<$item[coupon_end_time]}-->pin-price-discount<!--{/if}-->">￥{$item[price]}</span>
+         <!--{/if}-->
+                        </div>
+		                     
+		<ul class="comments">  
+		       <li>
+		       		{$item[name]}
+		       </li>
+		</ul>
+        
+      <!--{if $item[OneComment]&&$item[OneComment][content]}-->
+        <div class="user">   
+            <a class="a-img" <!--{if $item[OneComment][userid] != 0}--> href="{SITE_URL}{tsurl('user','space',array(userid=>$item[OneComment][userid]))}" title="{$item[OneComment][user][username]}" target="_blank" <!--{/if}-->>
+                                
+<img src="{$item[OneComment][user][face_32]}" width="30px" height="30px" alt="{$item[OneComment][user][username]}">
+
+                                                                </a>
+                                <a class="ofh" <!--{if $item[OneComment][userid] != 0}--> href="{SITE_URL}{tsurl('user','space',array(userid=>$item[OneComment][userid]))}" title="{$item[OneComment][user][username]}" target="_blank" <!--{/if}-->>{$item[OneComment][user][username]}：</a> 
+                                                                                                                    <div class="bewrite ofh">{$item[OneComment][content]}</div>
+                                                    </div>
+                                                    
+            <!--{/if}-->
+	</div>
+<!--{/loop}-->
+<!--{/if}-->
+	
+	</div>
+			</div>
+            
+            
+            
+			<!--goods-wall end-->
+						<div class="goods-loading">&nbsp;</div>
+			
+			<div class="page-box" style="margin-bottom:20px;">
+				<div class="pagin inlineblock clearfix" id="J_Pagination">
+					<span>1</span>
+				</div>
+			</div>
+			 						
+						<!-- 标签begin -->
+			        <!--{if $catetags}-->
+
+			<div class="tag-book s1024">
+            
+				<div class="bd clearfix">
+                <!--{loop $catetags $key $item}-->
+										<div class="item">
+										<h3><a href="{SITE_URL}{tsurl($cate_appname,'',array(subcate=>$item[cate_name]))}"  title="{$item[cate_name]}" <!--{if $subcate==$item[cate_name]}-->class="cur"<!--{/if}-->>{$item[cate_name]}</a></h3>
+                                        
+                                        
+                           <!--{if is_array($item[subcate])}-->
+                       <!--{loop $item[subcate] $kkey $iitem}-->
+						<div class="top">
+							<div class="tag-img">
+								<a href="{SITE_URL}{tsurl($cate_appname,'',array(subcate=>$item[cate_name]))}" title="{$item[cate_name]}">
+								<img src="<!--{if $iitem[subcate_icon]}-->{SITE_URL}{$iitem[subcate_icon]}<!--{else}-->{SITE_URL}images/subcate_ico.png<!--{/if}-->" title="{$item[cate_name]}" alt="{$item[cate_name]}"/>
+								</a>
+							</div>
+							<ul>
+                             <!--{if is_array($iitem[arr_tag])}-->
+                            <!--{loop {$iitem[arr_tag]} $kkkey $iiitem}-->
+                            <li><a class="<!--{if $tag == $iiitem}-->cur<!--{/if}-->" href="{SITE_URL}{tsurl($cate_appname,'',url_array('tag',$iiitem))}">{$iiitem}</a></li>
+							<!--{/loop}-->
+							 <!--{/if}--> 																	</ul>
+						</div>
+  <!--{/loop}-->
+                        <!--{/if}--> 
+
+
+
+
+
+
+
+											</div>
+									<!--{/loop}-->
+									</div>
+			</div>
+        <!--{/if}-->    
+			<!-- 标签end -->
+			
+		</div><!--container end-->
+	</div>
+{php include pubTemplate("JsConstant");}
+
+<script src="{SITE_URL}js/jquery-1.6.4.min.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="{SITE_URL}js/jquery.tools.min.js"></script>
+<script type="text/javascript" src='{SITE_URL}js/guang.min.js?t=20120106230000.js'></script>
+<script type="text/javascript" src="{SITE_URL}js/common.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}js/comment.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}js/jquery.pagination.js"></script>
+<script type="text/javascript" src='{SITE_URL}js/goods_flow_ajax.min.js?t=20120106230000.js'></script>
+<script type="text/javascript" src="{SITE_URL}js/like_say.min.js?t=20120106230000"></script>
+
+<script type="text/javascript" src="{SITE_URL}js/ajaxfileupload.min.js"></script>
+
+
+<script type="text/javascript">
+var goodsPage = {
+	sumGoodsNum : $sumGoodsNum,
+	curPageNum : $page,
+	urlType : '{$TS_SITE[base][site_urltype]}',
+	pageUrl : "{SITE_URL}{tsurl($cate_appname,'',url_array())}",
+	sort : "{$sort}",
+	tagid : "{$tagid}",
+	cateId : "",
+	kw : "{$kw}"
+}
+if(goodsPage.sumGoodsNum > 0){
+	jQuery(function() {
+		jQuery.guang.goods.conf.ajaxData.bpage = "{$page}";
+		jQuery.guang.goods.conf.ajaxData.cateId = "";
+		jQuery.guang.goods.conf.ajaxData.tagId = "{$tagid}";
+		jQuery.guang.goods.conf.ajaxData.sort = "{$sort}";
+		jQuery.guang.goods.conf.ajaxData.kw = "{$kw}";
+		jQuery.guang.goods.init();	
+	});	
+}
+</script>
+<script type="text/javascript" src="{SITE_URL}js/Pagination.js"></script>
+<script type="text/javascript" src="{SITE_URL}js/goods.min.js"></script>
+{template footer}

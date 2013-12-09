@@ -1,0 +1,109 @@
+{template header}
+<script src="{SITE_URL}public/js/jquery.js" type="text/javascript"></script>
+<script>
+
+	//显示和隐藏
+	function viewcontent(){
+		$("#displaycontent").toggle();
+		$("#displaytitle").hide();
+	}
+	//显示和隐藏
+	function closecontent(){
+		$("#displaycontent").hide();
+		$("#displaytitle").toggle();
+	}
+$(document).ready(function() {
+
+//选择一级区域
+$('#oneid').change(function(){
+	$("#stwoid").html('<img src="'+siteUrl+'public/images/loading.gif" />');
+	var oneid = $(this).children('option:selected').val();  //弹出select的值
+	
+	if(oneid==0){
+		$("#stwoid").html('');
+		$("#sthreeid").html('');
+	}else{
+		$("#sthreeid").html('');
+		$.ajax({
+			type: "GET",
+			url:  "{SITE_URL}index.php?app=user&ac=area&ts=two&oneid="+oneid,
+			success: function(msg){
+				$("#stwoid").html(msg);
+				
+				//选择二级区域
+				$('#twoid').change(function(){
+					$("#sthreeid").html('<img src="'+siteUrl+'public/images/loading.gif" />');
+					var twoid = $(this).children('option:selected').val();  //弹出select的值
+					
+					if(twoid == 0){
+						$("#sthreeid").html('');
+					}else{
+					
+						//ajax
+						$.ajax({
+							type: "GET",
+							url:  "{SITE_URL}index.php?app=user&ac=area&ts=three&twoid="+twoid,
+							success: function(msg){
+								$('#sthreeid').html(msg);
+							}
+						});
+					
+					}
+
+				});
+				
+			}
+		});
+	
+	}
+	
+});
+
+});
+</script>
+<link href="{SITE_URL}css/setting.css" rel="stylesheet" type="text/css" />
+<div id="wrap">
+		<div id="container">
+			<div class="content clearfix">
+				{template set_menu}				
+             <div class="main-content">
+					<div class="set-info">
+					<form class="set-form" method="post" action="{SITE_URL}index.php?app=user&ac=do&ts=setcity">
+							<div class="error-row"><p></p></div>
+							<div class="form-row">
+								<label>所在地：</label>
+								<span class="theemail yc"><!--{if $strArea}-->{$strArea[one][areaname]} {$strArea[two][areaname]} {$strArea[three][areaname]} <!--{else}-->火星<!--{/if}--></span>
+							</div>
+							<div class="form-row">
+								<label>修改所在地：</label>
+								<select id="oneid" name="oneid">
+                                    <option value="0">请选择</option>
+                                    <!--{loop $arrOne $key $item}-->
+                                    <option value="{$item[areaid]}">{$item[areaname]}</option>
+                                    <!--{/loop}-->
+                                 </select>
+                                 <span id="stwoid"></span>
+								 <span id="sthreeid"></span>
+							</div>
+							
+							<div class="form-row pt10">
+								<label>&nbsp;</label>
+								<input type="submit" class="bbl-btn submit" value="保存">
+							</div>
+						</form>
+										</div>
+				</div>
+			</div>
+		</div><!--container end-->
+	</div>
+<script type="text/javascript">siteUrl = '{SITE_URL}'</script>
+{php include pubTemplate("JsConstant");}
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});Do.add("track_info",{path:a("track_info.min.js"),type:"js"});
+    Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("add_topic_say",{path:a("add_topic_say.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");Do("track_info");
+})();
+Do('ajaxfileupload');
+</script>
+{template footer}

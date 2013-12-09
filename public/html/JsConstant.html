@@ -1,0 +1,32 @@
+<script type="text/javascript">
+	var photo = "";
+	if(photo == ""){
+		photo = "{SITE_URL}public/images/noavatar.gif";
+	}else{
+		photo = "{SITE_URL}"+photo;
+	}
+	GUANGER = {
+		staticVersion : "20130818",
+		userId:"{$TS_USER[user][userid]}",
+		nick:"{$TS_USER[user][username]}",
+		userPhoto:photo,
+		path:"{SITE_URL}",
+		referer : "{SITE_URL}",
+		login : "",
+		<!--{if $mediaImgList||$mediaVideoList}-->
+		mediaImgList:$mediaImgList,
+		mediaVideoList:$mediaVideoList,
+		<!--{/if}-->
+		<!--{if $strGroup[groupid]}-->
+		groupid : "{$strGroup[groupid]}",
+		<!--{/if}-->
+		<!--{if $goods_id}-->
+		cmurl:"{SITE_URL}{tsurl('baobei',$goods_id)}",
+		<!--{/if}-->
+		login_qq:"<!--{if in_array('qq',$isL_Open)}-->1<!--{/if}-->",
+		login_taobao:"<!--{if in_array('taobao',$isL_Open)}-->1<!--{/if}-->",
+		login_sina:"<!--{if in_array('sina',$isL_Open)}-->1<!--{/if}-->",
+		urltype: '{$TS_SITE[base][site_urltype]}',
+		resulthtml: '{$resulthtml}'
+	}
+</script>

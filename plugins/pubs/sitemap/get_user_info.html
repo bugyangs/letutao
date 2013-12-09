@@ -1,0 +1,76 @@
+<?php  include PubTemplate("newheader"); ?>
+<link href="<?php echo SITE_URL; ?>css/reglogin.css" rel="stylesheet" type="text/css" />
+<div id="container">
+	<div class="content">
+
+		<h2>绑定淘宝网账户</h2>
+
+		<div class="form">        	
+
+    		<div class="error-row-l" ><p class="error"></p></div>
+
+    		<fieldset class="reg">
+				<legend>
+
+        			<img src="<?php echo SITE_URL; ?>plugins/pubs/taobao/connect_taobao.gif" align="absmiddle" /> 您将使用淘宝网账号 <strong style="color:#C00"><?php echo $info_arr['visitor_nick']; ?></strong> 登录本站。
+
+        		</legend>
+        		<div class="field-box pt25 pl20">
+
+        		<form method="POST" action="<?php echo SITE_URL; ?>index.php?app=pubs&ac=plugin&plugin=taobao&in=do">
+                <input type="hidden" name="taobao_access_token" value="<?php echo $info_arr['taobao_access_token'] ?>" />
+
+					<div class="form-row">
+
+						<label>Email：</label>
+
+						<input class="base-input"  name="email" value="" />
+
+					</div>
+                    
+                    <div class="form-row">
+
+						<label>昵称：</label>
+
+						<input class="base-input" name="username" value="<?php echo $info_arr['nick'] ?>" />
+
+					</div>
+                    
+                    
+                    
+                    
+
+					<div class="form-row pt10 clearfix">
+
+						<label>&nbsp;</label>
+
+						<input type="submit" class="bbl-btn submit" value="完成，继续浏览" />
+
+					</div>
+                    
+                    <div class="form-row">
+
+						<label>&nbsp;</label>
+
+						<input type="checkbox" class="check" name="remember" value="1" checked="checked" />
+
+						<span class="agreement gc6">我已阅读并同意<a href="<?php echo SITE_URL; ?>index.php?app=faxian&ac=agreement" target="_blank">《使用协议》</a></span>
+
+					</div>
+
+				</form>
+
+				</div>
+                
+
+			</fieldset>
+
+			
+
+		</div>		
+
+	</div><!--content end-->
+
+</div>
+
+<?php  include PubTemplate("footer"); ?>

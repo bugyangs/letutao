@@ -1,0 +1,58 @@
+
+.content { padding:40px;margin:0 auto;background:#fff;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:0 1px 1px rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(0,0,0,0.1); } 
+.content h2 { width:400px;line-height:22px;margin:0 auto 30px;padding:0 0 10px 0;font-size:16px;border-bottom:1px dotted #d1d1d1; } 
+.content h2 span { color:#666;font-size:12px;font-weight:normal; } 
+.content .form { width:400px;margin:0 auto; } 
+.form fieldset { border:none; } 
+.form fieldset.out-login {margin-bottom:30px; } 
+.form legend { margin-left:5px;color:#666;font-size:14px;font-weight:bold; } 
+.form .out-login a { float:left;margin-left:20px; } 
+.l-sina, .l-qq, .l-tao { width:120px;height:24px;line-height:999px;overflow:hidden; } 
+.form .out-login .l-qq, .form .out-login .l-sina { margin-left:10px; } 
+.l-sina { background:url(../images/l-sina.png); } 
+.l-qq { background:url(../images/l-qq.png); } 
+.l-tao { background:url(../images/l-tao.png); } 
+.forgotlink { line-height:32px;margin-left:10px; }  
+
+/* 第三方登录完善注册 */
+.set-box { width:365px;margin:0 auto; } 
+.set-box .title-info { padding:40px 0 20px 0;border-bottom:1px dotted #cdcdcd; } 
+.set-box .title-info .face { float:left;width:50px;height:50px;overflow:hidden; } 
+.set-box .title-info .info { float:right;width:300px; } 
+.set-box .title-info .info .name { color:#333;font-size:14px;font-weight:bold; } 
+.set-box .title-info .info p { color:#333;margin-top:10px; } 
+.set-box .set-form { margin-top:25px; } 
+
+/* Email验证 */
+.confirm-box { width:410px;margin:0 auto; } 
+.confirm-box h3 { line-height:22px;padding:0 0 20px 0;font-size:16px; } 
+.confirm { border-bottom:1px dotted #d1d1d1; } 
+.confirm p { color:#333;font-size:14px; } 
+.problem p { padding:15px 0 10px; } 
+.problem ol li { line-height:1.6;margin-bottom:5px; } 
+
+/* 申请试用成功 */
+.success { width:410px;margin:0 auto; } 
+.success p.randomword { padding:10px 0 25px; } 
+.success p.share-text { padding-top:15px; }
+.success .txa-share { width:390px;height:60px;padding:10px;font-size:14px; } 
+.success .shareToSina { text-align:center;padding-top:20px; }  
+.success .success-ft { margin-top:20px;padding-top:20px;border-top:1px dotted #d1d1d1; } 
+
+/* 
+ * 使用协议 
+ * added by heiniu@www.letushuo.com 2011-12-18
+*/
+.agreement-box h2{text-align:center;border-bottom:none;}
+.agreement-box ul li{line-height:2;color:#333;}
+.agreement-box ul li h3{margin:20px 0 0 0;}
+.agreement-box ul li ol{line-height:1.8;margin-left:2em;}
+.agreement-box ul li ol pre,.agreement-box ul li pre{margin-left:2em;}
+.agreement-box ul li p{line-height:1.6;padding-left:2em;margin:15px 0 0 0;color:#333;}
+
+/* 设置登录密码，完成注册 */
+.reg-complete { width:400px;margin:0 auto; } 
+.theemail { line-height:32px;font-size:14px;display:inline-block;zoom:1;*display:inline;overflow:hidden; } 
+
+/* 重置密码 */
+.reset-passoword{}

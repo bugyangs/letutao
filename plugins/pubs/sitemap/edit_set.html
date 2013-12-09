@@ -1,0 +1,35 @@
+<?php include template("admin/header");?>
+<!--main-->
+<div class="midder">
+
+<h2>sitemap生成插件</h2>
+<?php include template("admin/plugin_menu");?>
+
+<form method="POST" action="<?php echo SITE_URL; ?>index.php?app=pubs&ac=plugin&plugin=sitemap&in=edit&ts=do">
+<table  cellpadding="0" cellspacing="0">
+
+<tr><td width="100">sitemap路径：</td><td colspan="2"><input class="input-text" style="width:300px;" name="file_dir" value="/sitemap.*" /> 默认为根目录，*为生成的文件类型，修改路径请勿修改该*。</td></tr>
+<tr><td>文件类型：</td><td colspan="2"><span style="width:170px; display:block; float:left;"><input type="radio" name="xml_txt" checked="checked"value="xml"/><label for="goods">XML</label>&nbsp;</span><span style="width:170px; display:block; float:left;"><input type="radio"name="xml_txt" value="txt"/><label for="goods">TXT</label>&nbsp;</span></td></tr>
+<tr><td>针对搜索引擎：</td><td colspan="2"><span style="width:170px; display:block; float:left;"><input type="radio" name="search" checked="checked"value="baidu"/><label for="goods">baidu</label>&nbsp;</span><span style="width:170px; display:block; float:left;"><input type="radio"name="search" value="google"/><label for="goods">google</label>&nbsp;</span>仅在文件类型为XML生效</td></tr>
+<tr><td>生成的模块：</td><td colspan="2"><span style="width:170px; display:block; float:left;"><input type="checkbox" name="scope[]" checked="checked"value="goods"/><label for="goods">商品</label>&nbsp;</span><span style="width:170px; display:block; float:left;"><input type="checkbox" name="scope[]" checked="checked"value="zhuti"/><label for="zhuti">主题</label>&nbsp;</span><span style="width:170px; display:block; float:left;"><input type="checkbox" name="scope[]" checked="checked"value="topic"/><label for="topic">话题</label>&nbsp;</span></td></tr>
+<tr><td>
+
+<input type="submit" value="确认生成" /></td><td width="10"></td>
+<td width="165"></td>
+</tr>
+
+</table>
+</form>
+</div>
+
+<script type="text/javascript">
+var choiceAll = document.getElementById("choiceAll");
+choiceAll.onclick = function(){
+  var checkBox = document.getElementsByName("scope[]");
+  for(var i = 0;i < checkBox.length;i ++){
+    checkBox[i].checked = "checked";
+  }
+}
+</script>
+
+<?php include template("admin/footer");?>

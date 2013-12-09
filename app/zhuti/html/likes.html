@@ -1,0 +1,83 @@
+{template header}
+<link href="{SITE_URL}css/forum.css" rel="stylesheet" type="text/css" />
+
+	<div id="container">
+				<div class="forum-nav">
+			<ul class="nav-bar clearfix">
+				<li class="h on">
+					<div class="nav-item clearfix">
+						<h2>
+                            <a href="{SITE_URL}{tsurl('zhuti'.{$strTheme[themeid]})}" data-val="0">{$strTheme[title]}</a>
+						</h2>
+						<a href="javascript:;" class="ilike-s mt5" data-type="0">喜欢</a>
+					</div>
+				</li>
+				<li>
+					<div class="nav-item">
+						<a href="{SITE_URL}{tsurl('zhuti'.{$strTheme[themeid]})}" title="宝贝"><em>N+</em><br>宝贝</a>
+					</div>	
+				</li>
+				<li>
+					<div class="nav-item">
+						<a  href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$strTheme['topicid']))}">{$commentNum}<br>讨论</a>
+					</div>
+				</li>
+				<li>
+					<div class="nav-item">
+						<a class="trait" href="{SITE_URL}{tsurl('zhuti'.$strTheme[themeid],'likes')}"><em id="J_LikeCount">{$strTheme[likenum]}</em><br>喜欢</a>
+					</div>
+				</li>	
+				<i></i>
+			</ul>
+			<span class="pos-l-txt gc6">返回：
+    	    	        <a href="{SITE_URL}{tsurl('zhuti')}">主题街</a>
+    	    	        	            					<span class="ml5 mr5">/</span>
+                                                            
+            				    		                <a href="{SITE_URL}{tsurl('zhuti',{$strTheme[cate]})}#zhutiid">{$strTheme[cate]}</a>    		
+                        </span>
+		</div>         			
+                        
+
+        <div class="forum clearfix forum-lover box-shadow">
+	<h3><a href="{SITE_URL}{tsurl('zhuti')}">主题首页</a>&nbsp;&gt;&nbsp;喜欢这个主题的人</h3>
+	<ul class="user-member">
+								
+ <!--{if is_array($arrlikeuser)}-->
+<!--{loop $arrlikeuser $key $item}-->				
+			<li>
+			<a class="img" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[userid]))}" title="{$item[username]}">
+								<img src="{$item[face]}" width="50" height="50" alt="{$item[username]}" title="{$item[username]}">
+							</a>    
+			<span class="ofh">
+			  <!--{if $item[darenid]>0}-->
+			<a class="g-daren" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[userid]))}"><em class="ofh">{$item[username]}</em><i class="i-daren">达人</i></a>
+             <!--{else}-->
+            <a class="g-daren" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[userid]))}">{$item[username]}</a>
+			<!--{/if}-->				
+			</span>
+			<span class="ofh"> {$item[likenum]} 个喜欢宝贝</span>
+		</li>
+                <!--{/loop}-->
+<!--{/if}-->
+        
+		</ul>
+	<div class="tac mt20">
+	<div class="pagin inlineblock clearfix" id="J_Pagination">
+		    	   {$pageUrl}
+	    </div>
+    </div>
+</div>
+
+</div>
+
+{php include pubTemplate("JsConstant");}
+
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});
+Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");
+})();
+Do('ajaxfileupload');
+</script> 
+{template footer}

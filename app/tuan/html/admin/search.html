@@ -1,0 +1,70 @@
+{php include template("admin/header");}
+<script src="<?php echo SITE_URL; ?>public/js/jquery.js" type="text/javascript"></script>
+
+<script>
+$(function(){
+   //全选反选
+		$('.J_checkall').live('click', function(){
+			$('.J_checkitem').attr('checked', this.checked);
+			$('.J_checkall').attr('checked', this.checked);
+    	});
+});
+function redirect(url) {
+		window.location.replace(url);
+	}
+</script>
+
+<!--main-->
+<div class="midder">
+
+{php include template("admin/menu");}
+<form action="<?php echo SITE_URL; ?>index.php?app=share&ac=admin&mg=spider&ts=publish" name="searchform" method="post">
+<table cellpadding="0" cellspacing="0">
+<tbody><tr class="old">
+    <td width="50" align="center"><input style=" margin-top:8px;" type="checkbox" name="checkall" class="J_checkall">全选</td>
+    <td width="440">商品信息</td>
+    <td width="100">商品价格</td>
+    <td>佣金/佣金比率</td>
+    <td>30天推广量</td>
+    <td>30天总佣金</td>
+    <td>30天成交量</td>
+    </tr>
+ <!--{if count($taobaoke_item_list)<2}-->
+ <script>
+ setTimeout("redirect('{$url}{$p}');", 1);
+</script>
+ <!--{/if}-->
+<!--{loop $taobaoke_item_list $key $item}-->
+<tr class="odd">
+<td><input style=" margin-top:25px;" type="checkbox" class="J_checkitem" name="num_iid[]" value="{$item['num_iid']}"></td>
+<td>
+<div style="float:left; margin-right:10px;"><img src="{$item['pic_url']}_100x100.jpg" width="60" height="60" style="border:#CCC 1px solid; padding:1px;" /></div>
+                    <div>
+                        <a href="{$item['click_url']}" >{$item['title']}</a><br/>
+                        淘宝店铺：<a href="{$item['shop_click_url']}"  style="color:#999">{$item['nick']}</a>
+                    </div>
+
+</td>
+<td>{$item['price']}元</td>
+<td>{$item['commission']}元 / {php echo $item['commission_rate']/100}%</td>
+<td>{$item['commission_num']}件</td>
+<td>{$item['commission_volume']}元</td>
+<td>{$item['volume']}件</td>
+</tr>
+ <!--{/loop}-->
+<tr class="odd">
+<td>
+<input type="hidden" name="url" value="{$url}{$p}">
+<input style=" margin-top:10px;" type="checkbox" name="checkall" class="J_checkall">全选</td>
+<td>
+<input class="btn btn_submit"  style=" margin-top:6px; float:left;" type="submit" value="发 布">
+<a href="{$url}" title="重新载入淘宝数据" class="btn btn_submit mr10" style="height:15px; line-height:15px; display:block; width:70px; margin-top:6px; float:left; margin-left:5px;" >重新载入</a></td>
+<td></td>
+<td colspan="4"><div class="page" style="float:right">{$pageUrl}</div></td>
+<td></td>
+</tr>
+
+</tbody></table>
+</form>
+</div>
+{php include template("admin/footer");}

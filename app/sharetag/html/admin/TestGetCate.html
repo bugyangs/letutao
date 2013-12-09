@@ -1,0 +1,129 @@
+{php include template("admin/header");}
+<style>
+.form-row { margin:20px; clear:both; padding:5px;}
+.pipei { width:{$w}px;border:#CCC 1px dashed; margin:-15px 0 0 65px;}
+.pipei .table { margin:20px 0; clear:both; height:30px;border-bottom:#CCC 1px dashed} 
+.clearfix:after {
+visibility: hidden;
+display: block;
+font-size: 0;
+content: ".";
+clear: both;
+height: 0;
+line-height: 0;
+overflow: hidden;
+}
+.tag{ width:800px; margin-left:65px; margin-top:-17px;}
+.tag li{float:left; margin-right:10px;text-align:center;}
+.pipei li { float:left; margin-left:20px; width:60px; text-align:center;}
+.first { padding-left:80px;}
+.n_tag{padding: 2px 5px;white-space: nowrap;border-radius: 2px; background-color:#006B9F; color:#FFF}
+.l_tag{background-color:#347B00;}
+.tips {
+background-color: #68AF02;
+color: #fff;
+text-align: center;
+z-index: 10000;
+border-radius: 2px;
+padding: 1px 10px 2px;
+line-height: 1em;
+font-size: 12px!important;
+}
+.ico_loading_dotted {
+display: inline-block;
+width: 11px;
+height: 12px;
+overflow: hidden;
+margin-left: 2px;
+background: url(<?php echo SITE_URL ?>images/ico_loading_dotted.gif) no-repeat scroll 0 9px;
+}
+</style>
+
+<script>
+function check(){ 
+	if($("#url").attr("value")==""){ 
+		alert("目标商品链接不能为空"); 
+		$("#url").focus(); 
+		return false; 
+	} 
+	
+	$("#lo").show();
+} 
+
+</script>
+<div class="midder">
+{php include template("admin/menu");}
+<p>自动分类原理：1、根据商品标题提取关键词；2、对提取出的关键词循环和所有分类的关键词匹配，并把匹配关键词的权重值相加。3、总权重即权重值和最大的为最终分类。</p>
+<div style=" position:relative;">
+<!--{if $submit}-->
+<h3 style=" width:150px; height:30px; line-height:30px;">测试结果<input class="btn btn_submit" style="float:right;" type="button" onclick="javascript:history.back(-1);" value="返 回"></h3>
+<div class="form-row clearfix">
+<label>商品名称：</label>
+{$return['name']}
+</div>
+
+<div class="form-row clearfix">
+<label>分词结果：</label>
+    <div class="tag clearfix">
+    <ul>
+    <!--{loop $tag_arr $key $item}-->
+     <!--{if $item}-->
+    <li><a href="index.php?app=sharetag&ac=admin&mg=goods_tags&ts=list&selecttype=name&selectvalue={$item}"  class="n_tag l_tag">{$item}</a></li>
+    <!--{/if}-->
+<!--{/loop}-->
+        </ul>
+    </div>
+</div>
+<div class="form-row clearfix">
+<label>测试结果：</label>
+
+因为<a href="index.php?app=sharetag&ac=admin&mg=goods_tags&ts=list&selecttype=cate_name&selectvalue={$return_cate['cate_name']}" class="n_tag l_tag">{$return_cate['cate_name']}</a>分类所获得的总权重值最高，所以系统把该商品归类为<a href="index.php?app=sharetag&ac=admin&mg=goods_tags&ts=list&selecttype=cate_name&selectvalue={$return_cate['cate_name']}" class="n_tag l_tag">{$return_cate['cate_name']}</a>，如果分类有误，请根据下面测试的匹配数据对关键词分类以及权重进行调整。
+
+</div>
+<div class="form-row clearfix">
+<label>匹配数据：</label>
+<br />
+<div class="pipei clearfix">
+<div class="table first clearfix">
+    <ul>
+    <!--{loop $arrcate $key $item}-->
+     <li><a href="index.php?app=sharetag&ac=admin&mg=goods_tags&ts=list&selecttype=cate_name&selectvalue={$item['cate_name']}" class="n_tag">{$item['cate_name']}</a></li>
+<!--{/loop}-->
+    </ul>
+</div>
+<div class="table"><ul><li>总权重</li>
+<!--{loop $weight $key $item}-->
+<li>{$item}</li>
+<!--{/loop}-->
+
+
+</ul></div>
+<!--{loop $tag_weight $key $item}-->
+<div class="table">
+	<ul>
+    <li><a href="index.php?app=sharetag&ac=admin&mg=goods_tags&ts=list&selecttype=name&selectvalue={$item[tagname]}" class="n_tag l_tag">{$item[tagname]}</a></li>
+        <!--{loop $item[weight] $k $v}-->
+        <li>{$v}</li>
+        <!--{/loop}-->
+    </ul>
+</div>
+<!--{/loop}-->
+</div>
+</div>
+
+<!--{else}-->
+<form method="POST" action="index.php?app=sharetag&ac=admin&mg=TestGetCate&ts=do">
+<input type="hidden" name="submit" value="1" />
+请粘贴目标商品链接：<input type="text" class="input-text" name="url" id="url" value="" style="width:250px;"><br />
+<input class="btn btn_submit" type="submit" onclick="return check()" value="测 试" style="margin-left:120px; margin-top:10px;" />
+<span class="tips" id="lo" style="display:none">正在加载<span class="ico_loading_dotted"></span></span>
+<div class="clear"></div>
+<br />
+</form>
+
+<!--{/if}-->
+
+</div>
+
+</div>
+{template footer}

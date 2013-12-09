@@ -1,0 +1,21 @@
+{php include template("admin/header");}
+<div class="midder">
+{php include template("admin/menu");}
+
+该标签为自动匹配商品所属分类的<span style="color:#FF0000;  line-height:24px;">必要条件</span>，请认真填写相关的关键词，多个用<span style="color:#FF0000;  line-height:24px;">空格</span>或<span style="color:#FF0000;  line-height:24px;">,</span>隔开,请勿换行，重复的标签系统会自动忽略。多分类请按住“Ctrl”键进行多选。
+<div style=" position:relative;">
+<form method="POST" action="index.php?app=sharetag&ac=admin&mg=add_tag&ts=do">
+请选择所属分类：<select name="cate_id[]" size="5" style="width:100px;margin-right:5px;" multiple="">
+			<option value="0" selected="">无分类</option>
+			 {php echo getCateOption('','cate_id')}
+			</select>
+<textarea name="strtag" cols="80" rows="18" style="height:84px; width:50%; line-height:24px; position:absolute; top:2px;" >{$strtag}</textarea><br />
+<input class="btn btn_submit" type="submit" value="提 交" style="margin-left:96px; margin-top:10px;" />
+<div class="clear"></div>
+<br />
+</form>
+
+</div>
+
+</div>
+{template footer}

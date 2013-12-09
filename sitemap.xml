@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+			<sitemapindex>
+			<url><loc>http://test.gope.cn/</loc><priority>1.0</priority><lastmod>2013-10-29</lastmod><changefreq>Always</changefreq></url>
+			
+					<url>
+		<loc>http://test.gope.cn/index.php?app=coats</loc>
+		<lastmod>2013-10-29</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.8</priority>
+		</url>
+					
+					<url>
+		<loc>http://test.gope.cn/index.php?app=pants</loc>
+		<lastmod>2013-10-29</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.8</priority>
+		</url>
+					
+					<url>
+		<loc>http://test.gope.cn/index.php?app=shoes</loc>
+		<lastmod>2013-10-29</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.8</priority>
+		</url>
+					
+					<url>
+		<loc>http://test.gope.cn/index.php?app=bags</loc>
+		<lastmod>2013-10-29</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.8</priority>
+		</url>
+					
+					<url>
+		<loc>http://test.gope.cn/index.php?app=accessories</loc>
+		<lastmod>2013-10-29</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.8</priority>
+		</url>
+					
+					<url>
+		<loc>http://test.gope.cn/index.php?app=beauties</loc>
+		<lastmod>2013-10-29</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.8</priority>
+		</url>
+					
+					<url>
+		<loc>http://test.gope.cn/index.php?app=home</loc>
+		<lastmod>2013-10-29</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.8</priority>
+		</url>
+					
+			<url>
+<loc>http://test.gope.cn/index.php?app=goodid&amp;ac=1</loc>
+<lastmod>2013-10-29</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+			
+			<url>
+<loc>http://test.gope.cn/index.php?app=goodid&amp;ac=2</loc>
+<lastmod>2013-10-29</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+			
+			<url>
+<loc>http://test.gope.cn/index.php?app=goodid&amp;ac=3</loc>
+<lastmod>2013-10-29</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+			
+			<url>
+<loc>http://test.gope.cn/index.php?app=goodid&amp;ac=4</loc>
+<lastmod>2013-10-29</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+			<url><loc>http://test.gope.cn/index.php?app=zhuti</loc><priority>0.8</priority><lastmod>2013-10-29</lastmod><changefreq>Always</changefreq></url>
+			<url><loc>http://test.gope.cn/index.php?app=group</loc><priority>0.8</priority><lastmod>2013-10-29</lastmod><changefreq>Always</changefreq></url>
+			
+			<url>
+<loc>http://test.gope.cn/index.php?app=topicid&amp;ac=1</loc>
+<lastmod>2013-10-29</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+			
+			<url>
+<loc>http://test.gope.cn/index.php?app=topicid&amp;ac=2</loc>
+<lastmod>2013-10-29</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+			
+			<url>
+<loc>http://test.gope.cn/index.php?app=topicid&amp;ac=3</loc>
+<lastmod>2013-10-29</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.6</priority>
+</url>
+			</sitemapindex>

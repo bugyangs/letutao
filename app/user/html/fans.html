@@ -1,0 +1,168 @@
+{template header}
+
+<!--
+<div class="ad clearfix">
+ {php doAction('adcode',null,'8')}
+</div>
+-->
+<div id="wrap">
+
+	<div id="container">
+
+		<div class="nav box-shadow">
+
+	<ul class="clearfix">
+
+		<li class=" user bigfs">
+
+			<a href="{SITE_URL}{tsurl('user','space',array(userid=>$strUser[userid]))}">
+
+													<img src="{$strUser[face]}" alt="{$strUser[username]}" />
+
+							{$strUser[username]}
+
+			</a>
+
+		</li>	
+
+		<li><a href="{SITE_URL}{tsurl('user','feed',array(userid=>$strUser[userid]))}">$feedNum<br>动态</a></li>
+
+		<li><a href="{SITE_URL}{tsurl('user','space',array(userid=>$strUser[userid]))}">{$Gnum}<br>宝贝</a></li>
+
+
+		 <li ><a href="{SITE_URL}{tsurl('user','zhuti',array(userid=>$strUser[userid]))}">{$Tnum}<br>主题</a></li>
+
+			<li class="cur trait"><a href="{SITE_URL}{tsurl('user','fans',array(userid=>$strUser[userid]))}">{$fansNum}<br>粉丝</a></li>
+            
+            
+            	<li class="last"><a href="{SITE_URL}{tsurl('user','follow',array(userid=>$strUser[userid]))}">{$followNum}<br>关注</a></li>
+
+			<i></i>	
+
+	</ul>
+
+</div>
+
+		<div class="page-bd clearfix">
+		<div class="main">
+			<div class="fans-list box-shadow">
+								<div class="fans-search">已有&nbsp;{$fansNum}&nbsp;人关注了<!--{if  $userid == $TS_USER[user][userid]}-->我<!--{else}--> TA <!--{/if}--></div>
+                                
+                                
+                                <!--{loop $arrFan $key $item}-->
+                                
+												<div class="section clearfix">
+                                                
+                                <!--{if $item[new]&&$userid == $TS_USER[user][userid]}--><span class="i-new"></span><!--{/if}-->
+					<div class="user-pic">
+												<a href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" title="{$item[user][username]}">
+        				        					<img src="{$item[user][face]}" alt="{$item[user][username]}" title="{$item[user][username]}" width="50" height="50">
+        										</a>
+					</div>
+					<div class="user-info">
+						<p class="user-intro">
+														<a href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" class="g-daren">{$item[user][username]}<!--{if $item[user]['darenid']>0}--><i class="i-daren">达人</i><!--{/if}--></a>&nbsp;
+																				</p>
+						<p class="user-data">
+																				关注 {$item[user][count_follow]}<span class="mr5 ml5">|</span>粉丝 {$item[user][count_followed]}
+																			</p>
+					</div>
+					<div class="follow">
+					 <!--{if $item[isfollow]==3&&$userid == $TS_USER[user][userid]}-->
+                    <div href="#" class="followed-btn">互相关注<span class="mr5 ml5">|</span><a rel="removefollow" href="javascript:;" data-followtype="5" data-userid="{$item[user][userid]}" data-usernick="{$item[user][username]}">取消</a></div>
+                     <!--{elseif $item[isfollow]==3}-->
+                     <div href="#" class="followed-btn">互相关注</div>
+                     
+                      <!--{elseif  $item[user][userid]== $TS_USER[user][userid]}-->
+                      
+                       <div href="#" class="followed-btn">互相关注</div>
+                       
+                      <!--{elseif $item[isfollow]==1}-->
+                     <div href="#" class="followed-btn">已关注</div>
+                     
+                      <!--{else}-->
+                     <a rel="follow" href="javascript:;" class="follow-btn" data-followtype="<!--{if $item[isfollow]==2&&$userid == $TS_USER[user][userid]}-->1<!--{elseif $item[isfollow]==2}-->3<!--{elseif $item[isfollow]==4&&$userid == $TS_USER[user][userid]}-->5<!--{elseif $item[isfollow]==4}-->4<!--{/if}-->" data-userid="{$item[user][userid]}" data-usernick="{$item[user][username]}">加关注</a><br />
+                     <!--{/if}-->
+					 <!--{if $userid == $TS_USER[user][userid]}-->
+                     <a rel="removefans" href="javascript:;" class="remove-fans" data-userid="{$item[user][userid]}" data-usernick="{$item[user][username]}">移除粉丝</a>
+                     <!--{/if}-->
+																</div>
+				</div>
+								
+								<!--{/loop}-->
+                                
+                                
+                                
+				 <!-- End foreach-->
+				<div class="clearfix pt20 pb20">
+									<div class="pagin fr pagination" id="J_Pagination">
+                                     {$pageUrl}
+    									</div>
+								</div>
+			</div> <!--fans-list box-shadow end-->
+		</div><!--main end-->
+         <!--{if $Per}-->
+		<div class="side">
+			<div class="interest box-shadow plr15 ss">
+		<div class="title">你可能感兴趣的人<a href="javascript:window.location.reload();" class="all-follows">换一组</a></div>
+		<ul class="interPer" id="J_InterPer">
+        
+          <!--{if $arrPer}-->
+                            <!--{loop $arrPer $key $item}-->
+                            
+						<li>
+				<div class="user-pic">
+					<a href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" title="{$item[user][username]}">
+        			        				<img src="{$item[user][face]}" width="50" height="50" alt="{$item[user][username]}" title="{$item[user][username]}">
+        								</a>
+				</div>
+				<div class="user-info">
+										<a class="username ofh" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" title="{$item[user][username]}">{$item[user][username]}</a>
+									<p>关注 {$item[user][count_follow]}<span class="mr5 ml5">|</span>粉丝 {$item[user][count_followed]} </p>
+					<a rel="follow" href="javascript:;" class="follow-btn" data-followtype="{$item[ft]}" data-userid="{$item[user][userid]}">加关注</a>
+				</div>
+			</li>
+            <!--{/loop}-->
+            
+            <!--{else}-->
+            <li><p>木有了，你好厉害，系统自愧不如。</p></li>
+                            <!--{/if}-->
+
+						
+					</ul>
+	</div>
+			
+		
+	<!--
+		-->
+	
+		
+		
+		
+	</div><!--side end-->
+    
+       <!--{/if}-->
+       
+       		</div><!--main end-->
+	</div>
+
+		<!--page-bd end-->
+
+	</div>
+
+</div>
+{php include pubTemplate("JsConstant");}
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});
+Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");
+})();
+</script> 
+<script type="text/javascript">
+Do('profile');
+Do('follow');
+Do('ajaxfileupload');
+</script>
+
+{template footer}

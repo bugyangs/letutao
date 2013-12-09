@@ -1,0 +1,147 @@
+/* 
+ *CSS Document  
+ *BY QIUJUN 2011-06-29
+ *标准基础样式表
+ *头部header
+ *中部midder
+ *底部footer
+ */
+ 
+/*基本*/ 
+body{ font-size:12px;font-family:Arial,Helvetica,sans-serif;margin:0 auto;color: #333;background: #F9F9EF;}
+table {border-collapse:collapse;}
+th,caption {font-weight:normal;font-style:normal;text-align:left;}
+caption {font-weight:bold;}
+ol,ul,li{list-style:none;margin:0;padding:0;}
+a img {border:none}
+
+form input[type='radio'] {vertical-align:text-bottom;}
+
+h1 {color: #494949;font-size: 16px;font-weight: bold;margin: 0;padding:10px 0;}
+h1 a{color:#555555;}
+
+h2 {color: #555555;font-size: 14px;font-weight:normal;}
+h2 span{font-size:12px;}
+
+input,textarea{padding: 3px 2px;}
+
+.clear {clear: both;font-size: 0;line-height: 0;}
+
+/*链接/文字*/
+a {color:#336699;text-decoration:none;}
+
+/*按钮*/
+/*字体大小*/
+.f12{font-size:12px;}
+.f14{font-size:14px;}
+
+/*字间距*/
+.line23{line-height:23px;}
+
+/*浮动方向*/
+.fl{float:left;}
+.fr{float:right;}
+ 
+/*结构*/
+ 
+/*头部*/
+.header .hc{width:960px;height:60px;margin:0 auto;overflow:hidden;}
+.header .hc .left{float:left;margin:10px 0 0 0;color:#FFFFFF;}
+.header .hc .right{color:#FFFFFF;float:right;margin:10px 0 0 0;width:280px;line-height:19px;}
+.header .hc .right .fimg{border:solid 1px #3266A0;background:#FFFFFF;float:left;margin:5px 2px 0 0;padding:2px;}
+.header .hc .right a{color:#FFFFFF;}
+
+.header .hc .nav{float:left;padding:25px 0 0 20px;}
+.header .hc .nav ul{overflow: hidden;}
+.header .hc .nav ul li{font-size:14px;padding:0 10px;float:left;}
+
+.header .hc .nav ul li a{color:#FFFFFF;}
+
+/*APP导航*/
+.appnav{width:960px;margin:0 auto;padding:0;overflow:hidden;}
+.appnav ul{margin:0;padding:10px 0 0 0;}
+.appnav ul li{float:left;font-size:14px;margin:0 5px 0 0;padding:5px 10px;}
+.appnav .select{background:#333a40;}
+.appnav .select a{color:#FFFFFF;}
+
+
+/*midder中部*/
+.midder{width:960px;margin:0 auto;padding:0;overflow:hidden;height:auto !important;min-height:400px;margin-top:10px;background:#FFFFFF}
+.midder .mc{overflow:hidden;display: block;padding:10px;}
+.midder .mc .cleft{float: left;padding-right: 40px;width: 590px;}
+.midder .mc .cright{float: right;width: 310px;}
+
+/*footer底部*/
+.softname {color:#336699;font-weight:bold;}
+
+/*tab切换导航*/
+.tabnav {height:35px;padding:0px;}
+.tabnav ul {height:30px;margin:0;overflow:hidden;padding:0;background: url("bg-line.gif") repeat-x scroll 0 bottom transparent;}
+.tabnav ul li {height:30px;float:left;font-weight: bold;=height: 30px;line-height: 22px;margin-right: 20px;padding-right: 20px;}
+
+.tabnav ul li a{color:#333333}
+.tabnav .select {background:url("bg-lined.gif") repeat-x scroll 0 bottom transparent;}
+.tabnav .select a {font-weight:bold;color:#336699;}
+
+/*page分页*/
+.page {margin:0;text-align: left;padding:5px;}
+.page a {
+float: left;
+height: 20px;
+line-height: 20px;
+padding: 3px 10px;
+margin-left: 8px;
+font-size: 14px;
+border: 1px solid #DEDEDE;
+background: white;
+overflow: hidden;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+white-space: nowrap;
+border-image: initial;
+}
+.page a:hover {color: white;
+background: #5AD;
+text-decoration: none;}
+.page a:active {color: white;
+background: #5AD;
+text-decoration: none;}
+.page .current {float: left;
+height: 20px;
+line-height: 20px;
+padding: 3px 10px;
+margin-left: 8px;
+font-size: 14px;
+border: 1px solid #DEDEDE;
+background: #5AD;
+overflow: hidden;
+color: white;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+white-space: nowrap;
+border-image: initial;}
+.page .disabled {border: #eee 1px solid; padding:2px 5px; margin: 2px;color: #ddd;}
+
+/*tag标签*/
+
+
+/*comment评论列表*/
+.comment{width: 100%;overflow:hidden;}
+.comment li {margin: 0 0 20px 0px;overflow:hidden;}
+.comment li .user-face {float: left;height: 48px;overflow: hidden;width: 48px;}
+.comment li .reply-doc {float: right;width: 520px;overflow: hidden;}
+.comment li .reply-doc p img{max-width:450px;}
+.comment li .reply-doc h4 {font-weight:normal;font-size:12px;height: 22px;line-height: 22px;margin: 0 0 15px 0px;background: #F0F0F0;color: #666666;display: block;overflow: hidden;}
+.comment li .reply-doc p {margin: 0 0 25px;overflow: hidden;word-wrap: break-word;line-height:23px;}
+.comment li .reply-doc .recomment {background: #F8F8F8;border: 1px dashed #DDDDDD;color: #666666;font-size: 12px;padding: 10px;}
+.comment li .group_banned {text-align: right;}
+input, select, textarea {
+border: 1px solid 
+#CCC;
+line-height: 1.62;
+margin-top: 5px;
+padding: 3px;
+margin-bottom:5px;
+}

@@ -1,0 +1,215 @@
+{template header}
+<style>
+.bulletin .label{width:210px;height:280px;}
+.bulletin .label .dotted{padding-top:0;   }
+.bulletin .label ul{padding-top:4px; }
+.bulletin .label li.first{padding:4px 0 6px;}
+.bulletin .label li{width:230px;overflow:hidden;height:20px;line-height:20px;padding:7px 0;   }
+.bulletin .label li a{display:inline-block;zoom:1;padding:3px 4px;color:#666;height:16px;line-height:16px;}
+.bulletin .label li a.em{color:#ee2266;}
+.bulletin .label li a.tag{background:#fff5f5;padding:0 6px;margin-right:3px;height:22px;line-height:22px;color:#f86b82;border-radius:2px;-webkit-border-radius:2px;text-decoration:none;   }
+
+</style>
+    <!-- main-box begin -->
+    <div class="main-box clearfix">
+        <div class="flash fl">
+			<div class="scrollable">
+				<!-- 解决图片加载顺序问题  style="left: -2880px;"-->
+				<div class="items">
+ <!--{if $indexslide}-->
+<!--{loop $indexslide $key $item}-->
+							<div class="item">
+							<a class="topic-bg" href="{$item[url]}" target="_blank" style="background-image:url({$item[img]})" title="{$item[title]}">
+							</a>
+							<div class="itemText">
+							<h3 class="topicTitle bigfs"><a href="{$item[url]}" target="_blank">{$item[title]}</a></h3>
+								
+							<a class="byOne" href="{$item[url]}" target="_blank">
+									{php echo nl2br($item[desc])}
+							</a>
+							</div>
+                            <!--{if $item[title]}-->
+							<a href="{$item[url]}" target="_blank" class="itmeGuang"  title="{$item[title]}">去看看&gt;</a>
+                            <!--{/if}-->
+							<a href="{$item[url]}" class="a-mask" target="_blank" title="{$item[title]}" <!--{if empty($item[title])}-->
+ style="background:none"<!--{/if}-->></a>
+						</div>
+<!--{/loop}-->
+<!--{/if}-->
+
+																
+					</div>
+			</div>
+	        <ul class="navi clearfix"> 
+            
+              <!--{if $indexslide}-->
+<!--{loop $indexslide $key $item}-->
+
+		<li <!--{if $item[i]==0}-->class="first active"<!--{/if}-->>
+					<span></span>
+					<a href="{$item[url]}" title="{$item[title]}" target="_blank">
+					<div class="thumb">
+						<img src="{$item[img]}" alt="{$item[title]}" width="130" height="45">
+					</div>
+					<h3 class="topicTitle ofh"></h3>
+					</a>
+				</li>
+	<!--{/loop}-->
+<!--{/if}-->
+
+	                    	                	                
+			</ul>
+        </div>
+        <!-- flash end -->
+        			<div class="bulletin fr clearfix" id="J_Bulletin">
+				<h3>最近热门标签~</h3>
+				<div class="label clearfix"> <ul class="dotted clearfix"> 
+                
+                <!--{loop $HotTag $key $item}-->
+                <!--{if $key%5==0}-->
+                <li <!--{if $key==0}-->class="first"<!--{/if}-->> 
+                <!--{/if}-->
+				 <a<!--{if $item['count']>100}--> class="tag"<!--{/if}--> href="{SITE_URL}{tsurl($item[appname],'',array('tag'=>$item['tag_name']))}" target="_blank" title="{$item['tag_name']}">{$item['tag_name']}</a>
+                   <!--{if $key%5==5&&$key>0}-->
+                </li>
+                <!--{/if}-->
+                <!--{/loop}-->
+        
+                
+             </ul> </div>
+                
+			</div><!-- cms end 最近热门的玩意儿 end -->
+    </div>
+     <div class="ad clearfix" style="margin:-15px auto 10px auto; width:980px;"><!-- 首页广告1 -->
+ {php doAction('adcode',null,'1')}
+</div>
+    <!-- main-box end -->
+	<!-- latestLike end-->
+    <!--{if $category}-->					
+<!--{loop $category $key $item}-->
+    	<div class="category-main clearfix">
+		
+        <div class="category">
+            <div class="hd clearfix">
+                <h2><a href="{SITE_URL}{tsurl($item[appname])}" title="{$item[catename]}" target="_blank">{$item[catename]}</a></h2>
+            </div>
+            <div class="group clearfix">
+                <dl class="clearfix">
+					 <dt>
+                       <ul class="J_Prompt">
+                       			
+                                
+                        <!--{if is_array($item[catetags_1])}-->					
+            <!--{loop $item[catetags_1] $key $iitem}-->
+    					    	<li>
+                                    <a href="{SITE_URL}{tsurl($item[appname],'',array(tag=>$iitem[tag_name]))}" title="{$iitem[tag_name]}" target="_blank">
+                                        <img src="{$iitem[imgstr]}" width="270px" height="140px" alt="{$iitem[tag_name]}">
+                                    </a>
+                                    <div class="title bigfs"><a href="{SITE_URL}{tsurl($item[appname],'',array(tag=>$iitem[tag_name]))}" target="_blank" title="{$iitem[tag_name]}">{$iitem[tag_name]}</a></div>
+                                </li>
+    								
+            <!--{/loop}-->
+                                                
+            <!--{/if}-->				    						    						                                
+    						    							</ul>
+                            </dt>
+							<dd>
+                            <ul class="J_Prompt">			    					
+            <!--{if is_array($item[catetags_2])}-->					
+            <!--{loop $item[catetags_2] $kkey $iitem}--> 
+    				    		<li>
+                                     <a href="{SITE_URL}{tsurl($item[appname],'',array(tag=>$iitem[tag_name]))}" title="{$iitem[tag_name]}" target="_blank">
+                                        <img src="{$iitem[imgstr]}" <!--{if $kkey==0}-->width="290px" height="290px"<!--{else}-->width="140px" height="140px"<!--{/if}--> alt="{$iitem[tag_name]}">
+                                    </a>
+                                    <div class="title bigfs"><a href="{SITE_URL}{tsurl($item[appname],'',array(tag=>$iitem[tag_name]))}" target="_blank" title="{$iitem[tag_name]}">{$iitem[tag_name]}</a></div>
+                                </li>
+                <!--{/loop}-->
+                                                
+            <!--{/if}-->	
+
+    												                        </ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        
+        <div class="tab fr">
+                    <div class="nav">
+                        <ul class="J_Theme-tab">
+                        <li class="on">主题</li>
+                                                <li>达人</li>
+                        </ul>
+                    </div>
+                    <div class="theme clearfix">
+                        <ul class="J_Theme">
+                        <!--{if is_array($item[arrThemes])}-->					
+            <!--{loop $item[arrThemes] $kkey $iitem}--> 
+							   <li  <!--{if $kkey==0}-->class="on"<!--{/if}-->>
+                                                        
+                                <a  class="list-a" href="{SITE_URL}{tsurl('zhuti'.$iitem[themeid])}" target="_blank" title="{$iitem[title]}">{$iitem[title]}</a>
+                                <a class="theme-pic" target="_blank" href="{SITE_URL}{tsurl('zhuti'.$iitem[themeid])}" >
+                                    <img src="<!--{if $iitem[simg]}-->{$iitem[simg]}<!--{else}-->images/none-z-b.gif<!--{/if}-->" alt="{$iitem[title]}" width="210" height="140">
+                                    <span>{$iitem[title]}</span>
+                                </a>
+                            </li>
+                                           <!--{/loop}-->
+                                                
+            <!--{/if}-->	 
+			
+						</ul>
+                        <div class="more-2">
+                             <a  class="more-a" href="{SITE_URL}{tsurl('zhuti',$item[catename])}" target="_blank" title="更多{$item[catename]}主题">&gt;&gt;</a>
+                        </div>
+                    </div>
+                    <div class="theme clearfix dr">
+                    	 <!--{if is_array($item[arrThemes])}-->					
+            <!--{loop $item[arrThemes] $kkey $iitem}-->
+						 <dl>
+                            <dt>
+                                <a class="user-img" href="{SITE_URL}{tsurl('user','space',array(userid=>$iitem['user']['userid']))}" title="{$iitem['user']['username']}" target="_blank">
+                                                							<img src="{$iitem['user']['face']}" width="60" height="60" alt="{$iitem['user']['username']}" />
+            						                                </a>
+                            </dt>
+                            <dd>
+                                <a class="name g-daren" href="{SITE_URL}{tsurl('user','space',array(userid=>$iitem['user']['userid']))}" target="_blank">
+                                <em class="ofh">{$iitem['user']['username']}</em></a>
+                                <p class="intro"><!--{if $iitem['user']['signed']}-->{$iitem['user']['signed']}<!--{else}-->这家伙很懒，什么话都没留下！<!--{/if}--></p>
+                            	<a rel="follow" href="javascript:;" class="follow-btn" data-followtype="5" data-userid="{$iitem['user']['userid']}" title="{$iitem['user']['username']}" data-usernick="{$iitem['user']['username']}">加关注</a>
+                                                        </dd>
+                        </dl>
+			<!--{/loop}-->
+                                                
+            <!--{/if}-->	 		
+						                      
+                    </div>
+        </div>
+		
+    </div>
+		<!--{/loop}-->
+									
+<!--{/if}-->
+
+	<div class="justGuang clearfix pos-r">
+		<fieldset>
+    		<h3 id="J_legend">
+    			现在加入我们，开始发现喜欢，改变生活...
+    		</h3>
+    		<div class="field-box" id="J_welcome">
+            <!--{if in_array('qq',$isL_Open)||in_array('sina',$isL_Open)||in_array('taobao',$isL_Open)}-->
+    			<div class="clearfix thirdLogin">
+                 <!--{if in_array('qq',$isL_Open)}-->
+					<a class="l-qq" href="{SITE_URL}index.php?app=pubs&ac=plugin&plugin=qq&in=qq_login" target="_blank">QQ帐号登录</a>
+                 <!--{/if}-->
+                     <!--{if in_array('taobao',$isL_Open)}-->
+                    <a class="l-tao" href="{SITE_URL}index.php?app=pubs&ac=plugin&plugin=taobao&in=tb_login" target="_blank">淘宝账户登录</a><!--{/if}-->
+                    <!--{if in_array('sina',$isL_Open)}-->
+					<a class="l-sina" href="{SITE_URL}index.php?app=pubs&ac=plugin&plugin=sina&in=sina_login" target="_blank">新浪微博登录</a><!--{/if}-->
+    			</div>
+			<!--{/if}-->
+<div class="clearfix gc login">	
+    				<a id="J_login" href="{SITE_URL}{tsurl('user','login')}">帐号登录</a>&nbsp;|&nbsp;<a href="{SITE_URL}{tsurl('user','register')}">免费注册</a>
+    			</div>
+    		</div>
+    	</fieldset>
+	</div>
+{template footer}

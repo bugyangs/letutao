@@ -1,0 +1,132 @@
+body {} 
+.main-recommend{background:#fff;padding:10px;}
+.main-recommend .left{width:730px;height:250px;float:left;overflow:hidden;position:relative; }
+#J_Slide{width:730px;height:250px;background-color:#fff;overflow:hidden;position:relative; } 
+#J_Slide .items { width:20000em;position:absolute;z-index:1; } 
+#J_Slide .items .item { width:730px;height:250px;position:relative;float:left; }
+#J_Slide_nav{position:absolute;bottom:10px;right:10px;width:80px;height:10px;z-index:10;}
+#J_Slide_nav li{height:10px;width:10px;border-radius:5px;background:#fff;float:left;cursor:pointer;margin-right:10px;box-shadow:0 1px 2px 0 rgba(0,0,0,0.5)}
+#J_Slide_nav li.active{background:#ee2266;}
+.main-recommend .right{width:200px;float:right;padding-right:10px;padding-top:40px;}
+.main-recommend .right p{line-height:28px;padding:8px 0px 0px 10px;margin-top:16px;}
+.main-recommend .right p a{color:#333;}
+.main-recommend .right p a:hover{text-decoration:none;}
+.main-recommend .right p a em{color:#e26;}
+.main-recommend .topic-tips{height:96px;background:url(../images/topic-ad-bg.png) no-repeat center 10px;}
+.main-recommend .create-topic-btn{display:block;height:42px;width:172px;margin-left:15px;background:url(../images/create-topic.png) no-repeat;}
+.main-recommend .right .link a{color:#e63;font-size:14px;}
+.main-recommend .right .link a:hover{text-decoration:underline;}
+
+.topic-main{padding-top:20px;} 
+.topic-nav{}
+.topic-banner{height:240px;display:block }
+.nav-main{height:39px;}
+.nav-main li{float:left;margin-right:10px;width:130px;height:39px;position:relative;}
+.nav-main li a{height:34px;line-height:34px;text-indent:25px;text-align:center;font-size:14px;font-weight:700;color:#666;display:block;background:#fff url(../images/topic-icon.png) no-repeat;}
+.nav-main li a:hover{text-decoration:none;}
+.nav-main li.nav-re a{background-position:200px 200px;text-indent:0px;}
+.nav-main li.nav-re-on a{background-position:200px 200px;color:#e26;text-indent:0px;}
+.nav-main li.nav-14 a{background-position:38px 7px;}
+.nav-main li.nav-14-on a{background-position:38px -39px;color:#e26;height:39px;line-height:42px;}
+.nav-main li.nav-14-on-notag a{background-position:38px -42px;}
+.nav-main li.nav-19 a{background-position:-102px 8px;}
+.nav-main li.nav-19-on a{background-position:-102px -39px;color:#e26;height:39px;line-height:42px;}
+.nav-main li.nav-19-on-notag a{background-position:-102px -42px;}
+.nav-main li.nav-17 a{background-position:-243px 8px;}
+.nav-main li.nav-17-on a{background-position:-243px -39px;color:#e26;height:39px;line-height:42px;}
+.nav-main li.nav-17-on-notag a{background-position:-243px -42px;}
+.nav-main li.nav-18 a{background-position:-383px 8px;}
+.nav-main li.nav-18-on a{background-position:-383px -39px;color:#e26;height:39px;line-height:42px;}
+.nav-main li.nav-18-on-notag a{background-position:-383px -42px;}
+.nav-main li.nav-15 a{background-position:-523px 8px;}
+.nav-main li.nav-15-on a{background-position:-523px -39px;color:#e26;height:39px;line-height:42px;}
+.nav-main li.nav-15-on-notag a{background-position:-523px -42px;}
+.nav-main li.nav-14-on-notag a,.nav-main li.nav-19-on-notag a,.nav-main li.nav-17-on-notag a,.nav-main li.nav-18-on-notag a,.nav-main li.nav-15-on-notag a{color:#e26;height:34px;line-height:34px;}
+.nav-main li.nav-ds{width:140px;margin-right:0;}
+.nav-main li.nav-ds-on{width:140px;margin-right:0;}
+.nav-main li.nav-ds a{background-position:-663px 8px;}
+.nav-main li.nav-ds-on a{background-position:-663px -42px;color:#e26;}
+.nav-main li.nav-ds i,.nav-main li.nav-ds-on i{position:absolute;top:-18px;right:-18px;height:26px;width:82px;background:url(../images/icon_topic_dasai.png) no-repeat;}
+
+
+.nav-sub{padding:14px 0px 12px 18px;height:24px;background:#fff;}
+.nav-sub li{float:left;margin-right:16px;}
+.nav-sub li a{display:block;padding:0 16px;height:24px;line-height:24px;background:#f5f5f5;color:#666;border-radius:2px;}
+.nav-sub li.on a{background:#e26;color:#fff;}
+
+.topic-cate-name{padding-top:25px;position:relative;}
+.topic-cate-name h3{height:24px;line-height:24px;font-size:18px;font-family:'Microsoft Yahei'}
+.topic-cate-name .more{position:absolute;right:0;bottom:0;color:#333;font-size:14px;font-weight:700;}
+.topic-cate-name .more:hover{text-decoration:none;color:#333;}
+
+.topic-list{position:relative;} 
+.topic-aside {position:absolute;width:230px;height:310px;top:20px;right:0;}
+.bar-list{padding:10px 8px 0px 12px;background:#fff;margin-bottom:20px;position:relative;}
+.bar-list h3 { padding:6px 0 14px 0;line-height:16px;font-size:14px;position:relative;z-index:2; } 
+.bar-list li {padding-bottom:13px;position:relative;}
+.bar-list li a { display:block;padding-left:10px;height:31px;line-height:33px;background:#e9e9e9;color:#666;text-decoration:none;transition:background 0.9s;-webkit-transition:background 0.9s;-moz-transition:background 0.9s;-o-transition:background 0.9s; } 
+.bar-list .num { float:right;padding-right:10px;font-family:Georgia;*margin-top:-33px; } 
+.bar-list li a:hover { background:#d9d9d9; } 
+.bar-list .rank{height:15px;width:15px;float:left;border:1px #dadada solid;background:#f5f5f5;border-radius:2px;position:absolute;left:6px;top:8px;}
+.bar-list .rank i{display:block;border-top:1px #ffffff solid;border-left:1px #ffffff solid;line-height:14px;color:#666;text-align:center;font-family:'Georgia';font-style: normal;}
+.bar-list .rank3{border:1px #b00000 solid;background:#e60000;}
+.bar-list .rank3 i{border-top:1px #ff9b9b solid;border-left:1px #ff9b9b solid;color:#fff;}
+.topic-aside .bar-list em{position:absolute;font-size:12px;font-family:'Microsoft Yahei';font-weight:700;top:16px;left:77px;z-index:1;}
+.topic-aside .hot em{color:#f80000;left:60px;}
+.topic-aside .hot li a{padding-left:30px;}
+.topic-aside .hot li{padding-bottom:15px;}
+.topic-aside .hot {padding-bottom:6px;}
+.topic-aside .top em{color:#e26;}
+.topic-aside .new em{color:#ff6d00;}
+.bar-list .tips{background:#ffebc9;padding:8px!important;margin-bottom:10px;line-height:20px;}
+.bar-list .tips span{color:#5ad;cursor:pointer;}
+.bar-list .tips i{position:absolute;top:-12px;left:10px;height:0px;width:0px;border:6px transparent solid;border-bottom:6px #ffebc9 solid;}
+.bar-list #J_rankList li{padding-bottom:10px;}
+.bar-list #J_rankList {padding-bottom:9px;}
+.bar-list #J_favorList li{padding-bottom:10px;}
+.bar-list #J_favorList {padding-bottom:9px;}
+.bar-list #J_switchList a{color:#333;}
+.bar-list #J_switchList .on{color:#e26;}
+
+.topic-dashai{}
+.topic-dashai .topic-list{position:relative;min-height:750px;}
+.topic-dashai .topic-aside{position:absolute;right:0px;top:20px;}
+.topic-dashai .topic-dashai-nav {padding-top:25px;position:relative;}
+.topic-dashai .topic-dashai-nav h3{height:24px;color:#e26;line-height:24px;font-size:18px;font-family:'Microsoft Yahei'}
+.topic-dashai .topic-dashai-nav a{color:#333;}
+.topic-dashai .topic-dashai-nav .on{font-weight:700;color:#e26}
+.topic-dashai .topic-dashai-nav span{margin:0 5px;}
+.topic-dashai .topic-dashai-nav .sort{position:absolute;left:100px;bottom:2px;color:#333;width:400px;}
+.topic-dashai .topic-dashai-nav .qq{float:right;font-weight:700;height:24px;color:#e26;line-height:24px;}
+.topic-dashai .topic-dashai-nav .qq span{color:#e63;font-size:16px;}
+
+
+/*分页样式*/
+.pagin span{border:1px solid #ebebeb;background:#fff;color:#666;}
+.pagin span.current{background:#999;color:#fff;}
+.pagin a { float:left;height:20px;line-height:20px;color:#666;padding:3px 10px;margin-left:8px;font-size:14px;border:1px solid #ebebeb;background:#fff;overflow:hidden;border-radius:0px;-moz-border-radius:0px;-webkit-border-radius:0px; white-space: nowrap; }  
+.pagin a:hover{border:1px solid #ccc;color:#666;background:#fff;}
+.pagin a:hover{border:1px solid #ccc;color:#666;background:#fff;}
+
+.extraNineGrid { margin-right:250px; }
+
+/* 参赛游戏规则介绍 */
+.topic-dashai-intro{padding:20px 10px 20px 25px;margin-top:10px;background:#fff;}
+.topic-dashai-intro p{line-height:24px;font-size: 12px; color: #666;}
+.topic-dashai-intro p .rc{font-weight: 700;}
+.topic-dashai-intro-btn-content{width:350px;float:right;padding-top:5px;}
+.topic-dashai-intro-btn{display:block;float:left;margin-left:10px;_margin-left:5px;height:36px;background:url(../images/topic-dasai-intro.png) no-repeat;text-indent: -9999px;cursor:pointer;}
+.topic-dashai-intro-btn1{width:106px;background-position:0 0;}
+.topic-dashai-intro-btn2{width:110px;background-position:-115px 0; }
+.topic-dashai-intro-btn3{width:102px;background-position:-238px 0; }
+/* 我要参晒 */
+.join-tp { width:402px; }
+.join-tp .tip-text { margin-bottom:10px;line-height:1.2;font-size:14px; }
+.join-tp .tip-text span { font-size:12px; }
+.join-tp .user-tp { width:360px;height:249px;overflow:auto; }
+.join-tp .user-tp li { width:330px;height:34px;margin-bottom:9px;background:#E9E9E9; }
+.join-tp .user-tp .tp-item { padding:10px 0 0 10px;line-height:14px;position:relative; }
+.join-tp .user-tp .tp-item label { display:block;width:230px; }
+.join-tp .user-tp .tp-item span { position:absolute;top:10px;right:10px; }
+.join-tp  .act-row { margin-top:15px;padding-left:125px;line-height:28px; }
+.join-tp #J_JoinSubmit { margin-right:20px;padding:0;width:80px;text-align:center; }

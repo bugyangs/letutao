@@ -1,0 +1,46 @@
+{php include template("admin/header");}
+<script src="<?php echo SITE_URL; ?>public/js/jquery.js" type="text/javascript"></script>
+
+<script>
+	function redirect(url) {
+		window.location.replace(url);
+	}
+</script>
+
+<!--main-->
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<div class="infobox">
+<!--{if $stop}-->
+<h4 class="infotitle2">所选商品全部采集并发布完毕</h4>
+ <p class="marginbot">
+    <a href="{php echo urldecode($url)}" class="lightlink">3秒后自动转跳到搜索结果</a>
+    </p>
+    <script type="text/JavaScript">
+setTimeout("redirect('<?php echo SITE_URL; ?>{php echo urldecode($url)}');", 3000);
+</script>
+<!--{elseif $isExists||$Cantresizeimage}-->
+<h4 class="infotitle3"><!--{if $isExists}-->第{$i}个商品已经存在，正在跳过......<!--{elseif $Cantresizeimage}-->第{$i}个商品无法生成缩略图，正在跳过......<!--{/if}--></h4>
+    <img src="<?php echo SITE_URL; ?>app/system/skins/default/ajax_loader.gif" class="marginbot">
+    <p class="marginbot">
+    <a href="<?php echo SITE_URL; ?>index.php?app=share&ac=admin&mg=spider&ts=redirect&ids={$ids}&catename={$catename}&url={$url}&step={$i}" class="lightlink">如果您的浏览器没有自动跳转，请点击这里</a>
+    </p>
+<script type="text/JavaScript">
+setTimeout("redirect('<?php echo SITE_URL; ?>index.php?app=share&ac=admin&mg=spider&ts=redirect&ids={$ids}&catename={$catename}&url={$url}&step={$i}');", 500);
+</script>
+<!--{else}-->
+<h4 class="infotitle1">正在采集第{$i}个商品，请稍候......</h4>
+    <img src="<?php echo SITE_URL; ?>app/system/skins/default/ajax_loader.gif" class="marginbot">
+    <p class="marginbot">
+    <a href="<?php echo SITE_URL; ?>index.php?app=share&ac=admin&mg=spider&ts=redirect&ids={$ids}&catename={$catename}&url={$url}&step={$i}" class="lightlink">如果您的浏览器没有自动跳转，请点击这里</a>
+    </p>
+<script type="text/JavaScript">
+setTimeout("redirect('<?php echo SITE_URL; ?>index.php?app=share&ac=admin&mg=spider&ts=redirect&ids={$ids}&catename={$catename}&url={$url}&step={$i}');", 500);
+</script>
+<!--{/if}-->
+</div>
+
+</div>
+{php include template("admin/footer");}

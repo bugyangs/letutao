@@ -1,0 +1,66 @@
+{template header}
+
+<div class="midder">
+
+<div class="mc">
+<div class="cleft">
+
+{template my_menu}
+
+<div class="topic_list">
+<ul>
+<!--{if $arrTopic}-->
+<!--{loop $arrTopic $key $item}-->
+<li>
+<div class="userimg"><a href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}"><img src="{$item[user][face_32]}" width="32"></a></div>
+
+<div class="topic_title">
+<div class="title"><a title="{$item[title]}" href="{SITE_URL}{tsurl('group','topic',array(topicid=>$item[topicid]))}">{$item[title]}</a>
+<!--{if $item[istop]=='1'}--><img src="{SITE_URL}app/{$app}/skins/{$skin}/headtopic_1.gif" title="[置顶]" alt="[置顶]" /> <!--{elseif $item[addtime]>strtotime(date('Y-m-d 00:00:00'))}--><img src="{SITE_URL}app/{$app}/skins/{$skin}/topic_new.gif" align="absmiddle"  title="[新帖]" alt="[新帖]" /><!--{else}--><img src="{SITE_URL}app/{$app}/skins/{$skin}/topic.gif" align="absmiddle"  title="[话题]" alt="[话题]" /><!--{/if}--> <!--{if $item[isphoto]=='1'}--><img src="{SITE_URL}app/{$app}/skins/{$skin}/image_s.gif" title="[图片]" alt="[图片]" align="absmiddle" /><!--{/if}--> <!--{if $item[isattach] == '1'}--><img src="{SITE_URL}app/{$app}/skins/{$skin}/attach.gif" title="[附件]" alt="[附件]" /><!--{/if}-->
+</div>
+
+<div class="topic_info">
+<span style="float:left;">
+<a href="{SITE_URL}{tsurl('group','group',array(groupid=>$item[groupid]))}">{$item[group][groupname]}</a>
+</span>
+
+<span style="float:right;">
+{php echo getTime($item[uptime],time())}
+
+<a href="{SITE_URL}{tsurl('user','space',array(userid=>$item[userid]))}">{$item[user][username]}</a>
+
+<!--{if $item[count_comment]>0}--><a class="rank" style="color:#FFFFFF;" href="{SITE_URL}{tsurl('group','topic',array(topicid=>$item[topicid]))}">{$item[count_comment]}</a><!--{/if}-->
+</span>
+</div>
+</div>
+<div class="clear"></div>
+</li>	
+<!--{/loop}-->
+<!--{/if}-->
+</ul>
+</div>
+<div class="clear"></div>
+
+</div>
+
+<div class="cright">
+
+<p class="pl2">&gt; <a href="{SITE_URL}{tsurl('group')}">{$TS_HL[app][1032]}</a></p>
+
+</div>
+</div>
+</div>
+{php include pubTemplate("JsConstant");}
+
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});Do.add("track_info",{path:a("track_info.min.js"),type:"js"});
+    Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("add_topic_say",{path:a("add_topic_say.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");Do("track_info");
+})();
+</script>
+<script type="text/javascript">
+Do('ajaxfileupload');
+</script>
+
+{template footer}

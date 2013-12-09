@@ -1,0 +1,153 @@
+{template header}
+
+<!--
+<div class="ad clearfix">
+ {php doAction('adcode',null,'8')}
+</div>
+-->
+<div id="wrap">
+
+	<div id="container">
+
+		<div class="nav box-shadow">
+
+	<ul class="clearfix">
+
+		<li class=" user bigfs">
+
+			<a href="{SITE_URL}{tsurl('user','space',array(userid=>$strUser[userid]))}">
+
+													<img src="{$strUser[face]}" alt="{$strUser[username]}" />
+
+							{$strUser[username]}
+
+			</a>
+
+		</li>	
+
+		<li class="cur trait"><a href="{SITE_URL}{tsurl('user','feed',array(userid=>$strUser[userid]))}">$feedNum<br>动态</a></li>
+
+		<li><a href="{SITE_URL}{tsurl('user','space',array(userid=>$strUser[userid]))}">{$Gnum}<br>宝贝</a></li>
+        
+        <li ><a href="{SITE_URL}{tsurl('user','zhuti',array(userid=>$strUser[userid]))}">{$Tnum}<br>主题</a></li>
+
+			<li><a href="{SITE_URL}{tsurl('user','fans',array(userid=>$strUser[userid]))}">{$fansNum}<br>粉丝</a></li>
+            
+            
+            	<li class="last"><a href="{SITE_URL}{tsurl('user','follow',array(userid=>$strUser[userid]))}">{$followNum}<br>关注</a></li>
+
+			<i></i>	
+
+	</ul>
+
+</div>
+
+		<div class="page-bd clearfix">
+		<div class="main">   
+			<div class="feeds-list box-shadow">
+			<div class="dongtai-title">
+								<b><!--{if  $userid == $TS_USER[user][userid]}-->我<!--{else}--> Ta <!--{/if}-->的最近动态</b>
+												<a href="{SITE_URL}{tsurl('feed')}" class="bbl-btn" title="看看好友的动态">看看好友的动态</a>
+							</div>
+                             <!--{if $arrFeed}-->
+                            <!--{loop $arrFeed $key $item}-->
+										<div class="section clearfix">
+					<div class="pro-pic">
+
+					{$item[content]}
+
+													<div class="item">
+								<div class="user-pic">
+									<a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" title="{$item[user][username]}" target="_blank">
+									<img title="{$item[user][username]}" alt="{$item[user][username]}" src="{$item[user][face]}" width="20" height="20">
+									</a>
+								</div>
+								<div class="user-comment">
+									<p>
+    								<span>{$item[data][ctyle]}</span><span class="comment-time">  {php echo date('m-d h:i:s',$item[addtime])}</span>
+    																		</p>
+																	</div>
+							</div>
+													</div>
+						<div class="pro-btn">
+						<!--{if  $userid == $TS_USER[user][userid] ||$TS_USER[user][userid] == 1}--><a rel="del_feed" href="javascript:;" data-feedid="{$item[feedid]}" title="删除该动态">删除动态</a><!--{/if}-->
+						</div>
+					</div>
+				</div>
+							<!--{/loop}-->
+                            <!--{/if}-->
+							
+
+						<div class="clearfix pt20 pb20">
+				<div class="pagin fr pagination" id="J_Pagination">
+				    				 			   							
+					{$pageUrl}
+					</div>
+			</div>
+			</div>
+		</div><!--main end-->
+		<div class="side">
+		
+			<div class="feeds box-shadow plr15 ss">
+		<div class="title"><a href="{SITE_URL}{tsurl('feed')}" class="all-follows" target="_blank">全部</a>好友动态</div>
+		<ul> 
+        <!--{if $arrfollowfeed}-->
+        <!--{loop $arrfollowfeed $key $item}-->
+						<li>
+                        
+				<div class="user-pic" style="height:50px;">
+					<a href="{SITE_URL}{$item[data][link]}" target="_blank">
+					<img src="{SITE_URL}{$item[data][img]}" width="50" alt="{$item[data][title]}" title="{$item[data][title]}">
+					</a>
+				</div>
+				<div class="user-news">
+					<a class="pro-name" style="overflow:hidden; height:24px;" href="{SITE_URL}{$item[data][link]}" target="_blank">{$item[data][title]}</a>
+					<div class="news-list">
+												<div class="news-item">
+							<div class="user-photo">
+								<a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" title="{$item[user][username]}" target="_blank">
+							<img title="{$item[user][username]}" alt="{$item[user][username]}" src="{$item[user][face]}" width="18" height="18">
+								</a>
+								<span class="user-comment-arrow"></span>
+							</div>
+							<div class="user-comment">
+														<a href="{SITE_URL}{tsurl('user','space',array('userid'=>$item[user][userid]))}" title="{$item[user][username]}" target="_blank">{$item[user][username]}</a>
+														<br>
+														<b>喜欢它</b>
+														</div>
+						</div>
+											</div>
+									</div>
+			</li>
+						
+                        <!--{/loop}-->
+                        <!--{/if}-->
+					</ul>
+	</div>
+			
+		
+		
+	</div><!--side end-->		</div>
+
+		<!--page-bd end-->
+
+	</div>
+
+</div>
+
+{php include pubTemplate("JsConstant");}
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});
+Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");
+})();
+</script> 
+<script type="text/javascript">
+Do('profile');
+Do('follow');
+Do('ajaxfileupload');
+</script>
+
+
+{template footer}

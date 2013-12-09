@@ -1,0 +1,116 @@
+{template header}
+<link href="http://cdn.duitang.com/css/0/a.css?1331893079.0" rel="stylesheet" type="text/css" />
+<link href="http://cdn.duitang.com/css/0/p/groupindex.css?1329542991.0" rel="stylesheet" type="text/css" />
+<div id="content">
+<div class="layer">
+    <div class="tube tube-a">
+        <div class="block">
+    <h4>板块话题 (<a href="{SITE_URL}{tsurl('group','all')}">全部板块</a>)</h4>
+    <div class="tpc-area">
+        <table class="cmt-qlist" cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <th width="340">标题</th>
+                    <th width="80">作者</th>
+                    <th width="50">回复</th>
+                    <th width="110">最后发表</th>
+                </tr>
+                
+                <!--{if $arrTopic}-->
+<!--{loop $arrTopic $key $item}-->
+                <tr>
+                    <td>
+                <a title="{$item[title]}" href="{SITE_URL}{tsurl('group','topic',array(topicid=>$item[topicid]))}">{$item[title]}</a>
+                    </td>
+                    <td>
+<a href="{SITE_URL}{tsurl('user','space',array(userid=>$item[userid]))}">{$item[user][username]}</a>
+                    </td>
+                    <td>
+                      {$item[count_comment]}
+                    </td>
+                    <td class="gray">
+                       {php echo getTime($item[uptime],time())}
+                    </td>
+                </tr>
+<!--{/loop}-->
+<!--{/if}-->
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+        <!-- block end -->
+        <!-- block end -->
+    </div>
+    <div class="tube tube-b mr0">
+        <div class="block">
+            <div class="sidenav">
+                <ul class="mtctr">
+                    <li class="myuserpage last">
+                        <a href="{SITE_URL}{tsurl('group','create')}">
+                            <u>
+                                申请创建板块
+                            </u>
+                        </a>
+                    </li>
+                </ul>
+                <div class="clr">
+                    <div class="downtip r">
+                        申请创建主题板块，笼络更多喜好相投的糖友。
+                        <a class="lkl" href="{SITE_URL}{tsurl('group','create')}">
+                            立即申请
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- block end -->
+        <div class="block">
+            <h4 class="dash">
+                我的板块 &gt;
+            </h4>
+            <div class="cmt-dl cmt-area cmt-list">
+            
+            
+            <!--{loop $arrMyGroup $key $item}-->
+                <div class="cmt-dd">
+                    <div class="pimg">
+                      <a href="{SITE_URL}{tsurl('group','group',array(groupid=>$item[groupid]))}">
+                      <img alt="{$item[groupname]}" width="48" height="48" src="{$item[icon_48]}">
+                        </a>
+                    </div>
+                    <h5>
+                        <a class="ppdaren" title="{$item[groupname]}" href="{SITE_URL}{tsurl('group','group',array(groupid=>$item[groupid]))}">
+                            <u>
+                                {$item[groupname]}
+                            </u>
+                        </a>
+                    </h5>
+                    
+                </div>
+                
+    <!--{/loop}-->	            
+
+                
+            </div>
+        </div>
+        <!-- block end -->
+        
+    </div>
+</div>
+</div>
+{php include pubTemplate("JsConstant");}
+
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});Do.add("track_info",{path:a("track_info.min.js"),type:"js"});
+    Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("add_topic_say",{path:a("add_topic_say.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");Do("track_info");
+})();
+</script>
+<script type="text/javascript">
+Do('ajaxfileupload');
+</script>
+{template footer}

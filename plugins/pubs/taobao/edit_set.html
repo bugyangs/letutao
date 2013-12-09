@@ -1,0 +1,23 @@
+<?php include template("admin/header");?>
+<!--main-->
+<div class="midder">
+
+<h2>淘宝登录设置(OAuth2.0)</h2>
+<?php include template("admin/plugin_menu");?>
+
+<form method="POST" action="<?php echo SITE_URL; ?>index.php?app=pubs&ac=plugin&plugin=taobao&in=edit&ts=do">
+<table  cellpadding="0" cellspacing="0">
+
+<tr><td width="100">淘宝App Key：</td><td colspan="2"><input class="input-text" style="width:300px;" name="appkey" value="<?php echo $Recorder->readInc('appkey'); ?>" /></td></tr>
+<tr><td>淘宝App Secret:：</td><td colspan="2"><input class="input-text" style="width:300px;" name="appsecret" value="<?php echo $Recorder->readInc('appsecret'); ?>" /></td></tr>
+<tr><td>
+<input type="hidden" name="siteurl" value="<?php echo SITE_URL; ?>" />
+<input type="submit" value="提 交" /></td><td width="10"><a href="http://open.taobao.com/" target="_blank">申请淘宝登录</a></td>
+<td width="165"><a href="http://bbs.tuntron.com/thread-1369-1-1.html" target="_blank">申请教程</a></td>
+</tr>
+
+</table>
+</form>
+</div>
+
+<?php include template("admin/footer");?>

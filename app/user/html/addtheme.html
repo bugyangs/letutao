@@ -1,0 +1,137 @@
+{template header}
+<div id="wrap">
+
+		<div id="container">
+
+			<div class="title-wrap">
+
+				<h2 class="main-title">
+
+					创意手工堂 喜欢的宝贝（0个）
+
+					<!--<a href="/u/1009066">返回Ta的主页</a>-->
+
+				</h2>
+
+			</div>
+
+			<div class="goods-wall">
+
+					<div class="profile-box" style="top:5px;left:0">
+
+						<div class="hd">
+
+						</div>
+
+						<div class="u">
+
+							<div class="u-face" style="height:180px;">
+
+							<img alt="{$strUser[username]}" src="{$strUser[bigface]}">
+
+															</div>
+
+							<div class="u-info">
+
+								<h2 class="clearfix">
+
+									<span class="fl mr5">{$strUser[username]}</span>
+									<!--{if $strUser[count_score] >=2000}-->
+									<a class="editor" href="#" title="可创建专题"></a>
+									<!--{else}-->
+									<a class="neditor" href="#" title="积分到达2000自动点亮"></a>
+									<!--{/if}-->
+								<!--{if $strUser[userid] == $TS_USER[user][userid]}--><a class="changeinfo" href="{SITE_URL}{tsurl('user','set',array(ts=>base))}">&nbsp;&nbsp;[修改]</a><!--{/if}-->
+								</h2>		
+									<p>
+
+									<span>积分： </span>  <span class="weight red" style=" color:#E26">{$strUser[count_score]}</span>&nbsp;&nbsp;&nbsp;  <a href="#" style="color: #d8d8d8;">如何获取？</a>
+									<input type="hidden" id="score" value="{$strUser[count_score]}" />
+
+								</p>
+								
+								
+								<p>
+
+									<span>{$TS_HL[app][1072]} </span><!--{if $strUser[sex]=='0'}-->{$TS_HL[app][1073]}<!--{elseif $strUser[sex]=='1'}-->{$TS_HL[app][1074]}<!--{else}-->{$TS_HL[app][1075]}<!--{/if}--><br />
+
+								</p>
+
+								<p>
+
+									<span>签名： </span> {$strUser[signed]}
+
+								</p>
+
+
+																														
+
+							</div>
+
+						</div>
+
+					</div>
+
+
+
+														<div class="goods-null">
+
+						<p>这家伙可能忙着登船，都没时间来选喜欢的宝贝...</p>
+
+						<a class="bbl-btn" href="/xihuan">我没有船票，接着逛！</a>
+
+					</div>
+
+					
+
+							</div><!--goods-wall end-->
+
+			<div class="goods-loading">
+
+				&nbsp;
+
+			</div>
+
+			<div class="page-box">
+
+				<div id="J_Pagination" class="pagin page-bar inlineblock clearfix">
+
+					
+
+				</div>
+
+			</div>
+
+		</div><!--container end-->
+</div>
+	
+{php include pubTemplate("JsConstant");}
+
+<script src="{SITE_URL}js/jquery-1.6.4.min.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="{SITE_URL}js/jquery.tools.min.js"></script>
+
+<script type="text/javascript" src='{SITE_URL}js/guang-min.js?t=20120106230000.js'></script>
+
+<script type="text/javascript" src="{SITE_URL}js/jquery.pagination.js"></script>
+<script type="text/javascript">
+var goodsPage = {
+	sumGoodsNum : {$sumGoodsNum},
+	curPageNum : 1,
+	pagePath : '',
+	pageUrl : "/getuser/"
+}
+if(goodsPage.sumGoodsNum > 0){
+	jQuery(function() {
+	jQuery.guang.goods.conf.colArray = [363,0,0,0];
+		jQuery.guang.goods.conf.ajaxUrl = "index.php?app=getuser";
+		jQuery.guang.goods.conf.ajaxData.bpage = "1";
+		jQuery.guang.goods.conf.ajaxData.userId = "{$strUser[userid]}";
+		jQuery.guang.goods.conf.ajaxData.sort = "{$sort}";
+		jQuery.guang.goods.init();	
+	});	
+}
+</script>
+<script type="text/javascript" src="{SITE_URL}js/profile.js"></script>
+
+{template footer}

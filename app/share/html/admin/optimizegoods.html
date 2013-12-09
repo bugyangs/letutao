@@ -1,0 +1,58 @@
+{php include template("admin/header");}
+<style>
+.btt {margin-top:6px; float:left;color:#FFFFFF; background:#318dd0; font-size:12px;  border-color:#106BAB #106BAB #0D68A9;color:#333;background:#f1f0f0;border:1px solid #c4c4c4;border-radius:2px;padding:4px 15px;display:inline-block;
+cursor:pointer;text-decoration:none;overflow:visible;text-align:center;zoom:1;white-space:nowrap;margin-right:10px;font-family:inherit;position:relative;}
+.odd ul li { float:left; margin-left:8px;}
+.odd ul li a { display:block; width:30px; height:30px; background: no-repeat url(<?php echo SITE_URL; ?>images/b1_wide_120802.png) center center; text-indent:9999999px; border:#DDD 1px solid; overflow:hidden;}
+.odd ul li .laoding { background-image: url(<?php echo SITE_URL; ?>images/ico-operating.gif);}
+.odd ul li .zhu { border-color:#FFD0D0}
+
+.tfile {
+filter: alpha(opacity=0);
+opacity: 0;
+font-size: 16px;
+height: 31px;
+width: 31px;
+float: left;
+margin-top: -30px;
+overflow:hidden;
+cursor: pointer;
+}
+.goodstags{ display:none; padding-top:20px; border:1px solid #EBEBEB; width:138px; position:absolute;left:22px; background-color:#f7f7f7; z-index:9999;}
+
+.goodstags ul li {
+float: left;
+display: block;
+height: 22px;
+line-height: 22px;
+margin-left: 5px;
+margin-bottom: 2px;
+padding: 0px 4px;
+color: #fff;
+background-color: #449ACD;
+white-space: nowrap;
+cursor: pointer;
+}
+.close{position:absolute; top:-5px; right:-5px; width:40px; cursor: pointer; height:23px;}
+.goodstags ul .on {
+background-color: #0051A2;
+}
+</style>
+<div class="midder">
+{php include template("admin/menu");}
+<table  cellpadding="0" cellspacing="0">
+
+<tr><td width="100">清除重复商品：</td><td>
+<form method="get" action="index.php">
+<input type="hidden" value="system" name="app" />
+<input type="hidden" value="optimizegoods" name="ac" />
+<input type="hidden" value="delrepeat" name="ts" />
+商品起始ID<input value="0" name="goodid" />
+<input type="submit" value="确定优化"  />
+</form>
+
+</td></tr>
+
+</table
+></div>
+{template footer}

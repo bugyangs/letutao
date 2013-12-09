@@ -1,0 +1,78 @@
+{template header}
+<link href="{SITE_URL}css/forum.css" rel="stylesheet" type="text/css" />
+<link href="{SITE_URL}css/editor.css" rel="stylesheet" type="text/css" />
+
+<div id="container">
+
+<div class="forum-nav">
+	<ul class="nav-bar clearfix">
+				<li class="h on">
+			<div class="nav-item clearfix">
+				<h2>
+					<a href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid]))}">{$strGroup[groupname]}</a>
+				</h2>
+					<a id="J_ForumLover" href="javascript:;" class="ilike-s mt5" data-type="g">喜欢</a>
+			</div>
+		</li>
+        
+		<li>
+			<div class="nav-item">
+				<a  class="trait"  href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid]))}">{$strGroup[count_topic]}<br />讨论</a>
+			</div>
+		</li>
+				<li>
+			<div class="nav-item">
+				 <a  href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid],'likes'=>'1'))}"><em id="J_LikeCount">{$strGroup[count_user]}</em><br/>喜欢</a>
+			</div>
+		</li>	
+				<i></i>
+	</ul>	
+    
+    <span class="pos-l-txt gc6">
+    	    	        <!-- <!--{$strGroup[groupdesc]}-->-->
+                    </span>
+	
+	</div>
+
+
+<div class="forum clearfix forum-create box-shadow">
+		<h3>创建话题</h3>
+		<form action="{SITE_URL}index.php?app=group&ac=do&ts=new_topic" method="post" class="post-edit-form" id="J_ForumPostEditForm">
+		<input type="hidden" name="groupid" value="{$strGroup[groupid]}" />
+        <input type="hidden" name="iscomment" value="0" />
+		<ul>
+			<li><label>话题标题：</label><input id="J_ForumPostTitle" name="title" class="b-input" type="text" value='' placeholder="请输入话题标题"/></li>
+			<li><label>话题类型：</label><label class="no-float"><input type="radio" name="isask" checked="checked" value="0"/>普通</label><label class="no-float"><input type="radio" name="isask" value="1"/>问答</label></li>
+			<li class="clearfix"><label>话题内容：</label><textarea id="J_ForumPostCon" name="content" class="b-textarea" placeholder="请输入话题内容"></textarea></li>
+			<li class="oper clearfix" style="margin-bottom:20px;">
+        		<input id="J_ForumPostEditBtn" type="submit" class="bbl-btn"  value="发表"/>
+        		<a class="bgr-btn" href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid]))}">取消并返回</a>
+        		<!--<div class="share-set">
+					<span class="fl gc">同步分享：</span>
+					<div id="J_UserSns">
+																	</div>
+					<a href="#" class="fl" target="_blank">设置</a>
+				</div>-->
+        	</li>
+		</ul>
+	</form>
+</div>
+</div>
+{php include pubTemplate("JsConstant");}
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});
+Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");
+ 
+})();
+</script>
+<script type="text/javascript">
+Do('comment');
+Do('editor/guang.editor');
+Do('forum');
+Do('editor/init-new.editor');
+Do('editor/forumDecode');
+</script>
+
+    {template footer}

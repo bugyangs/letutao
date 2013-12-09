@@ -1,0 +1,91 @@
+{php include template("admin/header");}
+<script src="<?php echo SITE_URL; ?>public/js/jquery.js" type="text/javascript"></script>
+
+<script>
+
+function checkfrom(){
+	
+		if($('.J_cate_select').val()==''){
+			alert("请选择要发布的分类！");
+			return false;
+		}
+	}
+
+$(function(){
+    var uri = "<?php echo SITE_URL; ?>index.php?app=share&ac=admin&mg=spider&ts=ajax_get_tb_cate";
+    $('.J_tbcats').die('change').live('change', function(){
+        var _this = $(this),
+            _cid = _this.val();
+        _this.nextAll('.J_tbcats').remove();
+        $.getJSON(uri, {cid:_cid}, function(result){
+			
+            if(result.status == '1'){
+				
+                var _childs = $('<select class="J_tbcats mr10"><option value="0">--所有--</option></select>');
+                for(var i=0; i<result.data.length; i++){
+                    $('<option value="'+result.data[i].cid+'">'+result.data[i].name+'</option>').appendTo(_childs);
+                }
+                _childs.insertAfter(_this);
+            }
+        });
+        $('#J_cid').val(_cid);
+    });
+	
+	
+	
+});
+</script>
+
+<!--main-->
+<div class="midder">
+
+{php include template("admin/menu");}
+
+
+<form id="info_form" action="<?php echo SITE_URL; ?>index.php?app=share&ac=admin&mg=spider&ts=redirect" method="post" onsubmit="return checkfrom();">
+	<table width="100%" class="table_form">
+    <tbody>
+        <tr>
+            <th width="80">
+                发布到分类 :
+            </th>
+            <td>
+                <select class="J_cate_select mr10" name="catename">
+                    <option value="">--请选择--</option>
+                    <!--{loop $LE_APPone $key $item}-->
+                     <option value="{$key}">{$item}</option> 
+                     <!--{/loop}-->
+                </select>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>
+                采集马甲 :
+            </th>
+            <td>
+                <select name="auid" id="J_auid">
+                    <option value="1">
+                        现有会员随机
+                    </option>
+                </select>
+            </td>
+            <td></td>
+        </tr>
+        
+         <tr>
+            <th><input type="hidden" name="publish" value="1"></th>
+            <td><input style="float:left" type="submit" name="search" class="btn btn_submit mr10" value="确认发布"><a href="{$url}" title="返回搜索结果" class="btn btn_submit mr10" style="height:15px; line-height:15px; display:block; width:70px; margin-top:2px; float:left; margin-left:5px;" >返回搜索结果</a></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<input type="hidden" name="url" value="{$url}">
+<input type="hidden" name="cate_id" id="J_cate_id" value="4">
+<input type="hidden" name="ids" value="{$ids}">
+
+</form>
+
+
+</div>
+{php include template("admin/footer");}

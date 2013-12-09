@@ -1,0 +1,39 @@
+{template header}
+
+<div class="midder">
+<div class="mc">
+<h1>{$TS_HL[app][1185]}</h1>
+<div>
+<form method="POST" action="{SITE_URL}index.php?app=group&ac=do&ts=theme">
+<ul>
+<!--{loop $arrTheme $key $item}-->
+<li class="fl" style="padding:5px;">
+<img src="{SITE_URL}theme/{$item}/preview.gif">
+<br />
+<input type="radio" <!--{if $site_theme==$item}-->checked="select"<!--{/if}--> name="site_theme" value="{$item}" /> {$item}
+</li>
+<!--{/loop}-->
+</ul>
+
+<div class="clear"></div>
+<input class="submit" type="submit" value="{$TS_HL[app][1185]}" />
+</form>
+
+</div>
+
+
+</div>
+</div>
+{php include pubTemplate("JsConstant");}
+
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});Do.add("track_info",{path:a("track_info.min.js"),type:"js"});
+    Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("add_topic_say",{path:a("add_topic_say.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");Do("track_info");
+})();
+</script>
+<script type="text/javascript">
+Do('ajaxfileupload');
+</script>
+{template footer}

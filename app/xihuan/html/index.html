@@ -1,0 +1,52 @@
+<div class="goods-block" style="opacity: 1; ">
+<!--{if $Good}-->
+<!--{loop $Good $key $item}-->
+<div class="goods">		
+		<div class="goods-pic" style="height: {$item[img_h]}px;">            
+			<a href="{SITE_URL}{tsurl('baobei',$item[goods_id])}" target="_blank">                
+				<img src="<!--{if $DISK_YUN['isopen']}-->{BCS_URL}{$item[img]}<!--{else}-->{SITE_URL}{$item[img]}<!--{/if}-->">
+			</a>
+			<!--{if $item[uid] == $TS_USER[user][userid] || $TS_USER[user][userid] == 1}-->
+			<a class="ilike-del" href="javascript:void(0);" data-type="4" data-proid="{$item[goods_id]}" data-le="del_good" style="display: none; ">喜欢(<em class="like-count">{$item[count_like]}</em>)</a>
+            <a class="ilike-topic" href="javascript:void(0);" data-proid="{$item[goods_id]}" style="display: none; ">加入主题</a>
+			<!--{else}-->
+			<a class="ilike-m" href="javascript:void(0);" data-type="0" data-proid="{$item[goods_id]}" style="display: none; ">喜欢(<em class="like-count">{$item[count_like]}</em>)</a>
+            <a class="ilike-topic" href="javascript:void(0);" data-proid="{$item[goods_id]}" style="display: none; ">加入主题</a>
+			<!--{/if}-->
+			
+								</div>      
+		<div class="comments-top">
+         <span class="like-num"><em class="like-count">{$item[count_like]}  </em></span>
+         <span class="like-comments"><em class="like-count">{$item[count_comment]}</em></span>     
+<!--{if $item[price]> 0}-->
+          <span class="like-price <!--{if intval($item[coupon_price])>0 && time()<$item[coupon_end_time]}-->pin-price-discount<!--{/if}-->">￥{$item[price]}</span>
+         <!--{/if}-->
+                        </div>                     
+		<ul class="comments">  
+		       <li>
+		       		{$item[name]}
+		       </li>
+		</ul>
+        
+       <!--{if $item[OneComment]&&$item[OneComment][content]}-->
+
+        <div class="user">   
+            <a class="a-img" href="<!--{if $item[OneComment][userid] == 0}-->javascript:'';<!--{else}-->{SITE_URL}{tsurl('user','space',array(userid=>$item[OneComment][userid]))}<!--{/if}-->" title="{$item[OneComment][user][username]}" target="_blank">
+                                
+<img src="{$item[OneComment][user][face_32]}" width="30px" height="30px" alt="{$item[OneComment][user][username]}">
+
+                                                                </a>
+                                <a class="ofh" href="<!--{if $item[OneComment][userid] == 0}-->javascript:'';<!--{else}-->{SITE_URL}{tsurl('user','space',array(userid=>$item[OneComment][userid]))}<!--{/if}-->" title="{$item[OneComment][user][username]}" target="_blank">{$item[OneComment][user][username]}：</a> 
+                                                                                                                    <div class="bewrite ofh">{$item[OneComment][content]}</div>
+                                                    </div>
+                                                    
+            <!--{/if}-->
+	</div>
+<!--{/loop}-->
+<!--{/if}-->
+</div>
+ <div class="goods-hidden">
+<input type="hidden" class="J_HiddenSpage" value="{$spage}"/>   
+<input type="hidden" class="J_HiddenBpage" value="{$bpage}"/>
+<input type="hidden" class="J_HiddenIsEnd" value="{$goodsh}"/>
+</div>

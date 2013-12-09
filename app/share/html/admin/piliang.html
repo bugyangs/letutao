@@ -1,0 +1,232 @@
+{php include template("admin/header");}
+<style>
+.btt {margin-top:6px; float:left;color:#FFFFFF; background:#318dd0; font-size:12px;  border-color:#106BAB #106BAB #0D68A9;color:#333;background:#f1f0f0;border:1px solid #c4c4c4;border-radius:2px;padding:4px 15px;display:inline-block;
+cursor:pointer;text-decoration:none;overflow:visible;text-align:center;zoom:1;white-space:nowrap;margin-right:10px;font-family:inherit;position:relative;}
+.odd ul li { float:left; margin-left:8px;}
+.odd ul li a { display:block; width:30px; height:30px; background: no-repeat url(<?php echo SITE_URL; ?>images/b1_wide_120802.png) center center; text-indent:9999999px; border:#DDD 1px solid; overflow:hidden;}
+.odd ul li .laoding { background-image: url(<?php echo SITE_URL; ?>images/ico-operating.gif);}
+.odd ul li .zhu { border-color:#FFD0D0}
+
+.tfile {
+filter: alpha(opacity=0);
+opacity: 0;
+font-size: 16px;
+height: 31px;
+width: 31px;
+float: left;
+margin-top: -30px;
+overflow:hidden;
+cursor: pointer;
+}
+.goodstags{ display:none; padding-top:20px; border:1px solid #EBEBEB; width:138px; position:absolute;left:22px; background-color:#f7f7f7; z-index:9999;}
+
+.goodstags ul li {
+float: left;
+display: block;
+height: 22px;
+line-height: 22px;
+margin-left: 5px;
+margin-bottom: 2px;
+padding: 0px 4px;
+color: #fff;
+background-color: #449ACD;
+white-space: nowrap;
+cursor: pointer;
+}
+.close{position:absolute; top:-5px; right:-5px; width:40px; cursor: pointer; height:23px;}
+.goodstags ul .on {
+background-color: #0051A2;
+}
+</style>
+<script src="<?php echo SITE_URL; ?>public/js/jquery.js" type="text/javascript"></script>
+<script src="<?php echo SITE_URL; ?>js/ajaxfileupload.min.js" type="text/javascript"></script>
+<script>
+
+function UploadShareImg(g_id){
+	
+	$("#a_"+g_id).addClass("laoding");
+	$.ajaxFileUpload({
+		url:"<?php echo SITE_URL; ?>index.php?app=share&ac=do&le=UploadImg&f=uploadShareImg_"+g_id,
+		secureuri:false,
+		dataType:'text',
+		fileElementId:'uploadShareImg_'+g_id,
+		success:function(result){
+			$("#a_"+g_id). removeClass("laoding");
+			var img_src = "<?php echo SITE_URL; ?>"+result;
+			$("#a_"+g_id).css({"background-image":"url("+result+")","background-size":"30px 30px"});
+			$("#img_url_"+g_id).attr("value",result);
+			}
+		}
+	)}
+
+function show_tag(g_id){
+	
+		$("#tag"+g_id).show();
+	
+	}
+	
+function del_line(g_id){
+		$("#odd_"+g_id).remove();
+	
+	}
+
+function get_tag(g_id){
+	 	var _this = $(this),
+         catename = $("#catename"+g_id+"  option:selected").val();
+		$.ajax({
+				   url: "index.php?app=share&ac=do&le=get_tag&g_id="+g_id+"&catename="+catename,
+				   type : "post",
+				   dataType: "text",
+				   success: function(data){
+					   html = '<div class="close">关闭</div><ul>'+data+'</ul>';
+					    $("#tag"+g_id).html(html);
+					   $("#tag"+g_id).show();
+				   }
+			});
+	
+		
+	
+	}
+function get_share(g_id){
+	 	var _this = $(this);
+        var tao_url =  $("#input_url_"+g_id).attr("value");
+		$.ajax({
+				   url: "index.php?app=share&ac=do&le=get_share&tao_url="+tao_url,
+				   type : "post",
+				   dataType: "json",
+				   beforeSend:function(){$("#loading").show();},
+				   success: function(data){
+					 $("#input_name_"+g_id).attr("value",data.name);
+					 $("#tags"+g_id).attr("value",data.defaulttags);
+					 
+					 $("#a_1"+g_id).css({"background-image":"url("+data.pic_1+")","background-size":"30px 30px"});
+					 $("#img_url_1"+g_id).attr("value",data.pic_1);
+					 
+					 $("#a_2"+g_id).css({"background-image":"url("+data.pic_2+")","background-size":"30px 30px"});
+					 $("#img_url_2"+g_id).attr("value",data.pic_2);
+					 
+					 $("#a_3"+g_id).css({"background-image":"url("+data.pic_3+")","background-size":"30px 30px"});
+					 $("#img_url_3"+g_id).attr("value",data.pic_3);
+					 
+					 $("#a_4"+g_id).css({"background-image":"url("+data.pic_4+")","background-size":"30px 30px"});
+					 $("#img_url_4"+g_id).attr("value",data.pic_4);
+					 
+					 $("#loading").hide();
+				   }
+			});
+	
+		
+	
+	}
+
+$(document).ready(function(){
+	
+	$(".goodstags li").live('click', function(){
+		var g_id = $(this).attr("g_id");
+		var tagInput = $('#tags'+g_id+'');
+		var tagValue = tagInput.val();
+		tagValue = tagValue.replace('　',' ');
+		tagValue = tagValue.replace(/ +/g,' ');
+		tagValue = ' ' + $.trim(tagValue) + ' ';
+		if($(this).hasClass('on'))
+		{
+			tagValue = tagValue.replace(' ' + $(this).html() + ' ',' ');
+			$(this).removeClass('on');
+		}
+		else
+		{
+			tagValue += $(this).html();
+			$(this).addClass('on');
+		}
+		
+		tagValue = $.trim(tagValue);
+		tagInput.val(tagValue);
+	});
+	
+	$(".close").live('click', function(){
+			$(this).parent().hide();
+
+	});
+	
+	
+})
+
+
+function add_new_line(num){
+	var n=num+1;
+	var s;
+	s=$(".cr-add-ing");
+	s.before('<tr class="odd" id="odd_'+n+'"><td><ul><li><a href="javascript:;"class="zhu"id="a_1'+n+'">上传图片</a><input class="tfile PUB_PIC_FILE"name="uploadShareImg_1'+n+'"type="file"id="uploadShareImg_1'+n+'"onchange="return UploadShareImg(1'+n+');"><input type="hidden"name="img_url_1'+n+'"value=""id="img_url_1'+n+'"></li><li><a href="javascript:;"id="a_2'+n+'">上传图片</a><input class="tfile PUB_PIC_FILE"name="uploadShareImg_2'+n+'"type="file"id="uploadShareImg_2'+n+'"onchange="return UploadShareImg(2'+n+');"><input type="hidden"name="img_url_2'+n+'"value=""id="img_url_2'+n+'"></li><li><a href="javascript:;"id="a_3'+n+'">上传图片</a><input class="tfile PUB_PIC_FILE"name="uploadShareImg_3'+n+'"type="file"id="uploadShareImg_3'+n+'"onchange="return UploadShareImg(3'+n+');"><input type="hidden"name="img_url_3'+n+'"value=""id="img_url_3'+n+'"></li><li><a href="javascript:;"id="a_4'+n+'">上传图片</a><input class="tfile PUB_PIC_FILE"name="uploadShareImg_4'+n+'"type="file"id="uploadShareImg_4'+n+'"onchange="return UploadShareImg(4'+n+');"><input type="hidden"name="img_url_4'+n+'"value=""id="img_url_4'+n+'"></li></ul></td><td><input class="input-text"name="url[]"id="input_url_'+n+'"onchange="get_share('+n+');"value=""style=" line-height:24px; width:100px;"/></td><td><input class="input-text"name="name[]"id="input_name_'+n+'"value=""style=" line-height:24px; width:100px;"/></td><td><input class="input-text"name="uid[]"value=""style=" line-height:24px; width:100px;"/></td><td><select name="catename[]" id="catename'+n+'" onchange="get_tag('+n+');"style="width:100px"><option value="0">请修改分类</option>{$cate_html}</select></td><td style=" position:relative;"><input class="input-text" id="tags'+n+'" name="tag[]" value="" onfocus="show_tag('+n+');" style=" line-height:24px;"/><div class="goodstags" id="tag'+n+'"></div></td><td><input class="input-text"name="op[]"value=""style=" line-height:24px;"/></td><td><a href="javascript:;"onclick="return del_line('+n+');"><font color="red">X删除</font></a></td></tr>');
+	$("#addbuttom").attr("href","javascript:add_new_line("+n+")");}
+
+</script>
+<!--main-->
+<div id="loading" style="position:absolute; left:10px; color:#FFF; padding:2px 4px; background-color:#F00; display:none;">正在加载...</div>
+<div class="midder">
+
+{php include template("admin/menu");}
+<b style="color:#F00; line-height:24px;">注：直接粘贴淘宝商品网址到地址栏可以自动获取商品信息</b>
+<form action="{SITE_URL}index.php?app=share&ac=admin&mg=piliang&ts=add" method="post">
+  <table  cellpadding="0" cellspacing="0">
+    
+    <tr class="old">
+      <td width="170" align="center">图片(第一张为主图)</td>
+      <td width="100">地址</td>
+      <td width="100">标题</td>
+      <td width="100">发布者ID</td>
+      <td>分类</td>
+      <td>标签(多个用空格分开)</td>
+      <td>相关参数</td>
+
+      <td>操作</td>
+    </tr>
+  <tr class="odd" id="odd_0">
+    <td>
+    <ul>
+    <li>
+    <a href="javascript:;" class="zhu" id="a_10">上传图片</a>
+    <input class="tfile PUB_PIC_FILE" name="uploadShareImg_10" type="file" id="uploadShareImg_10" onchange="return UploadShareImg(10);">
+    <input type="hidden" name="img_url_10" value="" id="img_url_10">
+    </li>
+    <li><a href="javascript:;" id="a_20">上传图片</a>
+       <input class="tfile PUB_PIC_FILE" name="uploadShareImg_20" type="file" id="uploadShareImg_20" onchange="return UploadShareImg(20);">
+         <input type="hidden" name="img_url_20" value="" id="img_url_20">
+    </li>
+    <li><a href="javascript:;" id="a_30">上传图片</a>
+       <input class="tfile PUB_PIC_FILE" name="uploadShareImg_30" type="file" id="uploadShareImg_30" onchange="return UploadShareImg(30);">
+         <input type="hidden" name="img_url_30" value="" id="img_url_30">
+    </li>
+    <li><a href="javascript:;" id="a_40">上传图片</a>
+       <input class="tfile PUB_PIC_FILE" name="uploadShareImg_40" type="file" id="uploadShareImg_40" onchange="return UploadShareImg(40);">
+         <input type="hidden" name="img_url_40" value="" id="img_url_40">
+    </li>
+    </ul>
+    
+    </td>
+  
+    <td><input class="input-text" name="url[]" id="input_url_0"  value=""  onchange="get_share(0);" style=" line-height:24px; width:100px;"/></td>
+    <td><input class="input-text" name="name[]" id="input_name_0" value=""  style=" line-height:24px; width:100px;"/></td>
+       <td><input class="input-text" name="uid[]" value=""  style=" line-height:24px; width:100px;"/></td>
+    <td><select name="catename[]" id="catename0" onchange="get_tag(0);" style="width:100px" >
+      <option value="0">请修改分类</option>
+     {$cate_html}
+    </select></td>
+    <td style=" position:relative;"><input class="input-text" id="tags0" name="tag[]" value="" onfocus="show_tag(0);" style=" line-height:24px;"/>
+    <div class="goodstags" id="tag0">
+    </div>
+    </td>
+    <td><input class="input-text" name="op[]" value=""  style=" line-height:24px;"/></td>
+    <td><a href="javascript:;" onclick="return del_line(0);"><font color="red">X删除</font></a></td>
+  </tr>
+  <tr class="odd" id="odd_1"><td><ul><li><a href="javascript:;" class="zhu" id="a_11">上传图片</a><input class="tfile PUB_PIC_FILE" name="uploadShareImg_11" type="file" id="uploadShareImg_11" onchange="return UploadShareImg(11);"><input type="hidden" name="img_url_11" value="" id="img_url_11"></li><li><a href="javascript:;" id="a_21">上传图片</a><input class="tfile PUB_PIC_FILE" name="uploadShareImg_21" type="file" id="uploadShareImg_21" onchange="return UploadShareImg(21);"><input type="hidden" name="img_url_21" value="" id="img_url_21"></li><li><a href="javascript:;" id="a_31">上传图片</a><input class="tfile PUB_PIC_FILE" name="uploadShareImg_31" type="file" id="uploadShareImg_31" onchange="return UploadShareImg(31);"><input type="hidden" name="img_url_31" value="" id="img_url_31"></li><li><a href="javascript:;" id="a_41">上传图片</a><input class="tfile PUB_PIC_FILE" name="uploadShareImg_41" type="file" id="uploadShareImg_41" onchange="return UploadShareImg(41);"><input type="hidden" name="img_url_41" value="" id="img_url_41"></li></ul></td><td><input class="input-text" id="input_url_1" name="url[]" onchange="get_share(1);" value="" style=" line-height:24px; width:100px;"></td><td><input class="input-text" name="name[]" value="" id="input_name_1" style=" line-height:24px; width:100px;"></td><td><input class="input-text" name="uid[]" value="" style=" line-height:24px; width:100px;"></td><td><select name="catename[]" id="catename1" onchange="get_tag(1);" style="width:100px"><option value="0">请修改分类</option>{$cate_html}</select></td><td style=" position:relative;"><input class="input-text" id="tags1" name="tag[]" value="" onfocus="show_tag(1);" style=" line-height:24px;"><div class="goodstags" id="tag1"></div></td><td><input class="input-text" name="op[]" value="" style=" line-height:24px;"></td><td><a href="javascript:;" onclick="return del_line(1);"><font color="red">X删除</font></a></td></tr>
+  <tr class="cr-add-ing">
+    <td align="left" colspan="8">
+ 	<a class="btt" style=" height:15px; line-height:15px;" id="addbuttom" href="javascript:add_new_line(1);">+ 增加 +</a>
+     <input class="btt"type="submit" value="提交" />
+    
+    </td>
+  </tr>
+  </table>
+</form>
+</div>
+{php include template("admin/footer");}

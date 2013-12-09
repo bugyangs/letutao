@@ -1,0 +1,24 @@
+<?php include template("admin/header");?>
+<!--main-->
+<div class="midder">
+
+<h2>新浪登录设置</h2>
+<?php include template("admin/plugin_menu");?>
+
+<form method="POST" action="<?php echo SITE_URL; ?>index.php?app=pubs&ac=plugin&plugin=sina&in=edit&ts=do">
+<table  cellpadding="0" cellspacing="0">
+
+<tr><td width="100">Sina appid：</td><td colspan="2"><input class="input-text" style="width:300px;" name="appid" value="<?php echo $arrData['appid']; ?>" /></td></tr>
+<tr><td>Sina appkey：</td><td colspan="2"><input class="input-text" style="width:300px;" name="appkey" value="<?php echo $arrData['appkey']; ?>" /></td></tr>
+
+
+<tr><td>
+<input type="hidden" name="siteurl" value="<?php echo SITE_URL; ?>" />
+<input type="submit" value="提 交" /></td><td width="10"><a href="http://open.weibo.com/connect" target="_blank">申请新浪登录</a></td>
+</tr>
+
+</table>
+</form>
+</div>
+
+<?php include template("admin/footer");?>

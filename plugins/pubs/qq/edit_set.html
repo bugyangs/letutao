@@ -1,0 +1,56 @@
+<?php include template("admin/header");?>
+<!--main-->
+<div class="midder">
+
+<h2>QQ登录设置(OAuth2.0)</h2>
+<?php include template("admin/plugin_menu");?>
+
+<form method="POST" action="<?php echo SITE_URL; ?>index.php?app=pubs&ac=plugin&plugin=qq&in=edit&ts=do">
+<table  cellpadding="0" cellspacing="0">
+
+<tr><td width="100">QQ appid：</td><td colspan="2"><input class="input-text" style="width:300px;" name="appid" value="<?php echo $Recorder->readInc('appid'); ?>" /></td></tr>
+<tr><td>QQ appkey：</td><td colspan="2"><input class="input-text" style="width:300px;" name="appkey" value="<?php echo $Recorder->readInc('appkey'); ?>" /></td></tr>
+
+<tr><td>请求授权列表：</td><td colspan="2">
+
+
+ <span class='scope'>
+<?php
+$scope = array("get_user_info","add_share","list_album","add_album","upload_pic","add_topic","add_one_blog","add_weibo","check_page_fans","add_t","add_pic_t","del_t","get_repost_list","get_info","get_other_info","get_fanslist","get_idolist","add_idol","del_idol","get_tenpay_addr");
+$scopeArr = $scope;
+foreach($scopeArr as $key=>$val){
+?>
+<span style="width:170px; display:block; float:left;"><input type="checkbox" name="scope[]" <?php if($arrData['scope'][$key]==$val){ ?> checked="checked"<?php }?> value="<?=$val?>" id="<?=$val?>"/><label for="<?=$val?>"><?=$val?></label>&nbsp;</span>
+<?php
+}
+?>
+<br />
+<input type='button' value='全选' id="choiceAll"/>
+<a href="http://wiki.opensns.qq.com/wiki/%E3%80%90QQ%E7%99%BB%E5%BD%95%E3%80%91API%E6%96%87%E6%A1%A3" target="_blank">查看API说明</a>
+</span>
+
+</td></tr>
+     
+
+
+<tr><td>
+<input type="hidden" name="siteurl" value="<?php echo SITE_URL; ?>" />
+<input type="submit" value="提 交" /></td><td width="10"><a href="http://connect.opensns.qq.com/" target="_blank">申请QQ登录</a></td>
+<td width="165"><a href="http://bbs.tuntron.com/thread-55-1-1.html" target="_blank">申请教程</a></td>
+</tr>
+
+</table>
+</form>
+</div>
+
+<script type="text/javascript">
+var choiceAll = document.getElementById("choiceAll");
+choiceAll.onclick = function(){
+  var checkBox = document.getElementsByName("scope[]");
+  for(var i = 0;i < checkBox.length;i ++){
+    checkBox[i].checked = "checked";
+  }
+}
+</script>
+
+<?php include template("admin/footer");?>

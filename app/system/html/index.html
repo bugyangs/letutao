@@ -1,0 +1,15 @@
+{template header}
+
+<div class="midder">
+{template menu}
+<form method="POST" action="index.php?app=system&ac=do&ts=weibo">
+<table  cellpadding="0" cellspacing="0">
+
+<tr><td width="100">新浪微博地址：</td><td><input style="width:300px;" name="site_sinaweibo" value="{$strOption[site_sinaweibo]}" />（显示在头部微博关注地址，前面需要加http://）</td></tr>
+<tr><td>腾讯微博地址：</td><td><input style="width:300px;" name="site_qqweibo" value="{$strOption[site_qqweibo]}" /> （同上）</td></tr>
+
+<tr><td></td><td><input class="btn btn_submit" type="submit" value="提 交" /></td></tr>
+</table>
+</form>
+</div>
+{template footer}

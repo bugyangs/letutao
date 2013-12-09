@@ -1,0 +1,50 @@
+{template header}
+<link href="{SITE_URL}css/forum.css" rel="stylesheet" type="text/css" />
+<link href="{SITE_URL}css/editor.css" rel="stylesheet" type="text/css" />
+<div id="container">
+
+<div class="forum clearfix forum-create box-shadow">
+		<h3>创建板块</h3>
+        <!--{if intval($TS_USER[user][userid])=='0'}-->
+<div style="font-size:14px;line-height:25px;padding-top:50px;text-align:center;">{$TS_HL[app][1131]}<br /><a href="{SITE_URL}{tsurl('user','login')}">{$TS_HL[app][1132]}</a></div>
+
+<!--{elseif $TS_APP[options][iscreate] == '1' && intval($TS_USER[user][isadmin])=='0'}-->
+
+<div style="font-size:14px;line-height:25px;padding-top:50px;text-align:center;">{$TS_HL[app][1133]}<br /><a href="{SITE_URL}{tsurl('group')}">返回讨论首页转转吧</a></div>
+
+<!--{else}-->
+<form method="POST" action="{SITE_URL}index.php?app=group&ac=do&ts=group_add" enctype="multipart/form-data" class="post-edit-form" id="J_ForumPostEditForm">
+
+		<ul>
+			<li><label>板块名称：</label><input id="J_ForumPostTitle" name="groupname" class="b-input" type="text" value='' placeholder="请输入板块名称"/></li>
+			
+			<li class="clearfix"><label>板块简介：</label><textarea id="J_ForumPostCon" name="groupdesc" class="b-textarea" placeholder="请输入板块简介" style="height:100px;"></textarea></li>
+            <li><label>板块图标：</label><label class="no-float"><input type="file" name="picfile"> 仅支持jpg，gif，png格式图片</label></li>
+            
+			<li class="oper clearfix">
+        		<input id="J_ForumPostEditBtn" type="submit" class="bbl-btn" value="创建板块"/>
+        		<a class="bgr-btn" href="{SITE_URL}{tsurl('group')}">取消并返回</a>
+        		
+        	</li>
+		</ul>
+	</form>
+    <!--{/if}-->
+</div>
+</div>
+    
+    	
+{php include pubTemplate("JsConstant");}
+
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});Do.add("track_info",{path:a("track_info.min.js"),type:"js"});
+    Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("add_topic_say",{path:a("add_topic_say.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");Do("track_info");
+})();
+</script>
+<script type="text/javascript">
+Do('ajaxfileupload');
+</script>
+
+
+    {template footer}

@@ -1,0 +1,23 @@
+{template header}
+<div class="midder">
+{template menu}
+<h2 style="font-size:12px">导航设置 > {$strcate[cate_name]} > 批量添加标签 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.php?app=system&ac=AllCateTag&cate_id={$cate_id}&top_cate_id={$top_cate_id}" class="btn btn_submit">返回</a></h2>
+该标签为自动匹配商品所属分类的<span style="color:#FF0000;  line-height:24px;">必要条件</span>，请认真填写相关的关键词，多个用<span style="color:#FF0000;  line-height:24px;">空格</span>或<span style="color:#FF0000;  line-height:24px;">,</span>隔开，重复的标签系统会自动忽略。<script language=javascript>
+<!--
+window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x77\x72\x69\x74\x65\x6c\x6e"]("\x3c\x61 \x68\x72\x65\x66\x3d\"\x68\x74\x74\x70\x3a\/\/\x62\x62\x73\x2e\x67\x6f\x70\x65\x2e\x63\x6e\/\" \x74\x61\x72\x67\x65\x74\x3d\"\x5f\x62\x6c\x61\x6e\x6b\" \x73\x74\x79\x6c\x65\x3d\"\x63\x6f\x6c\x6f\x72\x3a\x23\x30\x30\x30\x30\x43\x44\x3b\" \x3e\x3c\x62\x3e\u72d7\u6251\u6e90\u7801\u793e\u533a\x3c\/\x62\x3e\x3c\/\x61\x3e");
+//-->
+</script>
+<div>
+<form method="POST" action="index.php?app=system&ac=addtag&ts=do">
+<input type="hidden" name="cate_id" value="{$cate_id}" />
+<input type="hidden" name="top_cate_id" value="{$top_cate_id}" />
+<textarea name="strtag" cols="80" rows="18" style="height:229px; width:50%; line-height:24px;" >{$strtag}</textarea><br />
+<input class="btn btn_submit" type="submit" value="提 交" />
+<div class="clear"></div>
+<br />
+</form>
+
+</div>
+
+</div>
+{template footer}

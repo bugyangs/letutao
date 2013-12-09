@@ -1,0 +1,15 @@
+<h2>团购管理</h2>
+<div class="tabnav">
+<ul>
+
+<li <!--{if $mg=='goods' && $ts=='list'}-->class="select"<!--{/if}-->><a href="{SITE_URL}index.php?app=tuan&ac=admin&mg=goods&ts=list">团购列表</a></li>
+
+<!--{if $mg=='goods' && $ts=='view'}--><li class="select"><a href="{SITE_URL}index.php?app=user&ac=admin&mg=user&ts=list">{$strUser[username]}团购列表</a></li>
+
+<!--{/if}-->
+
+<li <!--{if $mg=='cate'}-->class="select"<!--{/if}-->><a href="{SITE_URL}index.php?app=tuan&ac=admin&mg=cate">团购分类</a></li>
+
+<li <!--{if $mg=='addtuan'}-->class="select"<!--{/if}-->><a href="{SITE_URL}index.php?app=tuan&ac=admin&mg=addtuan">添加团购</a></li>
+</ul>
+</div>

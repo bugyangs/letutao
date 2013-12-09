@@ -1,0 +1,44 @@
+<?php include template("admin/header");?>
+
+<!--main-->
+<div class="midder">
+
+<h2>广告代码管理</h2>
+<?php include template("admin/plugin_menu");?>
+
+<form method="POST" action="<?php echo SITE_URL; ?>index.php?app=pubs&ac=plugin&plugin=gobad&in=edit&ts=do">
+<table  cellpadding="0" cellspacing="0">
+
+<tr><td width="200">首页顶部广告代码：<br />宽度960px<br />如不需要请留空</td><td><textarea style="width:600px;height:100px;" name="code[1]"><?php echo stripslashes($code['1']) ?></textarea></td></tr>
+
+<tr><td>首页中部广告代码：<br />宽度960px<br />如不需要请留空</td><td><textarea style="width:600px;height:100px;" name="code[2]"><?php echo stripslashes($code['2']) ?></textarea></td></tr>
+
+<tr><td>首页底部广告代码：<br />宽度960px<br />如不需要请留空</td><td><textarea style="width:600px;height:100px;" name="code[3]"><?php echo stripslashes($code['3']) ?></textarea></td></tr>
+
+<tr><td>主题街广告代码：<br />宽度655px<br />如不需要请留空</td><td><textarea style="width:600px;height:100px;" name="code[4]"><?php echo stripslashes($code['4']) ?></textarea></td></tr>
+
+
+<tr><td>主题街广告代码：<br />宽度265px<br />如不需要请留空</td><td><textarea style="width:600px;height:100px;" name="code[5]"><?php echo stripslashes($code['5']) ?></textarea></td></tr>
+
+
+<tr><td>发现喜欢顶部：<br />宽度960px<br />如不需要请留空</td><td><textarea style="width:600px;height:100px;" name="code[6]"><?php echo stripslashes($code['6']) ?></textarea></td></tr>
+
+
+<tr><td>分类页顶部：<br />宽度960px<br />如不需要请留空</td><td><textarea style="width:600px;height:100px;" name="code[7]"><?php echo stripslashes($code['7']) ?></textarea></td></tr>
+
+
+<tr><td>会员中心顶部：<br />宽度960px<br />如不需要请留空</td><td><textarea style="width:600px;height:100px;" name="code[8]"><?php echo stripslashes($code['8']) ?></textarea></td></tr>
+
+<tr><td>宝贝页顶部：<br />宽度960px<br />如不需要请留空</td><td><textarea style="width:600px;height:100px;" name="code[9]"><?php echo stripslashes($code['9']) ?></textarea></td></tr>
+
+<tr><td>宝贝页右侧1：<br />宽度320px<br />如不需要请留空</td><td><textarea style="width:600px;height:100px;" name="code[10]"><?php echo stripslashes($code['10']) ?></textarea></td></tr>
+
+<tr><td>宝贝页右侧2：<br />宽度320px<br />如不需要请留空</td><td><textarea style="width:600px;height:100px;" name="code[11]"><?php echo stripslashes($code['11']) ?></textarea></td></tr>
+
+<tr><td></td><td><input type="submit" value="提交修改" /></td></tr>
+
+</table>
+</form>
+</div>
+
+<?php include template("admin/footer");?>

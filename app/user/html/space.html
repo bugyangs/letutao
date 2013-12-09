@@ -1,0 +1,228 @@
+{template header}
+
+<!--
+<div class="ad clearfix">
+ {php doAction('adcode',null,'8')}
+</div>
+-->
+<div id="wrap">
+
+	<div id="container">
+
+		<div class="nav box-shadow">
+
+	<ul class="clearfix">
+
+		<li class=" user bigfs">
+
+			<a href="{SITE_URL}{tsurl('user','space',array(userid=>$strUser[userid]))}">
+
+													<img src="{$strUser[face]}" alt="{$strUser[username]}" />
+
+							{$strUser[username]}
+
+			</a>
+
+		</li>	
+
+		<li ><a href="{SITE_URL}{tsurl('user','feed',array(userid=>$strUser[userid]))}">{$feedNum}<br>动态</a></li>
+
+		<li class="cur trait"><a href="{SITE_URL}{tsurl('user','space',array(userid=>$strUser[userid]))}">{$Gnum}<br>宝贝</a></li>
+
+
+		 <li ><a href="{SITE_URL}{tsurl('user','zhuti',array(userid=>$strUser[userid]))}">{$Tnum}<br>主题</a></li>
+
+			<li><a href="{SITE_URL}{tsurl('user','fans',array(userid=>$strUser[userid]))}">{$fansNum}<br>粉丝</a></li>
+            
+            
+            	<li class="last"><a href="{SITE_URL}{tsurl('user','follow',array(userid=>$strUser[userid]))}">{$followNum}<br>关注</a></li>
+
+			<i></i>	
+
+	</ul>
+
+</div>
+
+		<div class="page-bd clearfix">
+
+		<div class="main">   
+
+			<div class="baobei box-shadow plr15">
+
+				<div class="main-title clearfix">
+
+					<h2>
+					<!--{if $sort==''}-->
+						最近喜欢的宝贝({$lGoodsNum})
+
+						<span class="ml5 mr5">|</span>
+
+						<a href="{SITE_URL}{tsurl('user','space',array(userid=>$strUser[userid],sort=>'share'))}">发布的宝贝({$sGoodsNum})</a>
+                        
+					<!--{/if}-->
+                    
+                    <!--{if $sort=='share'}-->
+						<a href="{SITE_URL}{tsurl('user','space',array(userid=>$strUser[userid]))}">最近喜欢的宝贝({$lGoodsNum}) </a>
+
+						<span class="ml5 mr5">|</span>
+
+						发布的宝贝({$sGoodsNum})
+                        
+					<!--{/if}-->
+                    
+					</h2>
+<!--{if  $userid == $TS_USER[user][userid]}-->
+										<span class="fr">
+
+					<a rel="shareGoods" class="bbl-btn ml10" href="javascript:;">+ 发布宝贝</a>
+
+					</span>
+<!--{/if}-->
+									</div>
+
+								<ul class="clearfix">
+                                
+                                
+                     <!--{if $Good}-->
+					<!--{loop $Good $key $item}-->
+						<li <!--{if ($key+1)%5==0}-->class="last"<!--{/if}-->>
+
+						<div class="baobei-wrap">
+
+							<div class="baobei-pic">
+
+								<a target="_blank" title="{$item[name]}" href="{SITE_URL}{tsurl('baobei',$item[goods_id])}">
+
+								<img src="<!--{if $DISK_YUN['isopen']}-->{BCS_URL}{$item[img]}<!--{else}-->{SITE_URL}{$item[img]}<!--{/if}-->" width="120" alt="{$item[name]}" title="{$item[name]}"/>
+
+								</a>
+
+<!--{if  $userid == $TS_USER[user][userid] ||$TS_USER[user][userid] == 1}-->
+			<a class="ilike-del" href="javascript:void(0);" data-type="4" data-proid="{$item[goods_id]}" data-le="del_{$letype}" style="display: none; " title="{$letypewz}">喜欢-1</a>
+            <!--{/if}-->
+
+									</div>
+
+														<p>{$item[name]}</p>
+
+							                            						</div>
+
+					</li>
+                    
+                    <!--{/loop}-->
+<!--{/if}-->
+                    
+
+														</ul>
+
+								<div class="clearfix pt20 pb20">
+
+					<div class="pagin fr pagination">
+{$pageUrl}
+									</div>
+
+				</div>
+
+			</div>
+
+			
+
+		</div><!--main end-->
+
+		<div class="side">
+
+		<div class="profile-box box-shadow ss">
+
+		<div class="u">
+
+			<div class="u-face">
+
+				<a href="{SITE_URL}{tsurl('user','space',array(userid=>$strUser[userid]))}">
+
+													<img src="{$strUser[bigface]}" alt="{$strUser[username]}"  width="180px" height="180px"/>
+
+								</a>
+
+			</div>
+
+			<div class="u-info clearfix">
+
+								<h2 class="ofh">{$strUser[username]}</h2>
+
+																				
+
+				
+				<ul class="ul-daren clearfix">
+                <!--{if $strdaren}-->
+                <li class="bg-daren" style=" background:url({SITE_URL}{$strdaren[background]}) no-repeat"><h5>{$strdaren[darenname]}</h5><i>本站认证</i></li>
+                <!--{/if}-->
+
+									</ul>
+
+                                    <!--{if $strUser[userid] == $TS_USER[user][userid]}-->
+                                    <a href="{SITE_URL}{tsurl('user','set',array(ts=>base))}">修改资料</a>
+                                    <!--{/if}-->
+                                     <!--{if $strUser[userid] <> $TS_USER[user][userid]}-->
+                                     <!--{if $strUser[isfollow]}-->
+                                        <div class="followed-btn-big">已关注<span class="mr5 ml5">|</span><a rel="removefollow" data-followtype="0" data-usernick="{$strUser[username]}" data-userid="{$strUser[userid]}" href="javascript:;">取消</a></div>
+                                     <!--{else}-->
+                                     
+                                      <a rel="follow" href="javascript:;" class="follow-btn-big" data-followtype="0" data-userid="{$strUser[userid]}" data-usernick="{$strUser[username]}">加关注</a>
+                                    
+                                     <!--{/if}-->
+									
+                                    <!--{/if}-->
+                                    &nbsp;&nbsp;&nbsp;
+                                   <span style="color: #BCBCBC"><!--{if $strArea}-->
+{$strArea[one][areaname]} 
+{$strArea[two][areaname]} 
+{$strArea[three][areaname]} 
+<!--{else}-->
+火星
+<!--{/if}--></span>
+                                   <!--{if $strUser[signed]}-->
+                                   <p style="line-height:24px; margin-top:10px; padding:5px; background-color: #F8FEFD; border:#E4FCF7 1px solid">{$strUser[signed]}</p><!--{/if}-->
+                                                                                    </div>
+
+		</div>
+
+	</div>
+
+		
+
+		<div class="friend-tags box-shadow plr15 ss">
+
+				<div class="title">跟<!--{if  $userid == $TS_USER[user][userid]}-->我<!--{else}--> Ta <!--{/if}-->相关的标签</div>
+
+				<ul class="clearfix">
+				<!--{loop $arrtagss $key $item}-->
+								    			<li <!--{if $item[is_hot]}-->class="focus"<!--{/if}-->><a class="ofh" href="{SITE_URL}{tsurl('faxian','',array(tag=>$item[tag_name]))}">{$item[tag_name]}</a></li>
+
+<!--{/loop}-->
+
+							</ul>
+
+	</div>
+
+		<!--side end-->		</div>
+
+		<!--page-bd end-->
+
+	</div>
+
+</div>
+{php include pubTemplate("JsConstant");}
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});
+Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");
+})();
+</script> 
+<script type="text/javascript">
+Do('profile');
+Do('follow');
+Do('ajaxfileupload');
+</script>
+
+{template footer}

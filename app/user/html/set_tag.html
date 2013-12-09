@@ -1,0 +1,35 @@
+{template header}
+<!--main-->
+<div id="container" style="margin-bottom:200px; min-height:300px;">
+<div class="content clearfix" style="min-height:300px;">
+<div class="mc">
+{template set_menu}
+
+<div>
+<div class="tags">
+<!--{loop $arrTag $key $item}-->
+<a rel="tag" title="" class="post-tag" href="{SITE_URL}index.php?tag={$item[tagname]}">{$item[tagname]}</a><a href="index.php?app=user&ac=do&ts=deltag&tagid={$item[tagid]}"  style="margin-left:-10px">x</a>
+<!--{/loop}-->
+
+<a id="set_tag"  href="javascript:void('0');">+添加个人标签</a>注：多个标签用空格或,隔开
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+{php include pubTemplate("JsConstant");}
+
+<script src="{SITE_URL}js/jquery-1.6.4.min.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="{SITE_URL}js/jquery.tools.min.js"></script>
+
+<script type="text/javascript" src='{SITE_URL}js/guang-min.js?t=20120106230000.js'></script>
+
+<script type="text/javascript" src="{SITE_URL}js/ajaxfileupload.min.js"></script>
+
+<script src="{SITE_URL}js/follow.js" type="text/javascript"></script>
+
+<script src="{SITE_URL}js/goods.js" type="text/javascript"></script>
+{template footer}

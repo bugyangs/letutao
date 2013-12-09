@@ -1,0 +1,25 @@
+{php include template("admin/header");}
+<div class="midder">
+{php include template("admin/menu");}
+<form method="POST" action="index.php?app=tuan&ac=admin&mg=addtuan&ts=do" enctype="multipart/form-data">
+<table  cellpadding="0" cellspacing="0">
+
+<tr><td width="100">团购分类：</td><td><select name="cateid" style="width:100px;">
+<option value="0">无分类</option>
+<!--{loop $tuancate $key $item}-->
+<option value="{$item[cate_id]}">{$item[cate_name]}</option>
+<!--{/loop}-->
+</select></td></tr>
+<tr><td>团购标题：</td><td><input class="input-text" style="width:300px;" name="title" value=""></td></tr>
+<tr><td>封面图片：</td><td><input type="file" name="picfile">(大小为290X265像素)</td></tr>
+<tr><td>市场价：</td><td><input class="input-text" style="width:300px;" name="price_market" value=""></td></tr>
+<tr><td>团购价：</td><td><input class="input-text" style="width:300px;" name="price_tuan" value=""></td></tr>
+<tr><td>已购买人数：</td><td><input class="input-text" style="width:300px;" name="count_sold" value=""></td></tr>
+<tr><td>团购网址：</td><td><input class="input-text" style="width:300px;" name="tuan_url" value=""></td></tr>
+<tr><td>是否置顶：</td><td><input type="radio" checked="select" name="istop" value="0">不置顶 <input type="radio" name="istop" value="1">置顶</td></tr>
+<tr><td>是否显示：</td><td><input type="radio" checked="select" name="isshow" value="0">显示 <input type="radio" name="istop" value="1">不显示</td></tr>
+<tr><td></td><td><input class="btn btn_submit" type="submit" value="提 交" /></td></tr>
+</table>
+</form>
+</div>
+{php include template("admin/footer");}

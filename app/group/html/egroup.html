@@ -1,0 +1,53 @@
+{template header}
+<link href="{SITE_URL}css/forum.css" rel="stylesheet" type="text/css" />
+<link href="{SITE_URL}css/editor.css" rel="stylesheet" type="text/css" />
+<div id="container">
+
+<div class="forum clearfix forum-create box-shadow">
+		<h3>编辑板块</h3>
+        <!--{if intval($TS_USER[user][userid])=='0'}-->
+<div style="font-size:14px;line-height:25px;padding-top:50px;text-align:center;">{$TS_HL[app][1131]}<br /><a href="{SITE_URL}{tsurl('user','login')}">{$TS_HL[app][1132]}</a></div>
+
+<!--{elseif $TS_APP[options][iscreate] == '1' && intval($TS_USER[user][isadmin])=='0'}-->
+
+<div style="font-size:14px;line-height:25px;padding-top:50px;text-align:center;">{$TS_HL[app][1133]}<br /><a href="{SITE_URL}{tsurl('group')}">返回讨论首页转转吧</a></div>
+
+<!--{else}-->
+        
+<form method="POST" action="{SITE_URL}index.php?app=group&ac=do&ts=group_e" enctype="multipart/form-data" class="post-edit-form" id="J_ForumPostEditForm">
+<input type="hidden" value="{$arrOne[groupid]}" name="groupid">
+<input type="hidden" value="{$arrOne[groupicon]}" name="postpicimg">
+
+		<ul>
+			<li><label>板块名称：</label><input id="J_ForumPostTitle" name="groupname" class="b-input" type="text" value='{$arrOne[groupname]}' placeholder="请输入板块名称"/></li>
+			
+			<li class="clearfix"><label>板块简介：</label><textarea id="J_ForumPostCon" name="groupdesc" class="b-textarea" placeholder="请输入板块简介" style="height:100px;">{$arrOne[groupdesc]}</textarea></li>
+            <li><label>板块图标：</label><label class="no-float"><input type="file" name="picfile"> 仅支持jpg，gif，png格式图片</label></li>
+            
+			<li class="oper clearfix">
+        		<input id="J_ForumPostEditBtn" type="submit" class="bbl-btn" value="确认修改"/>
+        		<a class="bgr-btn" href="{SITE_URL}{tsurl('group')}">取消并返回</a>
+        		
+        	</li>
+		</ul>
+	</form>
+    <!--{/if}-->
+</div>
+</div>
+    
+    	
+{php include pubTemplate("JsConstant");}
+
+<script src="{SITE_URL}js/jquery-1.6.4.min.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="{SITE_URL}js/jquery.tools.min.js"></script>
+
+<script type="text/javascript" src='{SITE_URL}js/guang-min.js?t=20120106230000.js'></script>
+
+<script type="text/javascript" src="{SITE_URL}js/ajaxfileupload.js"></script>
+
+<script type="text/javascript" src="{SITE_URL}js/goods.js"></script>
+
+<script type="text/javascript" src="{SITE_URL}js/forum.js"></script>
+
+{template footer}

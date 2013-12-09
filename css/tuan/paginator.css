@@ -1,0 +1,114 @@
+@charset "utf-8";
+
+/* S 翻页组件 */
+.paginator{
+	float:right;
+	height:21px;
+	overflow:hidden;
+}
+.paginator, .paginator input, .paginator button{
+	font-family:Tahoma, "宋体";
+	font-size:12px;
+}
+.paginator a, .paginator span{
+	float:left;
+	height:19px;
+	margin:0 3px 0 0;
+	text-align:center;
+	white-space:nowrap;
+	vertical-align:middle;
+	line-height:19px;
+	background:#fff;
+}
+.paginator a{
+	color:#014ccc;
+}
+.paginator a:link, .paginator a:visited, .paginator a:hover, .paginator a:active{
+	text-decoration:none;
+}
+.paginator .page-start, .paginator a, .paginator .page-end{
+	padding:0 6px;
+	border:1px solid #ccc;
+	background:#ffffff;
+}
+.paginator .page-start{
+	padding-left:15px;
+	border-color:#d9d9d9;
+	background:#fff url(http://static.paipaiimg.com/assets/common/page/pagebg.png) no-repeat 5px 5px;
+	color:#d9d9d9;
+}
+.paginator a.page-prev{
+	padding-left:15px;
+	background:#fff url(http://static.paipaiimg.com/assets/common/page/pagebg.png) no-repeat 5px -16px;
+}
+.paginator a.page-next{
+	padding-right:15px;
+	background:#fff url(http://static.paipaiimg.com/assets/common/page/pagebg.png) no-repeat -14px -16px;
+}
+.paginator .page-end{
+	padding-right:15px;
+	border-color:#d9d9d9;
+	background:#fff url(http://static.paipaiimg.com/assets/common/page/pagebg.png) no-repeat -14px 5px;
+	color:#d9d9d9;
+}
+.paginator .page-this, .paginator .page-break{
+	padding:0 3px;
+}
+.paginator .page-break{
+	border:1px solid #fff;
+}
+.paginator .page-this{
+	border:1px solid #fff;
+	color:#ff5500;
+	font-weight:bold;
+}
+.paginator .page-skip{
+	height:21px;
+	line-height:21px;
+	overflow:hidden;
+	padding:0 3px;
+	margin:0;
+	background:none;
+}
+.paginator .page-skip input{
+	width:26px;
+	*width:24px;
+	height:15px;
+	_height:14px;
+	font-size:12px;
+	margin:0 6px;
+	*margin-bottom:-1px;
+	_margin-bottom:-1px;
+	vertical-align:top;
+	*vertical-align:middle;
+	padding-top:0px;
+	padding-bottom:0px;
+}
+.paginator .page-skip button{
+	font-size:12px;
+	padding:0 5px;
+	width:auto;
+	_width:0;
+	height:22px;
+	*height:23px;
+	*line-height:20px;
+	_height:16px;
+	_line-height:16px;
+	margin-left:10px;
+	*margin-top:-1px;
+	overflow:visible;
+	vertical-align:top;
+}
+.paginator a:hover{
+	border:1px solid #014ccc;
+	background:#014ccc;
+	color:#ffffff;
+	text-decoration:none;
+}
+.paginator .page-prev:hover{
+	background:#014ccc url(http://static.paipaiimg.com/assets/common/page/pagebg.png) no-repeat 5px -37px;
+}
+.paginator .page-next:hover{
+	background:#014ccc url(http://static.paipaiimg.com/assets/common/page/pagebg.png) no-repeat -14px -37px;
+}
+/* E 翻页组件 *//*  |xGv00|b4ff0c0d3304c59db2cd12f4b5fbe634 */

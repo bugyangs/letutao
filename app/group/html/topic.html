@@ -1,0 +1,268 @@
+{template header}
+<link href="{SITE_URL}css/forum.css" rel="stylesheet" type="text/css" />
+<link href="{SITE_URL}css/editor.css" rel="stylesheet" type="text/css" />
+<div class="discuss">
+<!--{if $strTopic[typeid]==0}-->
+
+ <div class="forum-nav">
+	<ul class="nav-bar clearfix">
+				<li class="h on">
+			<div class="nav-item clearfix">
+				<h2>
+					<a href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid]))}">{$strGroup[groupname]}</a>
+				</h2>
+					<a id="J_ForumLover" href="javascript:;" class="ilike-s mt5" data-type="g">喜欢</a>
+							</div>
+		</li>
+		
+		<li>
+			<div class="nav-item">
+				<a  class="trait"  href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid]))}">{$strGroup[count_topic]}<br />讨论</a>
+			</div>
+		</li>
+				<li>
+			<div class="nav-item">
+            <a  href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid],'likes'=>'1'))}"><em id="J_LikeCount">{$strGroup[count_user]}</em><br/>喜欢</a>
+			</div>
+		</li>	
+				<i></i>
+	</ul>	
+    
+    <span class="pos-l-txt gc6">
+    	    	        <!-- <!--{$strGroup[groupdesc]}-->-->
+                    </span>
+	
+	</div>
+ 
+ <!--{else}-->
+ 
+ <div class="forum-nav">
+	<ul class="nav-bar clearfix">
+				<li class="h on">
+			<div class="nav-item clearfix">
+				<h2>
+					<a href="{SITE_URL}{tsurl('zhuti'.$strtheme[themeid])}">{$strtheme[title]}</a>
+				</h2>
+								<a id="J_ForumLover" href="javascript:;" class="ilike-s mt5" data-loverurl="#" data-backurl="#">加入</a>
+							</div>
+		</li>
+		<li>
+			<div class="nav-item">
+				<a   href="{SITE_URL}{tsurl('zhuti'.$strtheme[themeid])}" title="宝贝"><em>N+</em><br>宝贝</a>
+			</div>	
+		</li>
+		<li>
+			<div class="nav-item">
+				<a  class="trait"  href="{SITE_URL}{tsurl('group','group',array(groupid=>$strGroup[groupid]))}">{$commentNum}<br />讨论</a>
+			</div>
+		</li>
+				<li>
+			<div class="nav-item">
+				<a  href="{SITE_URL}{tsurl('zhuti'.$strtheme[themeid],'likes')}"><em id="J_LikeCount">{$strtheme[likenum]}</em><br/>喜欢</a>
+			</div>
+		</li>	
+				<i></i>
+	</ul>	
+    
+    <span class="pos-l-txt gc6">
+    
+    					返回：
+    	    	        <a href="{SITE_URL}{tsurl('zhuti')}">主题街</a>
+    	    	        <span class="ml5 mr5">/</span>  
+            			<a href="{SITE_URL}{tsurl('zhuti',{$strtheme[cate]})}#zhutiid">{$strtheme[cate]}</a>    		
+                    	</span>
+                        
+	
+	</div>
+ 
+<!--{/if}-->
+
+<div class="forum-no-data box-shadow" id="J_PostHasDel" style="display:none">亲，此话题已被删除，回<a href="#">{$strTopic[title]}</a></div>
+<div class="forum clearfix" id="J_Forum">
+	<div class="forum-main box-shadow">
+	<div class="forum-title clearfix">
+					<h3><em class="wordbreak" id="J_Forumtitle"><a href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$strTopic['topicid']))}" title="{$strTopic[title]}">{$strTopic[title]}</a></em>
+						<span id="J_ForumStatusIcons">
+                        <!--{if $strTopic[isask]}-->
+						<i class="icon i-forum i-status-ask" title="问答帖"></i>
+                        <!--{/if}-->
+                        </span>
+					</h3>
+                    
+                    <!--{if $sc=='asc'}-->
+                      <a class="fr mt5 ml5" href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$strTopic['topicid'],'sc'=>'desc'))}#gocomment" title="倒序">倒序</a>
+                      <!--{else}-->
+                         <a class="fr mt5 ml5" href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$strTopic['topicid']))}#gocomment" title="正序">正序</a>
+                      <!--{/if}-->
+                    <!--{if $strTopic[typeid]==0}-->
+                  
+					<a class="fr mt5" href="{SITE_URL}{tsurl('group','group',array(groupid=>$strTopic[groupid]))}">返回话题列表</a>
+                     <!--{else}-->
+                     <a class="fr mt5" href="{SITE_URL}{tsurl('zhuti'.$strtheme[themeid])}">返回宝贝页面</a>
+                     <!--{/if}-->
+                    
+                      
+                      
+		</div>
+		<div class="forum-con">
+			<ul class="forum-post " id="J_ForumPost">
+            <!--{if $page==1}-->
+								<li class="first">
+																						<a class="img" href="{SITE_URL}{tsurl('user','space',array(userid=>$strTopic[user][userid]))}" target="_blank" ><img title="{$strTopic[user][username]}" alt="{$strTopic[user][username]}" src="{$strTopic[user][face]}" width="50px" height="50px"></a>
+					
+										<span class="info">
+												<a href="{SITE_URL}{tsurl('user','space',array(userid=>$strTopic[user][userid]))}" target="_blank" title="{$strTopic[user][username]}">{$strTopic[user][username]}</a>
+																																					<span class="time"> 发布于 {php echo date('Y-m-d H:i:s',$strTopic[addtime])}</span>
+					</span>
+					<div class="post wordbreak" id="J_PostArtical">{$strTopic[content]}</div>
+					<span class="post-floor"><b>楼主</b></span>
+					<div class="oper clearfix" id="gocomment">
+						<div class="share fl">						
+						<label class="fl l20 gc">转帖：</label>	
+						<a class="s-sina" href="javascript:;" alt="分享到新浪微博"></a>
+						<a class="s-qzone" href="javascript:;" alt="分享到QQ空间"></a>	
+						<a class="s-tencent" href="javascript:;" alt="分享到腾讯微博"></a>	
+						<a class="s-douban" href="javascript:;" alt="分享到豆瓣"></a>		
+						<a class="s-renren" href="javascript:;" alt="分享到人人网"></a>
+						<a class="s-163" href="javascript:;" alt="分享到网易微博"></a>
+						</div>
+<!--{if $TS_USER[user][userid] == $strTopic[userid] || $TS_USER[user][userid]==$strGroup[userid] ||$strGroupUser[isadmin]=="1" || $TS_USER[user][isadmin]=="1"}-->
+
+<!--{if $TS_USER[user][userid]==$strGroup[userid] ||$strGroupUser[isadmin]=="1" || $TS_USER[user][isadmin]=="1"}-->
+
+<a href="{SITE_URL}index.php?app=group&ac=do&ts=topic_istop&topicid={$strTopic[topicid]}"><!--{if $strTopic[istop]=='0'}-->置顶<!--{else}-->取消置顶<!--{/if}--></a> 
+
+<a href="{SITE_URL}index.php?app=group&ac=do&ts=isposts&topicid={$strTopic[topicid]}"><!--{if $strTopic[isposts]==0}-->精华<!--{else}-->取消精华<!--{/if}--></a>
+
+<!--{/if}-->
+
+ <!--{if $strTopic[typeid]==0}-->
+ <a href="{SITE_URL}index.php?app=group&ac=topic_edit&topicid={$strTopic[topicid]}">编辑</a> 
+<a href="{SITE_URL}index.php?app=group&ac=do&ts=topic_del&groupid={$strGroup[groupid]}&topicid={$strTopic['topicid']}" onClick="return confirm('确定删除?')">删除</a>
+<!--{/if}-->
+<!--{/if}-->
+					 <span class="mr5 ml5"> | </span><a id="J_PostCmt">评论</a>
+                      <span class="mr5 ml5"> | </span>
+                      
+                      <!--{if $sc=='asc'}-->
+                      <a href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$strTopic['topicid'],'sc'=>'desc'))}#gocomment" title="倒序">倒序</a>
+                      <!--{else}-->
+                         <a href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$strTopic['topicid']))}#gocomment" title="正序">正序</a>
+                      <!--{/if}-->
+					</div>
+					</li>
+            <!--{/if}-->
+<!--{if is_array($arrTopicComment)}-->
+<!--{loop $arrTopicComment $key $item}-->
+										
+						
+									<li data-cmtid="{$item[commentid]}">
+            						<a class="img" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" target="_blank" title="{$item[user][username]}"><img src="{$item[user][face]}" width="50px" height="50px"></a>
+            						<span class="info">
+                                     <!--{if $item[user][darenid]}-->
+       <a class="J_UserNick g-daren" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" target="_blank"><em>{$item[user][username]}</em><i class="i-daren">达人</i></a>
+        <!--{else}-->
+         <a class="J_UserNick" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[user][userid]))}" target="_blank">{$item[user][username]}</a>
+        <!--{/if}-->
+            							            							            							            								            							            							<span class="time"> 发布于 {php echo date('Y-m-d H:i',$item[addtime])}</span>
+            						</span>
+            						<div class="post">
+            							<!--{if $item[referid] !='0'}--> 
+                                        <div class="post-reply" data-cmtid="16048">
+            								<span class="info">回复 
+                                             <!--{if $item[recomment][user][darenid]}-->
+       <a class="J_UserNick g-daren" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[recomment][user][userid]))}" target="_blank"><em>{$item[recomment][user][username]}</em><i class="i-daren">达人</i></a>
+        <!--{else}-->
+<a class="J_UserNick" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[recomment][user][userid]))}" target="_blank" title="{$item[recomment][user][username]}">{$item[recomment][user][username]}</a>
+        <!--{/if}-->
+            								<span class="time">/  {php echo date('m-d H:i',$item[recomment][addtime])}</span></span>
+            								<p class="post-quoteContent" title="">
+            								
+            								{$item[recomment][content]}
+            								
+            								</p>
+            								<span class="post-floor"></span>
+            							</div>
+                                         <!--{/if}-->     							
+            							
+            							<p class="J_PostCon wordbreak" data-content='{$item[content]}'>
+            								{$item[content]}
+            							</p>
+            							
+            						</div>
+            						<span class="post-floor">
+                                      <!--{if $sc=='asc'}-->
+                    				 {php echo $key+2+$lstart}楼
+                  				      <!--{else}-->
+                        			 {php echo $commentNum-($key-1+$lstart)}楼
+                   					 <!--{/if}-->
+                                   </span>
+            						<p class="oper" data-cmtid="{$item[commentid]}">
+            							<a class="J_PostCmtReply">回复</a>             						</p>
+            								
+            													</li>
+																								
+<!--{/loop}-->
+<!--{/if}-->
+											
+							</ul>
+			<div class="pagin inlineblock clearfix" id="J_Pagination">
+            
+					{$pageUrl}
+
+				</div>
+						<div class="forum-editor clearfix mb10">
+			<form class="form-cmt" id="J_PostCmtArea" action="{SITE_URL}index.php?app=group&ac=do&ts=addcomment" method="post">
+				<input type="hidden" value="1"/>
+				<input type="hidden" name="topicid" value="{$strTopic[topicid]}" />
+				<ul class="pos-r clearfix">
+					    					<li class="g-daren">{$TS_USER[user][username]}</li>
+    				    				<li id="J_PostCmtSegment" class="post-reply">
+    				</li>
+    				<li class="clearfix mb10"><textarea class="b-textarea" id="J_ForumPostCon" name="content" placeholder="说两句~~"></textarea></li>
+    				<li class="clearfix"><input type="submit" class="bbl-btn" id="J_CmtPublishBtn" value="发表"/></li>
+				</ul>
+			</form>
+			    		</div>
+		</div>
+	</div>
+	<div class="forum-sidebar">
+		<div class="box box-shadow">
+			<div class="hd">
+				<h3>最新讨论</h3>
+			</div>
+			<div class="bd user-member forum-latest">
+				<ul>
+                
+                <!--{if is_array($newTopic)}-->
+<!--{loop $newTopic $key $item}-->	
+										<li class="last">
+			<a class="img" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[userid]))}" target="_blank"><img src="{$item[user][face]}" width="40px" height="40px"></a>
+						<a href="{SITE_URL}{tsurl('group','topic',array(topicid=>$item[topicid]))}" class="ofh wordbreak" title="{$item[title]}">{$item[title]}</a>
+						<span>{$item[count_comment]}条讨论</span>
+					</li>
+<!--{/loop}-->
+<!--{/if}-->
+									</ul>
+			</div>
+		</div>
+			</div>
+</div>
+</div>
+{php include pubTemplate("JsConstant");}
+<script type="text/javascript" src="{SITE_URL}js/jquery.min.js?t=2012112603"></script>
+<script type="text/javascript" src="{SITE_URL}js/jquery.tools.min.js?t=2012112603"></script>
+<script type="text/javascript" src="{SITE_URL}js/jquery.cookie.min.js?t=2012112603"></script>
+<script type="text/javascript" src="{SITE_URL}js/guang.min.js?t=2012112603"></script>
+<script type="text/javascript" src="{SITE_URL}js/share_guang.min.js?t=2012112603"></script>
+<script type="text/javascript" src="{SITE_URL}js/search_suggest.min.js?t=2012112603"></script>
+<script type="text/javascript" src="{SITE_URL}js/localstorage.min.js?t=2012112603"></script>
+<script type="text/javascript" src="{SITE_URL}js/comment.min.js?t=2012112603"></script>
+<script type="text/javascript" src="{SITE_URL}js/forum.min.js?t=2012112603"></script>
+<script type="text/javascript" src="{SITE_URL}js/editor/guang.editor.min.js?t=2012112603"></script>
+<script type="text/javascript" src="{SITE_URL}js/editor/init.editor.min.js?t=2012112603" ></script>
+<script type="text/javascript" src="{SITE_URL}js/editor/forumDecode.min.js?t=2012112603"></script>
+<script type="text/javascript" src="{SITE_URL}js/ajaxfileupload.min.js?t=2012112603"></script>
+<script type="text/javascript" src="{SITE_URL}js/common.min.js?t=2012112603"></script>
+
+    {template footer}

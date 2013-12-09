@@ -1,0 +1,46 @@
+{template header}
+<!--main-->
+<link href="{SITE_URL}css/setting.css" rel="stylesheet" type="text/css" />
+
+<div id="wrap">
+		<div id="container">
+			<div class="content clearfix">
+				{template set_menu}				
+             <div class="main-content">
+					<div class="set-info">
+					<form method="POST" action="{SITE_URL}index.php?app=user&ac=resetpwd&ts=do">
+							<div class="error-row"><p></p></div>
+							<div class="form-row">
+								<label><span class="rc">*</span>Email：</label>
+								<input type="text" class="base-input" name="email" value="{$email}" disabled="true" />
+							</div>
+							<div class="form-row">
+								<label>新密码：</label>
+								<input type="password" class="base-input" name="pwd" />
+							</div>
+							<div class="form-row clearfix">
+								<label>重复新密码：</label>
+								<input type="password"  class="base-input" name="repwd" />
+							</div>
+							
+							<div class="form-row pt10">
+								<label>&nbsp;</label>
+                                <input type="hidden" name="resetpwd" value="{$resetpwd}" />
+								<input type="submit" class="bbl-btn submit" value="修 改">
+							</div>
+						</form>
+										</div>
+				</div>
+			</div>
+		</div><!--container end-->
+	</div>
+{php include pubTemplate("JsConstant");}
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});Do.add("track_info",{path:a("track_info.min.js"),type:"js"});
+    Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("add_topic_say",{path:a("add_topic_say.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");Do("track_info");
+})();
+Do('ajaxfileupload');
+</script>
+{template footer}

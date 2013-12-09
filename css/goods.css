@@ -1,0 +1,105 @@
+.tag-list{width:480px;float: left;}
+/* 顶部标签 */
+.tag-book { width:960px;margin-top:-20px;_padding-top:20px;overflow:hidden; } 
+.tag-book .hd { height:15px;background:url(../images/tag_book_bg.jpg) no-repeat -960px 0; } 
+
+.tag-book .ft { height:27px;background:url(../images/tag_book_bg.jpg) no-repeat 0 0; } 
+.tag-book .tag-list li { float:left;display:inline;margin:10px 8px 0 0;padding-left:13px;background:url(../images/tag_bg.png) no-repeat 0 -8px;cursor:pointer; } 
+.tag-book .tag-list li.focus { background-position:0 -64px; } 
+.tag-book .tag-list li:hover, .tag-book .tag-list li.hover { background-position:0 -120px; } 
+.tag-book .tag-list li.on, .tag-book .tag-list li.on:hover { background-position:0 -176px; } 
+.tag-book .tag-list li a { float:left;display:block;height:28px;line-height:28px;padding:0 15px 0 2px;color:#333;background:url(../images/tag_bg.png) no-repeat right -36px;white-space:nowrap; } 
+.tag-book .tag-list li.focus a { background-position:right -92px; } 
+.tag-book .tag-list li:hover a, .tag-book .tag-list li.hover a { background-position:right -148px; } 
+.tag-book .tag-list li.on a, .tag-book .tag-list li.on:hover a { color:#fff;background-position:right -204px; } 
+.tag-book .tag-list li a:hover { text-decoration:none; } 
+/* 商品类目标题 */
+.goods-title { height:28px;line-height:28px;padding:20px 0 0; } 
+.goods-title h2 { color:#333;font-size:20px; } 
+.goods-title h2 a { font-size:12px;font-weight:normal; }  
+/* 商品展示 */
+.goods-block { opacity:0; } 
+
+/* 类目 */
+.tag-book .cates-list{line-height:20px;padding-bottom:10px;}
+.tag-book .cates-list h3{float:left;}
+.tag-book .cates-list ul li{float:left;}
+.tag-book .cates-list ul li a{color:#505050;padding:1px 8px;margin:0 2px;}
+.tag-book .cates-list ul li.cur a{color:#EE2266;font-weight:bold;}
+
+/* 热门&&实用 */
+.tag-book .tag-list{padding:5px 0 0;/*border-top:1px solid #DAD2C6;*/}
+.tag-book .tag-list h3{float:left;margin-top:17px;}
+.tag-book .tag-list .tag-hot{/*float:left;width:600px;*/}
+.tag-book .tag-list .tag-practical{float:right;width:300px;}
+.tag-book .tag-list ul { /*margin-left:40px;*/ } 
+
+.goods-gray{filter:alpha(opacity=20);opacity:0.2; } 
+
+.zhuti-list {width:429px;float: left;}
+
+.gallery-topic h3 {padding-bottom: 8px;border-bottom: 1px dotted #DDD;}
+.gallery-topic a {color: #666;line-height: 2.3;display: block;width: 200px;}
+.gallery-topic a:hover {color: #5AD;}
+
+.gallery-topic .more {float: right;margin-top: -30px;}
+.gallery-topic a.more {width: 26px;text-align: center;}
+.gallery-topic .title {margin-top:15px;padding-left:10px;}
+.gallery-topic ul li {margin-left:10px;float:left;}
+
+
+.pin-board-switcher {
+vertical-align: middle;
+float:right;
+}
+.pin-board-switcher {
+display: inline-block;
+}
+
+.pin-board-switcher li {
+float: left;
+font-size: 15px;
+background: url("../images/tab_sprite.png") -1px -210px no-repeat;
+border-right: 1px solid #CCC;
+}
+.pin-board-switcher li a {
+display: block;
+background: url("../images/tab_sprite.png") -113px 8px no-repeat;
+height: 26px;
+line-height: 26px;
+font-size: 12px;
+cursor: pointer;
+text-decoration: none;
+padding: 2px 8px 2px 27px;
+}
+
+.pin-board-switcher li.selected a.pin-link {
+background-position: 7px -22px;
+}
+.pin-board-switcher li.first.selected {
+background-position: 0 -170px;
+}
+.pin-board-switcher li.last {
+background-position: right -330px;
+border: 0;
+}
+.pin-board-switcher a {
+color: #221919;
+margin-left:0px;
+float: right;
+display: inline;
+font-size:14px;
+}
+.pin-board-switcher a:hover {
+color:#5AD;
+}
+
+.pin-board-switcher li a:hover{background-position:-113px -52px}
+.pin-board-switcher li a.pin-link:hover{background-position:7px -52px}
+.pin-board-switcher li.last.selected {
+background-position: right -410px;
+}
+
+.pin-board-switcher li a.pin-link {
+background-position: 7px 8px;
+}

@@ -1,0 +1,133 @@
+{template header}
+
+<link href="{SITE_URL}css/profile08.css" rel="stylesheet" type="text/css" />
+
+<div id="wrap">
+	<div id="container" class="clearfix">
+		<div class="nav box-shadow">
+	<ul class="clearfix">
+
+		<li class=" user bigfs">
+
+			<a href="{SITE_URL}{tsurl('user','space',array(userid=>$strUser[userid]))}">
+
+													<img src="{$strUser[face]}" alt="{$strUser[username]}" />
+
+							{$strUser[username]}
+
+			</a>
+
+		</li>	
+
+		<li><a href="{SITE_URL}{tsurl('user','feed',array(userid=>$strUser[userid]))}">$feedNum<br>动态</a></li>
+
+		<li><a href="{SITE_URL}{tsurl('user','space',array(userid=>$strUser[userid]))}">{$Gnum}<br>宝贝</a></li>
+        
+        <li class="cur trait"><a href="{SITE_URL}{tsurl('user','zhuti',array(userid=>$strUser[userid]))}">{$Tnum}<br>主题</a></li>
+
+			<li><a href="{SITE_URL}{tsurl('user','fans',array(userid=>$strUser[userid]))}">{$fansNum}<br>粉丝</a></li>
+            
+            
+            	<li class="last"><a href="{SITE_URL}{tsurl('user','follow',array(userid=>$strUser[userid]))}">{$followNum}<br>关注</a></li>
+
+			<i></i>	
+
+	</ul>
+</div>
+		<div class="page-bd clearfix">
+		<div class="main">  
+			<div class="main-bd box-shadow">
+				<div class="tp-title clearfix">
+					<h2>
+                    <!--{if $sort==''}-->
+						喜欢的主题({$lthemesNum})
+                    <!--{else}-->
+                    <a href="{SITE_URL}{tsurl('user','zhuti',array(userid=>$strUser[userid]))}">喜欢的主题({$lthemesNum})</a>
+                    <!--{/if}-->
+						<span class="ml5 mr5">|</span>
+                    <!--{if $sort=='create'}-->
+						创作的主题({$sthemesNum})
+                        <!--{else}-->
+                    <a href="{SITE_URL}{tsurl('user','zhuti',array(sort=>'create',userid=>$strUser[userid]))}">创作的主题({$sthemesNum})</a>
+                        
+                    <!--{/if}-->
+					</h2>
+                    <!--{if  $userid == $TS_USER[user][userid]}-->
+					<span class="fr">
+					<a class="bbl-btn" href="{SITE_URL}{tsurl('user','createzt')}" rel="nofollow" target="_blank">创作主题</a>
+					</span>
+                    <!--{/if}-->
+									</div>
+								<div class="topic-list">
+					<ul class="topics clearfix">
+                                         <!--{if $arrtheme}-->
+					<!--{loop $arrtheme $key $item}-->
+												<li class="topic-item">
+							<div class="hd clearfix">
+								<h3><a href="{SITE_URL}{tsurl('zhuti'.$item[themeid])}" target="_blank">{$item[themename]}</a></h3>
+								<a href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$item[topicid]))}" class="count-cmt fr" target="_blank">{$item[count_cmt]}</a>
+								<a href="{SITE_URL}{tsurl('zhuti'.$item[themeid])}" class="count-like fr" target="_blank">{$item[likenum]}</a>
+							</div>
+							<div class="bd clearfix">
+								<a href="{SITE_URL}{tsurl('zhuti'.$item[themeid])}" class="link-block" target="_blank">
+                                <!--{loop $item[goods] $kkey $iitem}-->
+																		<img src="{SITE_URL}{$iitem[img]}" alt="{$iitem[name]}" />
+ <!--{/loop}-->
+																											<span class="go-btn">去看看</span>
+								</a>
+							</div>
+														<a class="ilike-del" href="javascript:;" data-type="5" data-proid="3829" style="display:none; ">删除</a>
+																				</li>
+					                    <!--{/loop}-->
+<!--{/if}-->
+											</ul>
+				</div>
+								<div class="clearfix pt20 pb20">
+					<div class="pagin fr pagination" id="J_Pagination">
+                    {$pageUrl}
+					     										</div>
+				</div>
+			</div>
+			
+		</div><!--main end-->
+		<div class="side">
+		
+		
+		
+		
+		<div class="tj-topic box-shadow">
+		<h3><a href="{SITE_URL}{tsurl('zhuti')}" class="rw" target="_blank">更多&gt;</a>精彩主题推荐</h3>
+		<ul>
+        <!--{loop $besttheme $key $item}-->
+						<li>
+				<div class="img">
+					<a href="{SITE_URL}{tsurl('zhuti'.$item[themeid])}" target="_blank">
+						<img src="{SITE_URL}{$item[simg]}" alt="{$item[title]}" />
+					</a>
+				</div>
+				<div class="info">
+					<div class="name ofh">
+						<a href="{SITE_URL}{tsurl('zhuti'.$item[themeid])}" title="{$item[title]}" target="_blank">{$item[title]}</a>
+					</div>
+					<p class="clearfix"><span class="ofh">创建者：<a class="editor-link" href="{SITE_URL}{tsurl('user','zhuti',array(userid=>$item[user][userid]))}" target="_blank">{$item[user][username]}</a></span><span class="ml5 ofh">更新：{php echo date('Y-m-d',$item[uptime])}</span></p>
+				</div>
+			</li>
+						
+                  <!--{/loop}-->
+                         
+					</ul>
+	</div>
+	</div><!--side end-->		</div>
+		<!--page-bd end-->
+	</div>
+</div>
+{php include pubTemplate("JsConstant");}
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});
+Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");
+})();
+Do('ajaxfileupload');
+</script>
+{template footer}

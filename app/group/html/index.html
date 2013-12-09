@@ -1,0 +1,451 @@
+{template header}
+
+<link href="{SITE_URL}css/forum.css" rel="stylesheet" type="text/css" />
+<div class="square clearfix">
+
+    <!-- 讨论吧 -->
+
+	<div class="main clearfix">
+
+        <div class="sort-news mb10 clearfix">
+        
+        <!--{loop $arrRecommendGroup $key $item}-->
+
+          <div class="sprt-piece  <!--{if ($key+1)%2==0}-->bg-fa<!--{else}-->bg-f3<!--{/if}-->">
+
+                <div class="sprt-img">
+
+                    <a href="{SITE_URL}{tsurl('group','group',array(groupid=>$item[groupid]))}" title="{$item[groupname]}" target="_blank">
+
+                        <img src="{SITE_URL}<!--{if $item[groupicon]}-->{$item[groupicon]}<!--{else}-->public/images/event_dft.jpg<!--{/if}-->" alt="{$item[groupname]}" width="80" height="80" />
+
+                    </a>
+
+                </div>
+
+                <div class="sprt-text">
+
+                    <h3>
+
+                        <a href="{SITE_URL}{tsurl('group','group',array(groupid=>$item[groupid]))}" title="{$item[groupname]}" target="_blank">{$item[groupname]}</a>
+
+                    </h3>
+
+                    <ul>
+
+					{$item[groupdesc]}
+
+                                            </ul>
+
+                </div>
+
+            </div>
+            
+		<!--{/loop}-->
+
+        </div>
+
+	</div>
+
+    <div class="forum-con square-bar-con vertical-box fl">
+
+		<div class="title">
+
+			<ul class="tab-title clearfix" id="J_ForumPostTabTitle">
+
+				<li class="first current"><a href="#" title="">热门话题Top20</a><i></i></li>
+
+				<li class="last"><a href="javascript:;" title="">新话题？抢沙发</a><i></i></li>
+			</ul>
+            
+            <div class="fr" style="margin-top:-35px;">
+
+					<a class="bbl-btn ml10" href="{SITE_URL}{tsurl('group','create')}">+ 创建板块</a>
+                    
+                    <a class="bbl-btn ml10" href="{SITE_URL}{tsurl('group','allgroup')}">查看所有板块</a>
+
+					</div>
+            
+            
+
+		</div>
+
+		<div class="panels" id="J_ForumPostTabPanels">
+
+			<!-- 热帖 -->
+
+			<div class="panels-con">
+
+    			<table>
+
+                   <tr> 
+
+    					<th class="top-icon"></th> 
+
+    					<th class="topic">话题</th>
+
+    					<th class="anthor">作者</th>
+
+    					<th class="statistics">回帖/查看</th>
+
+    					<th class="latest">最新回帖</th>
+
+    				</tr>
+	 <!--{if $arrhotTopic}-->
+ <!--{loop $arrhotTopic $key $item}-->
+    				<tr>
+
+    					<td class="top-icon" align="left">												
+							<!--{if $item[istop]==1}-->
+    					 	<div class="icon i-forum i-status-top i-d" title="置顶帖">置顶帖</div>
+                            <!--{elseif $item[isask]==1}-->
+                            <div class="icon i-forum i-status-ask i-d" title="问答帖">问答帖</div>
+                             <!--{elseif $item[isposts]==1}-->
+                            <div class="icon i-forum i-status-best i-d" title="精华帖">精华帖</div>
+                             <!--{else}-->
+                            <div class="icon i-forum i-status-general i-d" title="普通帖">普通帖</div>
+							<!--{/if}-->
+    						    					</td>
+
+    					<td align="left" class="topic">
+
+    						<a class="status-top ofh wordbreak" href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$item['topicid']))}" title="{$item['title']}">
+
+    							{$item['title']}
+
+    						</a>
+
+    					</td>
+
+    					<td align="left" class="anthor">
+
+							    						<a class="g-daren" href="{SITE_URL}{tsurl('user','space',array('userid'=>$item['user']['userid']))}" title="{$item['user']['username']}" target="_blank"><em class="ofh">{$item['user']['username']}</em><!--{if $item['user']['darenid']>0}--><i class="i-daren">达人</i><!--{/if}--></a>
+
+							    					</td>
+
+    					<td align="left">{$item['count_comment']}/{$item['count_view']}</td>
+
+    					<td align="right">{php echo date('m-d h:i',$item[addtime])}</td>
+
+    				</tr>
+                    
+                    
+                    <!--{/loop}-->
+                    
+                                        <!--{else}-->
+<tr>
+<td class="top-icon" align="left"></td>
+<td align="left" class="topic">暂无任何话题！</td>
+<td align="left" class="anthor"></td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+
+<!--{/if}--> 
+
+
+    				    				    			</table>
+
+			</div>
+
+			<!-- 新帖 -->
+
+			<div class="panels-con" style="display:none">
+
+				<table>
+
+                   <tr> 
+
+    					<th class="top-icon"></th> 
+
+    					<th class="topic">话题</th>
+
+    					<th class="anthor">作者</th>
+
+    					<th class="statistics">回帖/查看</th>
+
+    					<th class="latest">最新回帖</th>
+
+    				</tr>
+			 <!--{if $arrnewTopic}-->
+			 <!--{loop $arrnewTopic $key $item}-->
+    				<tr>
+
+    					<td class="top-icon" align="left">												
+							<!--{if $item[istop]==1}-->
+    					 	<div class="icon i-forum i-status-top i-d" title="置顶帖">置顶帖</div>
+                            <!--{elseif $item[isask]==1}-->
+                            <div class="icon i-forum i-status-ask i-d" title="问答帖">问答帖</div>
+                             <!--{elseif $item[isknowlege]==1}-->
+                            <div class="icon i-forum i-status-knowlege i-d" title="知识帖">知识帖</div>
+                             <!--{elseif $item[isposts]==1}-->
+                            <div class="icon i-forum i-status-best i-d" title="精华帖">精华帖</div>
+                             <!--{else}-->
+                            <div class="icon i-forum i-status-general i-d" title="普通帖">普通帖</div>
+							<!--{/if}-->
+    						    					</td>
+
+    					<td align="left" class="topic">
+
+    						<a class="status-top ofh wordbreak" href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$item['topicid']))}" title="{$item['title']}">
+
+    							{$item['title']}
+
+    						</a>
+
+    					</td>
+
+    					<td align="left" class="anthor">
+
+							    						<a class="g-daren" href="{SITE_URL}{tsurl('user','space',array('userid'=>$item['user']['userid']))}" title="{$item['user']['username']}" target="_blank"><em class="ofh">{$item['user']['username']}</em>
+                                                        <!--{if $item['user']['darenid']>0}--><i class="i-daren">达人</i><!--{/if}--></a>
+
+							    					</td>
+
+    					<td align="left">{$item['count_comment']}/{$item['count_view']}</td>
+
+    					<td align="right">{php echo date('m-d h:i',$item[addtime])}</td>
+
+    				</tr>
+                    
+                    
+                    <!--{/loop}-->
+                    
+                    <!--{else}-->
+<tr>
+<td class="top-icon" align="left"></td>
+<td align="left" class="topic">暂无任何话题！</td>
+<td align="left" class="anthor"></td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+
+<!--{/if}--> 
+
+
+    				    				    			</table>
+
+			</div>
+
+		</div>
+
+    </div>
+
+    <div class="square-sidebar fr">
+
+    	<!-- 达人 -->
+
+		
+
+    	<div class="daren vertical-box">
+
+    		<div class="title">
+
+    			<h3>达人们~</h3>
+
+    			<ul class="dot-tab-title clearfix" id="J_DarenTabTitle">
+					<!--{if $arrdaren}-->
+					<!--{loop $arrdaren $key $item}-->
+                    <li <!--{if $key=0}-->class="current"<!--{/if}-->><a title="{$item[username]} / {$item[darenname]}">{$key}</a></li>
+					<!--{/loop}-->
+                    <!--{else}-->
+                     <li></li>
+					<!--{/if}-->
+                   
+    			</ul>
+
+    		</div>
+
+			
+
+    		<ul class="daren-panels" id="J_DarenTabPanels">
+
+					<!--{if $arrdaren}-->
+					<!--{loop $arrdaren $key $item}-->
+    				   <li class="clearfix"  <!--{if $key>0}-->style="display:none"<!--{/if}-->>
+
+        				<a class="user-img" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[userid]))}" title="{$item[username]}">
+
+    						    							<img src="{$item[face]}" width="80" height="80" alt="{$item[username]}" />
+
+    						    					</a>
+
+        				<a class="user-name g-daren" href="{SITE_URL}{tsurl('user','space',array(userid=>$item[userid]))}" title="{$item[username]} / {$item[darenname]}"><em class="ofh">{$item[username]}</em><i class="i-daren">达人</i> / {$item[darenname]}</a>
+
+						
+
+						<span class="user-desc">{$item[signed]}</span>
+
+													<!--{if $item[isfollow]==3&&$userid == $TS_USER[user][userid]}-->
+                    <div href="#" class="followed-btn">互相关注<span class="mr5 ml5">|</span><a rel="removefollow" href="javascript:;" data-followtype="5" data-userid="{$item[userid]}" data-usernick="{$item[username]}">取消</a></div>
+                     <!--{elseif $item[isfollow]==3}-->
+                     <div href="#" class="followed-btn">互相关注</div>
+                     
+                      <!--{elseif  $item[userid]== $TS_USER[user][userid]}-->
+                      
+                       <div href="#" class="followed-btn">互相关注</div>
+                       
+                      <!--{elseif $item[isfollow]==1}-->
+                     <div href="#" class="followed-btn">已关注</div>
+                     
+                      <!--{else}-->
+                     <a rel="follow" href="javascript:;" class="follow-btn" data-followtype="<!--{if $item[isfollow]==2&&$userid == $TS_USER[user][userid]}-->1<!--{elseif $item[isfollow]==2}-->3<!--{elseif $item[isfollow]==4&&$userid == $TS_USER[user][userid]}-->5<!--{elseif $item[isfollow]==4}-->4<!--{/if}-->" data-userid="{$item[userid]}" data-usernick="{$item[username]}">加关注</a><br />
+                     <!--{/if}-->
+
+											</li>
+         
+                    <!--{/loop}-->
+					<!--{/if}-->	
+    								    		</ul>
+
+    	</div>
+
+    	
+
+    	<!-- 我创建的 -->
+ <!--{if $arrtopics}-->
+		    	<div class="my-joined vertical-box clearfix">
+
+    		    		    		<div class="title">
+
+				<ul class="tab-title clearfix" id="J_MyJoinedTabTitle">
+
+					<li class="first current"><a>我创建的话题</a><i></i></li>
+
+					<!--<li class="last"><a id="J_MyForumBtn">我参与的讨论</a><i></i></li>-->
+
+				</ul>
+
+    		</div>
+
+			<div class="panels" id="J_MyJoinedTabPanels">
+
+				<!-- 我创建的话题 -->
+
+				<div class="panels-con"  id="J_MyTopicPanels">
+
+            		    					<ul>
+                                            
+					<!--{loop $arrtopics $key $item}-->    
+
+        				                			<li>
+
+                				<a class="ofh" href="{SITE_URL}{tsurl('group','topic',array('topicid'=>$item['topicid']))}" title="">{$item[title]}</a>
+
+                				<span>{$item[count_comment]}条评论，最后回复：{php echo date('Y-m-d H:i',$item[uptime])}</span>
+
+                			</li>
+                            
+                              <!--{/loop}-->
+					
+
+
+        				                		</ul>
+
+    					                		<div class="my-pagin" style="height:25px;">
+
+                			
+                		</div>
+
+										
+
+				</div><!-- panels-con end -->
+
+			</div><!-- panels end -->
+
+
+
+    	</div>
+<!--{/if}-->	
+		        <div class="my-joined vertical-box">
+
+            <div class="forum-hot">
+
+                <div class="tab-hot clearfix" id="J_ForumTabNav">
+
+                    <a href="javascript:;" class="on" data-tab="hot">热闹的板块</a><span class="vline5 fl">|</span>
+
+                    <a href="javascript:;" data-tab="my">我创建的板块</a>
+
+                </div>
+
+                
+
+                <div class="tab-con tab-con-hot">
+
+                                        <ul class="clearfix">
+
+<!--{loop $arrHotGroup $key $item}-->    
+                                                        <li>
+
+                                <div class="item">
+
+                                    <h3><a href="{SITE_URL}{tsurl('group','group',array(groupid=>$item[groupid]))}" target="_blank">{$item[groupname]}</a></h3>
+
+                                    <p>{$item[count_topic]}个新话题，{$item[count_user]}人参与讨论</p>
+
+                                </div>
+
+                            </li>
+<!--{/loop}-->
+                                                </ul>
+
+                                    </div>
+
+                <div class="tab-con tab-con-my">
+
+                                        <ul class="clearfix">
+
+
+<!--{loop $myarrgroup $key $item}-->   
+                            <li>
+
+                                <div class="item">
+
+                                    <h3><a href="{SITE_URL}{tsurl('group','group',array(groupid=>$item[groupid]))}" target="_blank">{$item['groupname']}</a></h3>
+
+                                    <p>{$item['count_topic']}个新话题，{$item['count_user']}人参与讨论</p>
+
+                                </div>
+
+                            </li>
+
+<!--{/loop}-->
+                                            </ul>
+
+                                    </div>
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+{php include pubTemplate("JsConstant");}
+<script type="text/javascript" src="{SITE_URL}js/do.min.js"></script>
+<script>
+(function(){
+var b="?t="+GUANGER.staticVersion,a=function(a){return"{SITE_URL}js/"+a+b};Do.add("guang",{path:a("guang.min.js"),type:"js",requires:["tools","cookie"]});Do.add("tools",{path:a("jquery.tools.min.js"),type:"js"});Do.add("cookie",{path:a("jquery.cookie.min.js"),type:"js"});Do.add("share_guang",{path:a("share_guang.min.js"),type:"js",requires:["guang"]});Do.add("search_suggest",{path:a("search_suggest.min.js"),type:"js",requires:["guang"]});Do.add("localstorage",{path:a("localstorage.min.js"),type:"js"});
+Do.add("guang_comment",{path:a("comment.min.js"),type:"js"});Do.add("like_say",{path:a("like_say.min.js"),type:"js"});Do.add("common",{path:a("common.min.js"),type:"js",requires:["share_guang","search_suggest","localstorage"]});Do.global("guang");Do("common");
+ Do('ajaxfileupload');
+})();
+</script> 
+<script type="text/javascript">
+Do('squareBar');
+Do('follow');
+Do(function(){
+	if(window.location.search!=""){
+		var discussPosY = $(".discuss-page").offset().top-40;
+		$("html, body").animate({
+			scrollTop: discussPosY
+		}, 120);
+	}
+});
+</script>
+{template footer}
